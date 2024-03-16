@@ -1,0 +1,63 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddCourse</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/css/admin.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="page-container d-flex ">
+        <aside>
+            <h1>Admin Control</h1>
+            <ul>
+                <li><a asp-action="Reports" asp-controller="admin">Reports</a></li>
+                <li><a asp-action="Students" asp-controller="admin">Students</a></li>
+                <li><a asp-action="Instructors" asp-controller="admin">Instructors</a></li>
+                <li><a asp-action="AllCourses" asp-controller="admin" class="active">Courses</a></li>
+            </ul>
+            <img class="circle" src="~/images/circles.png" />
+        </aside>
+        <div class="dynamic-section">
+
+    <form asp-action="AddCourse" asp-controller="Admin">
+        <h1 class="main-title">Add New Course</h1>
+        <div class="form-group">
+            <label for="Name">Enter Course Name:</label>
+            <input type="text" name="name" class="form-control" placeholder="course name" required />
+            <span class="text-danger"></span>
+        </div>
+        <div class="form-group my-3">
+            <label for="passDegree">PassDegree:</label>
+            <input type="number" name="passDegree" class="form-control" placeholder="Enter Pass Degree" required />
+            <span class="text-danger"></span>
+        </div>
+                <div class="form-group my-3">
+                    <label for="Topics">Course Topics:</label>
+                    <textarea  name="topic" class="form-control" placeholder="Enter topics" ></textarea>
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group my-3">
+                    <label for="track">Assign To Tracks:</label>
+                    <select name="selectedTracks" class="form-control" multiple>
+                        @foreach (var track in Model)
+                        {
+                            <option value="@track.TrackId">@track.TrackName</option>
+                        }
+                    </select>
+                    <span class="text-danger"></span>
+                </div>
+        <div asp-validation-summary="All" class="text-danger alert-danger"></div>
+        <button type="submit" class="btn btn-custom">Add</button>
+    </form>
+    </div>
+</body>
+</html>
