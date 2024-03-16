@@ -48,7 +48,7 @@ namespace Exam_System.Controllers
         [HttpGet]
         public IActionResult AddCourse()
         {
-            var tracks = db.Tracks.Distinct().ToList();
+            var tracks = db.Tracks.ToList();
             return View("Course/AddCourse",tracks);
         }
         [HttpPost]
@@ -71,9 +71,10 @@ namespace Exam_System.Controllers
 
                 foreach (var trackId in selectedTracks)
                 {
-                    db.Database.ExecuteSqlRaw("EXEC AddCourseTrack @CourseId, @TrackId",
-                        new SqlParameter("@CourseId", courseId),
-                        new SqlParameter("@TrackId", trackId));
+                    db.Database.ExecuteSqlRaw("EXEC AddCourseTrack @TrackId,@CourseId",
+                          new SqlParameter("@TrackId", trackId),
+                    new SqlParameter("@CourseId", courseId));
+                      
                 }
             }
 
@@ -87,7 +88,6 @@ namespace Exam_System.Controllers
         
             var courseToUpdate = db.Courses
                                     .Include(t=>t.Topics)
-                                    .Include(c => c.Tracks)
                                     .FirstOrDefault(c => c.CourseId == courseId);
 
         
@@ -96,13 +96,14 @@ namespace Exam_System.Controllers
                
                 return NotFound(); 
             }
+            var allTracks=db.Tracks.ToList();
+            ViewData["AllTracks"] = allTracks;
 
-          
             return View("course/UpdateCourse", courseToUpdate);
         }
 
         [HttpPost]
-        public IActionResult UpdateCourse(int courseId, string name, int passDegree, string topic)
+        public IActionResult UpdateCourse(int courseId, string name, int passDegree, string topic, List<int> selectedTracks)
         {
          
             db.Database.ExecuteSqlRaw("EXEC UpdateCourse @CourseId, @CourseName, @PassDegree",
@@ -120,6 +121,14 @@ namespace Exam_System.Controllers
                       new SqlParameter("@topicId", topicId),
                     new SqlParameter("@TopicName", topic),
                     new SqlParameter("@CourseId", courseId)); 
+            }
+            // update assigned course 
+            foreach (var trackId in selectedTracks)
+            {
+                db.Database.ExecuteSqlRaw("EXEC AddCourseTrack @TrackId,@CourseId",
+                      new SqlParameter("@TrackId", trackId),
+                new SqlParameter("@CourseId", courseId));
+
             }
 
             return RedirectToAction("AllCourses"); 

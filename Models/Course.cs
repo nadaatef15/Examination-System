@@ -2,6 +2,7 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Exam_System.Models;
 
@@ -9,7 +10,15 @@ public partial class Course
 {
     public int CourseId { get; set; }
 
+
+    [Required(ErrorMessage = "Course name is required")]
+    [StringLength(100, ErrorMessage = "Course name cannot exceed 100 characters")]
+
     public string CourseName { get; set; }
+
+    [Required(ErrorMessage = "Pass degree is required")]
+    [Range(0, int.MaxValue, ErrorMessage = "Pass degree must be a positive number")]
+
 
     public int? PassDegree { get; set; }
 

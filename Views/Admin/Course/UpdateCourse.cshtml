@@ -23,6 +23,7 @@
                 <li><a asp-action="Students" asp-controller="admin">Students</a></li>
                 <li><a asp-action="Instructors" asp-controller="admin">Instructors</a></li>
                 <li><a asp-action="AllCourses" asp-controller="admin" class="active">Courses</a></li>
+                <li><a asp-action="Show" asp-controller="Login">LogOut</a></li>
             </ul>
             <img class="circle" src="~/images/circles.png" />
         </aside>
@@ -54,7 +55,7 @@
                 <div class="form-group my-3">
                     <label for="track">Assign To Tracks:</label>
                     <select name="selectedTracks" class="form-control" multiple>
-                        @foreach (var track in Model.Tracks)
+                        @foreach (var track in (List<Track>)ViewData["AllTracks"])
                         {
                             <option value="@track.TrackId">@track.TrackName</option>
                         }
