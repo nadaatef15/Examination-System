@@ -18,8 +18,8 @@ namespace Exam_System.Repository
             db.Database.ExecuteSqlRaw("EXECUTE dbo.InsertTrack {0}, {1}, {2}, {3}",
                                        track.TrackName,
                                        track.SupervisorId,
-                                       track.Capacity,
-                                       track.BranchId);
+                                       track.Capacity
+                                       );
             db.SaveChanges();
         }
 
@@ -35,8 +35,7 @@ namespace Exam_System.Repository
                                        id,
                                        track.TrackName,
                                        track.SupervisorId,
-                                       track.Capacity,
-                                       track.BranchId);
+                                       track.Capacity);
             db.SaveChanges();
         }
         public bool EmailIsExist(string email)
