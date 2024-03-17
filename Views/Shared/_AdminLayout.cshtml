@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title> 
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/css/admin.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="page-container d-flex ">
+        <aside>
+            <h1>Admin Control</h1>
+            <ul>
+                <li><a href="/Admin/Reports" class="@ViewData["ReportsActive"]">Reports</a></li> 
+                <li><a href="/Admin/Students" class="@ViewData["StudentsActive"]">Students</a></li>
+                <li><a href="/Admin/Instructors" class="@ViewData["InstructorsActive"]">Instructors</a></li>
+                <li><a href="/Admin/AllCourses" class="@ViewData["CoursesActive"]">Courses</a></li>
+                <li><a href="/Login/Show" class="@ViewData["LogOutActive"]">LogOut</a></li>
+            </ul>
+            <img class="circle" src="~/images/circles.png" />
+        </aside>
+        <div class="dynamic-section">
+            @RenderBody() 
+        </div>
+    </div>
+</body>
+</html>

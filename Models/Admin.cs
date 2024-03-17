@@ -2,7 +2,7 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
-
+using System.ComponentModel.DataAnnotations;
 namespace Exam_System.Models;
 
 public partial class Admin
@@ -13,7 +13,9 @@ public partial class Admin
 
     public string AdminLname { get; set; }
 
+    [Required(ErrorMessage = "Admin Email is required")]
     public string Email { get; set; }
 
+    [Required(ErrorMessage = "Password Email is required")]
     public string Password { get; set; }
 }
