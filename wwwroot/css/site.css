@@ -39,18 +39,24 @@ html {
         margin-bottom: 5px;
     }
 
-    input.form-control {
+    input.form-control  {
         height: 45px;
         border: none;
         outline: none;
         border-bottom: 2px solid var(--main-color);
         box-shadow: none;
     }
-
-        input.form-control:focus {
-            box-shadow: none;
-            border-bottom: 2px solid var(--main-color);
-        }
+select.form-control, textarea.form-control {
+    height:70px;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid var(--main-color);
+    box-shadow: none;
+}
+input.form-control:focus, select.form-control:focus, textarea.form-control:focus {
+    box-shadow: none;
+    border-bottom: 2px solid var(--main-color);
+}
 
     .btn-custom {
         background-color: var(--main-color);
