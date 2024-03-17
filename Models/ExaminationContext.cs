@@ -43,12 +43,19 @@ public partial class ExaminationContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+<<<<<<< HEAD
         => optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=Examination;Integrated Security=True;Encrypt=False;Trust Server Certificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.UseCollation("SQL_Latin1_General_CP1_CI_AS");
 
+=======
+        => optionsBuilder.UseLazyLoadingProxies().UseSqlServer("Server=.;Database=Examination;Integrated Security=true;TrustServerCertificate=true");
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+>>>>>>> a2c59f8edaa233efdc920623aa813cdfba66dced
         modelBuilder.Entity<Admin>(entity =>
         {
             entity.HasKey(e => e.AdminId).HasName("PK__Admin__719FE488BF5DDA22");
@@ -88,6 +95,40 @@ public partial class ExaminationContext : DbContext
                 .HasConstraintName("FK__Answer__Question__6383C8BA");
         });
 
+<<<<<<< HEAD
+=======
+        modelBuilder.Entity<Branch>(entity =>
+        {
+            entity.HasKey(e => e.BranchId).HasName("PK__Branch__A1682FC5D10CA30F");
+
+            entity.ToTable("Branch");
+
+            entity.Property(e => e.BranchName)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            entity.Property(e => e.Location)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+            entity.HasMany(d => d.Instructors).WithMany(p => p.Branches)
+                .UsingEntity<Dictionary<string, object>>(
+                    "WorkOn",
+                    r => r.HasOne<Instructor>().WithMany()
+                        .HasForeignKey("InstructorId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK__Work_On__Instruc__778AC167"),
+                    l => l.HasOne<Branch>().WithMany()
+                        .HasForeignKey("BranchId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK__Work_On__BranchI__76969D2E"),
+                    j =>
+                    {
+                        j.HasKey("BranchId", "InstructorId").HasName("PK__Work_On__08B83F6CA6D0A130");
+                        j.ToTable("Work_On");
+                    });
+        });
+
+>>>>>>> a2c59f8edaa233efdc920623aa813cdfba66dced
         modelBuilder.Entity<Course>(entity =>
         {
             entity.HasKey(e => e.CourseId).HasName("PK__Course__C92D71A717DA6F7D");
@@ -115,6 +156,13 @@ public partial class ExaminationContext : DbContext
                 .HasForeignKey(d => d.InstructorId)
                 .HasConstraintName("FK__Exam__Instructor__5812160E");
 
+<<<<<<< HEAD
+=======
+            entity.HasOne(d => d.Track).WithMany(p => p.Exams)
+                .HasForeignKey(d => d.TrackId)
+                .HasConstraintName("FK__Exam__TrackId__571DF1D5");
+
+>>>>>>> a2c59f8edaa233efdc920623aa813cdfba66dced
             entity.HasMany(d => d.Questions).WithMany(p => p.Exams)
                 .UsingEntity<Dictionary<string, object>>(
                     "QuestionExam",
@@ -315,6 +363,13 @@ public partial class ExaminationContext : DbContext
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
+<<<<<<< HEAD
+=======
+            entity.HasOne(d => d.Branch).WithMany(p => p.Tracks)
+                .HasForeignKey(d => d.BranchId)
+                .HasConstraintName("FK__Track__BranchId__403A8C7D");
+
+>>>>>>> a2c59f8edaa233efdc920623aa813cdfba66dced
             entity.HasOne(d => d.Supervisor).WithMany(p => p.Tracks)
                 .HasForeignKey(d => d.SupervisorId)
                 .HasConstraintName("FK__Track__Superviso__3F466844");
@@ -337,9 +392,16 @@ public partial class ExaminationContext : DbContext
                     });
         });
 
+<<<<<<< HEAD
         OnModelCreatingGeneratedProcedures(modelBuilder);
+=======
+>>>>>>> a2c59f8edaa233efdc920623aa813cdfba66dced
         OnModelCreatingPartial(modelBuilder);
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> a2c59f8edaa233efdc920623aa813cdfba66dced

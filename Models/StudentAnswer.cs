@@ -15,11 +15,11 @@ public partial class StudentAnswer
 
     public int? AnswerChooseId { get; set; }
 
-    public virtual Answer AnswerChoose { get; set; }
+    public virtual Answer? AnswerChoose { get; set; }
 
-    public virtual Exam Exam { get; set; }
+    public virtual Exam Exam { get; set; } = null!;
 
-    public virtual Question Question { get; set; }
+    public virtual Question Question { get; set; } = null!;
 
-    public virtual Student Student { get; set; }
+    public virtual Student Student { get; set; } = null!;
 }
