@@ -1,0 +1,104 @@
+﻿@model List<Course>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AllCourses</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/css/admin.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="page-container d-flex ">
+        <aside >
+            <h1>Admin Control</h1>
+            <ul>
+                <li><a asp-action="Reports" asp-controller="admin">Reports</a></li>
+                <li><a asp-action="Students" asp-controller="admin">Students</a></li>
+                <li><a asp-action="Instructors" asp-controller="admin">Instructors</a></li>
+                <li><a asp-action="AllCourses" asp-controller="admin" class="active">Courses</a></li>
+                <li><a asp-action="Show" asp-controller="Login">LogOut</a></li>
+            </ul>
+
+            <img class="circle" src="~/images/circles.png"/>
+        </aside>
+        <div class="dynamic-section">
+
+          
+
+
+            <table class="table table-bordered table-responsive">
+                <thead>
+                    <tr>
+                        <th>Course Id</th>
+                        <th>Course Name</th>
+                        <th>Pass Degree</th>
+                        <th>Course Topics</th>
+                       
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var course in Model)
+                    {
+                        <tr>
+                            <td>@course.CourseId</td>
+                            <td>@course.CourseName</td>
+                            <td>@course.PassDegree</td>
+                            <td>
+                                <ul>
+                                    @foreach (var topic in course.Topics)
+                                    {
+                                        <li>@topic.TopicName</li>
+                                    }
+                                </ul>
+                            </td>
+              @*               <td>
+                                <ul>
+                                    @foreach (var track in course.Tracks.Distinct())
+                                    {
+                                        if (course.Tracks.Count() > 0)
+                                        {
+                                            <li>@track.TrackName</li>
+                                        }
+
+                                        else
+                                        {
+                                            <li>Not Assigned Yet!</li>
+                                        }
+
+                                    }
+                                </ul>
+                            </td> *@
+                 
+                            <td>
+                                <form id="updateForm-@course.CourseId" asp-action="UpdateCourse" asp-controller="admin" method="get">
+                                    <input type="hidden" name="courseId" value="@course.CourseId" />
+                                    <button type="submit" ><img alt="update" width="50" src="~/images/update.png" /></button>
+                                </form>
+                                <form onsubmit="return confirm('Are you sure you want to delete this course?');" id="removeForm-@course.CourseId" asp-action="RemoveCourse" asp-controller="admin" method="get">
+                                    <input type="hidden" name="courseId" value="@course.CourseId" />
+                                    <button type="submit"  ><img alt="delete" width="40" src="~/images/trash (1).png"/></button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <form id="addCourseForm" asp-action="AddCourse" asp-controller="admin" method="get">
+                <button type="submit" class="btn btn-success">Add Course</button>
+            </form>
+        </div>
+    </div>
+
+
+    </div>
+    </div>
+ 
+</body>
+</html>
