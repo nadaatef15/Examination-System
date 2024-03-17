@@ -11,9 +11,9 @@ public partial class Track
 
     public string TrackName { get; set; }
 
-    public int? SupervisorId { get; set; }
+    public int SupervisorId { get; set; }
 
-    public int? Capacity { get; set; }
+    public int Capacity { get; set; }
 
     public virtual ICollection<Student> Students { get; set; } = new List<Student>();
 
