@@ -16,7 +16,7 @@ namespace Exam_System
 			builder.Services.AddScoped<StudentIRepo, StudentRepo>();
             builder.Services.AddScoped<TrackIRepo, TrackRepo>();
             builder.Services.AddScoped<StudentCourseIRepo, StudentCourseRepo>();
-            builder.Services.AddScoped<CourseIRepo, CourseRepo>();
+            builder.Services.AddTransient<ICourseRepo, CourseRepo>();
 
             var app = builder.Build();
 

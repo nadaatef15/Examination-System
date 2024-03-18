@@ -8,9 +8,9 @@ namespace Exam_System.Controllers
     {
         StudentIRepo studentIRepo;
         TrackIRepo trackIRepo;
-        CourseIRepo courseIRepo;
+        ICourseRepo courseIRepo;
         StudentCourseIRepo studentCourseIRepo;
-        public StudentController(StudentIRepo _studentIRepo,TrackIRepo _trackIRepo,CourseIRepo _courseIRepo,StudentCourseIRepo _studentCourseIRepo)
+        public StudentController(StudentIRepo _studentIRepo,TrackIRepo _trackIRepo,ICourseRepo _courseIRepo,StudentCourseIRepo _studentCourseIRepo)
         {
             studentIRepo = _studentIRepo;
             trackIRepo = _trackIRepo;
