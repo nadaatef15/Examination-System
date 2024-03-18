@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewData["Title"]</title> 
+    <title>@ViewData["Title"]</title>
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <link href="~/css/site.css" rel="stylesheet" />
     <link href="~/css/admin.css" rel="stylesheet" />
@@ -13,7 +13,7 @@
         <aside>
             <h1>Admin Control</h1>
             <ul>
-                <li><a href="/Admin/Reports" class="@ViewData["ReportsActive"]">Reports</a></li> 
+                <li><a href="/Admin/Reports" class="@ViewData["ReportsActive"]">Reports</a></li>
                 <li><a href="/Student/Index" class="@ViewData["StudentsActive"]">Students</a></li>
                 <li><a href="/Admin/Instructors" class="@ViewData["InstructorsActive"]">Instructors</a></li>
                 <li><a href="/Admin/AllCourses" class="@ViewData["CoursesActive"]">Courses</a></li>
@@ -22,8 +22,16 @@
             <img class="circle" src="~/images/circles.png" />
         </aside>
         <div class="dynamic-section">
-            @RenderBody() 
+            @RenderBody()
         </div>
     </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    @RenderSection("scripts", required: false)
+
 </body>
 </html>
