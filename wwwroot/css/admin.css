@@ -53,18 +53,23 @@ aside h1{
 
     aside ul li {
         margin: 20px 2px;
+      
 
     }
-    aside ul li a{
-        text-align:center;
-       text-decoration:none;
-       color:var(--main-text-color);
-       transition:.3s;
-       border-bottom:2px solid var(--main-color);
-       padding-bottom:7px;
-    }
+        aside ul li a {
+            text-align: center;
+            text-decoration: none;
+            color: var(--main-text-color);
+            transition: .3s;
+            border-bottom: 2px solid var(--main-color);
+            padding-bottom: 7px;
+            display: block;
+          
+            width: 170px;
+            text-align: left;
+        }
         aside ul li a:hover{
-            transform:translateY(6px);
+            transform:translateX(10px);
             color:var(--main-color);
         }
         .dynamic-section {

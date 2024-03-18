@@ -1,8 +1,15 @@
 ﻿@model Student
 @{
-    Layout = "_Layout";
+
     var Tracks = ViewBag.Tracks as List<Track>;
     SelectList TrackList = new SelectList(Tracks, "TrackId", "TrackName");
+
+    ViewData["Title"] = "Admin | Add Student";
+    ViewData["ReportsActive"] = "";
+    ViewData["StudentsActive"] = "active";
+    ViewData["InstructorsActive"] = "";
+    ViewData["CoursesActive"] = "";
+    ViewData["LogOutActive"] = "";
 }
 
 <!DOCTYPE html>
