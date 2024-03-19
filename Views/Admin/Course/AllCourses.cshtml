@@ -37,7 +37,7 @@
                     </ul>
                 </td>
                 <td>
-                    <form id="updateForm-@course.CourseId" asp-action="UpdateCourse" asp-controller="admin" method="get">
+                    <form id="updateForm-@course.CourseId" asp-action="UpdateCourse" asp-controller="Admin" method="get">
                         <input type="hidden" name="courseId" value="@course.CourseId" />
                         <button type="submit"><img alt="update" width="50" src="~/images/update.png" /></button>
                     </form>
@@ -50,7 +50,7 @@
         }
     </tbody>
 </table>
-<form id="addCourseForm" asp-action="AddCourse" asp-controller="admin" method="get">
+<form id="addCourseForm" asp-action="AddCourse" asp-controller="Admin" method="get">
     <button type="submit" class="btn-custom">Add Course</button>
 </form>
 

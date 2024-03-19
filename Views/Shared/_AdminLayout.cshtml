@@ -13,11 +13,11 @@
         <aside>
             <h1>Admin Control</h1>
             <ul>
-                <li><a href="/Admin/Reports" class="@ViewData["ReportsActive"]">Reports</a></li>
-                <li><a href="/Student/Index" class="@ViewData["StudentsActive"]">Students</a></li>
-                <li><a href="/Admin/Instructors" class="@ViewData["InstructorsActive"]">Instructors</a></li>
-                <li><a href="/Admin/AllCourses" class="@ViewData["CoursesActive"]">Courses</a></li>
-                <li><a href="/Login/Show" class="@ViewData["LogOutActive"]">LogOut</a></li>
+                <li><a href="#" class="@ViewData["ReportsActive"]">Reports</a></li>
+                <li><a href="#" class="@ViewData["StudentsActive"]">Students</a></li>
+                <li><a href="#" class="@ViewData["InstructorsActive"]">Instructors</a></li>
+                <li><a  asp-controller="Admin" asp-action="AllCourses" class="@ViewData["CoursesActive"]">Courses</a></li>
+                <li><a  asp-controller="Account" asp-action="Logout" class="@ViewData["LogOutActive"]">LogOut</a></li>
             </ul>
             <img class="circle" src="~/images/circles.png" />
         </aside>
