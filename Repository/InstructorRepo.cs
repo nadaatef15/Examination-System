@@ -1,13 +1,12 @@
 ﻿using Exam_System.IRepository;
 using Exam_System.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace Exam_System.Repository
 {
     public class InstructorRepo : IInstructorRepo
     {
-        ExaminationContext db;
-        IExaminationContextProcedures dbProcedures;
+        readonly ExaminationContext db;
+        readonly IExaminationContextProcedures dbProcedures;
 
         public InstructorRepo(ExaminationContext _db, IExaminationContextProcedures _dbProcedures)
         {
@@ -15,10 +14,8 @@ namespace Exam_System.Repository
             dbProcedures = _dbProcedures;
         }
 
-        public async Task<List<GetInstructorDataResult>> GetAll()
-        {
-            return await dbProcedures.GetInstructorDataAsync();
-        }
+        public async Task<List<GetInstructorDataResult>> GetAll() =>
+             await dbProcedures.GetInstructorDataAsync();
 
         public async Task Add(Instructor instructor)
         {
@@ -30,9 +27,7 @@ namespace Exam_System.Repository
                  insPassword: instructor.InstructorPassword,
                  insGender: instructor.InstructorGender
                  );
-
         }
-
 
         public async Task Edit(int id, Instructor instructor)
         {
@@ -45,22 +40,11 @@ namespace Exam_System.Repository
              insPassword: instructor.InstructorPassword
              );
         }
-        public void Delete(int id)
-        {
-            //var InstructorCourses = db.InstructorCourses.Where(sc => sc.InstructorId == id);
-            //db.InstructorCourses.RemoveRange(InstructorCourses);
-            //db.SaveChanges();
 
-            //db.Database.ExecuteSqlRaw("EXECUTE dbo.DeleteStudent {0}", id);
-            //db.SaveChanges();
-        }
-        public bool IsEmailExist(string email)
-        {
-            return db.Instructors.Any(a => a.InstructorEmail == email);
-        }
+        public async Task Delete(int id) =>
+            await dbProcedures.DeleteInstructorAsync(id);
 
-
-
-
+        public bool IsEmailExist(string email) =>
+            db.Instructors.Any(a => a.InstructorEmail == email);
     }
 }

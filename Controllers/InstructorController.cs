@@ -61,10 +61,11 @@ namespace Exam_System.Controllers
             return RedirectToAction("Index");
         }
 
-        //public IActionResult Edit(int id , Instructor instructor)
-        //{
-
-        //}
+        public async Task<IActionResult> Delete(int id)
+        {
+            await instructorRepo.Delete(id);
+            return RedirectToAction("Index");
+        }
 
     }
 }
