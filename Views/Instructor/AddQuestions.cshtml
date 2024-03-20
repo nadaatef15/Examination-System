@@ -6,65 +6,8 @@
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <link href="~/css/site.css" rel="stylesheet" />
     <link href="~/css/admin.css" rel="stylesheet" />
+    <link href="~/css/instructor.css" rel="stylesheet" />
 
-    <style>
-        .main-title{
-           margin: 40px auto ;
-        }
-        .top-addQuestion{
-            border-bottom: 2px #e4e4e4 double;
-         
-            padding-bottom: 50px;
-        }
-        .top-addQuestion select {
-            height: 35px;
-            padding: 5px;
-            font-size: 15px;
-            color: darkgreen;
-        }
-
-        .top-addQuestion select option {
-          padding: 8px; /* Add padding to the options */
-         height: 40px; /* Set height of the options */
-          background-color: #fff; /* Set background color */
-          color: #333; /* Set text color */
-        }
-
-                /* Style for selected option */
-            .top-addQuestion select option:checked {
-           background-color: #007bff; /* Set background color for selected option */
-           color: #fff; /* Set text color for selected option */
-         }
-
-        .mcq-answers{
-            display:grid;
-            grid-template-columns:1fr 1fr;
-            gap:30px;
-
-        }
-
-            .mcq-answers .form-group{
-                width:48%;
-            }
-
-        .mcq-answers input{
-            border:none;
-            outline:none;
-            border-bottom:2px solid darkgreen;
-            height:45px;
-            padding:0px 5px;
-        }
-
-            /*mobile screen*/
-      media (max-width: 768px) {
-           .mcq-answers{
-                
-                    grid-template-columns:1fr ;
-                    gap:15px;
-           }
-      }
-
-          </style>
 </head>
 <body>
 
@@ -72,10 +15,11 @@
 
         @if (ViewBag.InstructorCourses.Count > 0)
         {
-           <div class="top-addQuestion d-flex justify-content-between align-items-center my-3 flex-wrap">
+           <div class="top-addQuestion d-flex justify-content-between gap-2 align-items-center my-3 flex-wrap">
           <div>
             <label for="courseSelect">Select Course:</label>
-            <select id="selectedCourse" name="selectedCourse" required>
+            <select id="selectedCourse" name="selectedCourse"  required>
+                <option value="">Choose Course</option>
                 @foreach (var crs in ViewBag.InstructorCourses)
                 {
                     <option value="@crs.CourseId">@crs.CourseName</option>
@@ -86,6 +30,7 @@
             <div>
             <label for="selectquestionType">Select Question Type:</label>
             <select id="selectquestionType" name="questionType" required>
+                <option value="">Choose Question Type</option>
                 <option value="MCQ">Multiple Choice Question (MCQ)</option>
                 <option value="TF">True/False Question</option>
             </select>
@@ -96,10 +41,10 @@
                 <h3 class="main-title">Multiple Choice Question Form</h3>
                 <form method="POST" asp-action="AddMcqQuestions" asp-controller="Instructor">
 
-                    <!-- Course ID -->
+            
                     <input type="hidden" name="courseId" id="courseId" class="courseId" value="">
 
-                    <!-- Question Type -->
+                
                     <input type="hidden" name="questionType" id="questionType" class="questionType" value="">
 
                     <div class="form-group my-3">
@@ -130,7 +75,7 @@
                         <input id="correct" name="correctAns" type="text" placeholder="Correct Answer" required />
                     </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="submit" class="btn-custom">Add</button>
                 </form>
             </div>
 
@@ -138,10 +83,10 @@
                 <h3 class="main-title">True/False Question Form</h3>
                 <form method="POST" asp-action="AddTfQuestions" asp-controller="Instructor">
 
-                    <!-- Course ID -->
+                
                     <input type="hidden" name="courseId" id="courseId" class="courseId" value="">
 
-                    <!-- Question Type -->
+     
                     <input type="hidden" name="questionType" id="questionType" class="questionType" value="">
 
                     <div class="form-group my-3">
@@ -152,42 +97,19 @@
                     <div class="form-group my-3">
                         <label for="correctAnswer">Select the correct answer:</label>
                         <select name="correctAnswer" class="form-control" multiple required>
+                        
                             <option value="True">True</option>
                             <option value="False">False</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="submit" class="btn-custom">Add</button>
                 </form>
             </div>
          
 
             <script src="~/lib/jquery/dist/jquery.min.js"></script>
             <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-            <script>
-                $(document).ready(function () {
-                // Hide both forms initially
-                $('#mcqForm').collapse('hide');
-                $('#trueFalseForm').collapse('hide');
-
-                // Show the selected form based on dropdown selection
-                $('#selectquestionType').change(function () {
-                var selectedType = $(this).val();
-                $('.questionType').val(selectedType);
-                if (selectedType === 'MCQ') {
-                $('#mcqForm').collapse('show');
-                $('#trueFalseForm').collapse('hide');
-                } else if (selectedType === 'TF') {
-                $('#trueFalseForm').collapse('show');
-                $('#mcqForm').collapse('hide');
-                }
-                });
-                $('#selectedCourse').change(function () {
-                var selectedCourseId = $(this).val();
-                $('.courseId').val(selectedCourseId); // Update hidden input for course ID
-                });
-                 
-                });
-            </script>
+            <script src="~/js/instructorQuestion.js">  </script>
         }
         else
         {
