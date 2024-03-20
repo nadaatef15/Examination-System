@@ -187,7 +187,4 @@ input.form-control:focus, select.form-control:focus, textarea.form-control:focus
         bottom: 30px;
         right:20px
     }
-    .main-title {
-        font-size:22px;
-    }
-    }
+}

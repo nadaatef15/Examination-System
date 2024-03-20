@@ -22,7 +22,6 @@ namespace Exam_System
             builder.Services.AddScoped<TrackIRepo, TrackRepo>();
             builder.Services.AddScoped<StudentCourseIRepo, StudentCourseRepo>();
             builder.Services.AddTransient<ICourseRepo, CourseRepo>();
-            builder.Services.AddTransient<IInstructorRepo, InstructorRepo>();
             builder.Services.AddScoped<IAuthRepo, AuthRepo>();
             //applay filter to all
             builder.Services.AddControllersWithViews(options =>
