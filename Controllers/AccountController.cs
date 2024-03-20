@@ -69,7 +69,8 @@ namespace Exam_System.Controllers
         [HttpPost]
         public IActionResult Login(UserLoginView user)
         {
-
+            //student1@gmail.com  123456789
+            //AsmaaOmar@gmail.com 123456789
 
             try
             {
@@ -123,9 +124,9 @@ namespace Exam_System.Controllers
                             
                             return View("Views/Admin/AdminDashboard.cshtml");
                         case "Instructor":
-                            return RedirectToAction("View", "Instructor");
+                            return View("Views/Instructor/View.cshtml");
                         case "Student":
-                            return RedirectToAction("View", "Student");
+                            return View("View", "Student");
                     }
                 }
 

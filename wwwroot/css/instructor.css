@@ -1,0 +1,58 @@
+﻿
+
+.main-title {
+    margin: 50px auto;
+}
+
+.top-addQuestion {
+    border-bottom: 2px #e4e4e4 double;
+    padding-bottom: 50px;
+}
+
+    .top-addQuestion select {
+        height: 35px;
+        padding: 5px;
+        font-size: 15px;
+        color: darkgreen;
+        border:none;
+        outline:none;
+    }
+
+        .top-addQuestion select option {
+            padding: 8px;
+            height: 40px;
+            background-color: #fff;
+            color: #333;
+        }
+
+
+
+select.selector {
+    background-color: #48c572;
+}
+
+.mcq-answers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+    .mcq-answers .form-group {
+        width: 48%;
+    }
+
+    .mcq-answers input {
+        border: none;
+        outline: none;
+        border-bottom: 2px solid #48c572;
+        height: 45px;
+        padding: 0px 5px;
+    }
+
+/*mobile screen*/
+@media (max-width: 768px) {
+    .mcq-answers {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
