@@ -91,7 +91,7 @@ namespace Exam_System.Repository
  
             foreach (var trackId in selectedTracks)
             {
-                bool isAssignedToTrack = db.Courses.Any(ct => ct.CourseId == courseId && ct.Tracks.Any(t => t.TrackId == trackId));
+                bool isAssignedToTrack = db.Courses.Any(ct => ct.CourseId == courseId && ct.CourseTracks.Any(t => t.TrackId == trackId));
 
                 if (!isAssignedToTrack)
                 {

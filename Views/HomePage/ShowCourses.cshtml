@@ -1,0 +1,161 @@
+﻿@model Student
+@{
+    Layout = null;
+    Track tr = ViewBag.track;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ShowCourses</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="https://kit.fontawesome.com/d3bc0f0f7a.js" crossorigin="anonymous"></script> 
+    <style>
+        .header{
+            padding: 8px 8%;
+            background-color: darkred;
+        }
+        .logo{
+            width:7%;
+        }
+
+        .studentImg{
+            width:300px;
+            height:300px;
+            object-fit: cover;
+        }
+
+        .course {
+            position: relative;
+            height: 450px;
+            font-family: sans-serif;
+            letter-spacing: 4px;
+            font-weight:bolder;
+        }
+
+        .course::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/Images/iti.jpg');
+            background-size: cover;
+            background-position: center bottom;
+            background-repeat: no-repeat;
+            filter: blur(2px);
+            z-index: -1; 
+        }
+
+        .logoAndP{
+            font-family: sans-serif;
+        }
+
+        .grayColor{
+            color: lightgray;
+        }
+    </style>
+</head>
+<body>
+    <!------------------------------------------------------ Header ------------------------------------------------------>
+    <header class="header fs-6 d-flex justify-content-between align-items-center text-light">
+        <section class="d-flex">
+            <div> <a class="text-light text-decoration-none" href="https://iti.gov.eg/home"><i class="fa-regular fa-envelope"></i> ITI Website</a></div>
+            <div> <i class="fa-solid fa-mobile-screen-button ms-3"></i> 17002</div>
+        </section>
+        <section class="d-flex">
+            <a class="text-light" href="https://twitter.com/itichannel2"><i class="fa-brands fa-twitter ms-4"></i></a>
+            <a class="text-light" href="https://www.facebook.com/itichannel/"><i class="fa-brands fa-facebook ms-4"></i></a>
+            <a class="text-light" href="https://www.youtube.com/user/itichannel"><i class="fa-brands fa-youtube ms-4"></i></a>
+            <a class="text-light" href="https://eg.linkedin.com/school/information-technology-institute-iti-/"><i class="fa-brands fa-linkedin ms-4"></i></a>
+        </section>
+    </header>
+
+    <!------------------------------------------------------ NavBar ------------------------------------------------------>
+    <nav class="navbar bg-light sticky-top d-flex justify-content-around align-items-center">
+        <img src="/Images/logo.png" class="logo" />
+        <div class="d-flex ms-4 align-items-center fw-medium">
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-primary" type="submit">Search</button>
+            </form>
+            <div class="ps-2 ms-5"><a class="text-decoration-none bg-secondary bg-gradient btn text-light p-2" asp-controller="Login" asp-action="LogOut">Logout</a></div>
+        </div>
+    </nav>
+
+    <!------------------------------------------------------ Student Info ------------------------------------------------------>
+    <section class="text-center mt-5 mb-5 w-50 m-auto">
+       @*  @if(@Model.Image_ID != null)
+        {
+            <img src="/Images/Students/@Model.Image_ID" class="studentImg rounded-circle border border-5 border-light shadow-lg" />
+        }
+        else
+        {
+            <img src="/Images/anonymous_person.jpg" class="studentImg rounded-circle border border-5 border-light shadow-lg" />
+        } *@
+        <h1>@Model.StudentFname @Model.StudentLname</h1>
+        <h6 class="text-secondary">@Model.StudentEmail</h6>
+        @if (tr.TrackName != null)
+        {
+            <p><span class="text-warning">@tr.TrackName</span> Track</p>
+            <p>@tr.Supervisor</p>
+        }
+    </section>
+
+    <!------------------------------------------------------ ITI ------------------------------------------------------>
+    <section>
+        <div class="course text-white d-flex align-items-center ps-5">
+            <div>
+                <p>Every challenge you overcome brings you closer to success.</p>
+                <h1>Empower Yourself Today</h1>
+            </div>
+        </div>
+    </section>
+
+    <!------------------------------------------------------ Courses ------------------------------------------------------>
+    @* <section class="my-5 w-50 m-auto">
+        @foreach (var item in Model.StudentCourses)
+        {
+            <div class="mb-3 shadow-lg bg-light rounded p-4 ">
+                <div>
+                    <h2>@item.Course.Name</h2>
+                    <p>This course is @item.course.Hours Hours</p>
+                    <p>The Exam duration of this course is: @item.course.Exam.Duration</p>
+                    <a asp-action="GenerateQuestions" asp-controller="Student" asp-route-stdID="@item.StudentId" asp-route-CrsId="@item.CrsId" class="btn btn-primary text-light">Go to Exam</a>
+                </div>
+            </div>
+        }
+    </section>
+ *@
+    <!------------------------------------------------------ Footer ------------------------------------------------------>
+    <footer class="header d-flex text-light justify-content-between align-items-center">
+        <div class="logoAndP w-50">
+            <img class="w-25" src="/Images/whiteLogo.png" />
+            <p class="grayColor mt-2">Over 30 years, ITI has kept updating its training portfolio thru continuous monitoring for the future global tech trends, as well as the country’s national and mega projects, hence; sustaining its graduates’ employment percentage to 85 prior their graduation.</p>
+        </div>
+        <div>
+            <h3 class="mb-4">KEEP IN TOUCH</h3>
+            <div>
+                <a class="text-decoration-none grayColor" href="https://iti.gov.eg/home"><i class="fa-regular fa-envelope"></i> ITI Website</a>
+                <span>
+                    <i class="fa-solid fa-mobile-screen-button ms-3 grayColor"></i> 17002
+                    <section class="mt-3 d-flex">
+                        <a class="grayColor" href="https://twitter.com/itichannel2"><i class="fa-brands fa-twitter ms-4"></i></a>
+                        <a class="grayColor" href="https://www.facebook.com/itichannel/"><i class="fa-brands fa-facebook ms-4"></i></a>
+                        <a class="grayColor" href="https://www.youtube.com/user/itichannel"><i class="fa-brands fa-youtube ms-4"></i></a>
+                        <a class="grayColor" href="https://eg.linkedin.com/school/information-technology-institute-iti-/"><i class="fa-brands fa-linkedin ms-4"></i></a>
+                    </section>
+                </span>
+            </div>
+        </div>
+    </footer>
+
+    <div class="px-5 bg-light d-flex justify-content-between">
+        <p>Copyright ©2022 All Rights Reserved. Information Technology Institute (ITI).</p>
+        <p>Terms of Use . Privacy Policy</p>
+    </div>
+</body>
+</html>

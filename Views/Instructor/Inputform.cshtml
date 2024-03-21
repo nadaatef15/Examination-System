@@ -1,5 +1,7 @@
 ﻿@model Instructor
 @{
+    var Tracks = ViewBag.Tracks as List<Track>;
+    SelectList TrackList = new SelectList(Tracks, "TrackId", "TrackName");
 }
 <div class="form-group">
     <label asp-for="InstructorEmail">Email</label>
@@ -40,15 +42,16 @@
     <span asp-validation-for="InstructorSalary" class="text-danger"></span>
 </div>
 <button type="submit" class="btn custom-btn">Add</button>
-@* <div class="form-group">
+@* 
+<div class="form-group">
     <label asp-for="TrackId">Department</label>
     <select asp-for="TrackId" asp-items="TrackList" class="form-control">
         <option value="">Select</option>
     </select>
     <span asp-validation-for="TrackId" class="text-danger"></span>
-</div> *@
-@* @if (ViewBag.CapacityError != null)
+</div> 
+ @if (ViewBag.CapacityError != null)
 {
-    <div class="alert alert-danger">@ViewBag.CapacityError</div>
-}*@
+    <div class="alert alert-danger">@ViewBag.CapacityError</div> *@
+}
 

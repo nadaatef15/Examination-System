@@ -1,0 +1,41 @@
+﻿@model Instructor
+@{
+    Layout = "_Layout";
+    List<Course> ins = ViewBag.InstructorCourses as List<Course>;
+    List<Course> noIns = ViewBag.InstructorCourses as List<Course>;
+
+    SelectList insList = new SelectList(ins, "CourseId", "CourseName");
+    SelectList noInsList = new SelectList(noIns, "CourseId", "CourseName");
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Manage Courses</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <style>
+        .custom-btn {
+            background-color: lightgreen;
+        }
+    </style>
+</head>
+<body>
+    @* <div class="alert alert-success"><strong>Student:</strong>@Model.InstructorFname - @Model.Tracks.TrackName</div> *@
+    <div class="container mt-5">
+        <h2>Manage Course</h2>
+        <form asp-action="ManageCourses" asp-controller="Instructor" method="post">
+            <div class="form-group">
+                <label for="CourseToRemove">Courses Assigned</label>
+                <select multiple class="form-control" id="CourseToRemove" asp-items="insList" name="CourseToRemove"></select>
+            </div>
+            <div class="form-group">
+                <label for="CourseToAdd">Courses Available</label>
+                <select multiple class="form-control" id="CourseToAdd" asp-items="noInsList" name="CourseToAdd"></select>
+            </div>
+            <button type="submit" class="btn custom-btn mt-3">Change</button>
+            <a asp-action="Index" asp-controller="Student" class="btn btn-secondary mt-3">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>

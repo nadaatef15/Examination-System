@@ -1,0 +1,78 @@
+﻿@model List<InstructorCourse>
+@{
+    Layout = null;
+
+
+    ViewData["Title"] = "Admin | instructor courses";
+    ViewData["ReportsActive"] = "";
+    ViewData["StudentsActive"] = "";
+    ViewData["InstructorsActive"] = "active";
+    ViewData["CoursesActive"] = "";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>showInstructorCourses</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/site.css">
+    <style>
+        .form-control {
+            margin-bottom: 10px;
+        }
+
+        .custom-input {
+            border: none;
+            border-bottom: 2px solid lightgreen;
+            border-radius: 0;
+        }
+
+        .custom-btn {
+            background-color: lightgreen;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="text-center">
+            <h3 class="justify-content-center mt-5">Instructor Courses Data</h3>
+            <table class="table table-bordered table-hover border-danger align-items-center justify-content-center mt-5">
+
+                <thead>
+                    <tr>
+                        <th>Instructor</th>
+                        <th>Course</th>
+                        <th>Operation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count() == 0)
+                    {
+                        <tr>
+                            <td colspan="3">No Data Found</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.InstructorId </td>
+                                <td>@item.CourseId</td>
+                                <td>
+                                    <a class="btn btn-danger" asp-action="DeleteCourse" asp-controller="InstructorCourse" onclick="return confirm (' Are you sure?')" asp-route-idstring="@String.Join(",", item.InstructorId, item.CourseId)">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            <a asp-action="AddInstructorCourse" asp-controller="InstructorCourseCRUD" class="btn btn-success">Add</a>
+        </div>
+    </div>
+
+</body>
+</html>

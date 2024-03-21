@@ -3,6 +3,7 @@ using Exam_System.IRepository;
 using Exam_System.Models;
 using Exam_System.Repository;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Options;
 
 namespace Exam_System
@@ -23,8 +24,10 @@ namespace Exam_System
             builder.Services.AddScoped<TrackIRepo, TrackRepo>();
             builder.Services.AddScoped<StudentCourseIRepo, StudentCourseRepo>();
             builder.Services.AddTransient<ICourseRepo, CourseRepo>();
-            builder.Services.AddScoped<InstructorRepo, InstructorRepo>();
+            builder.Services.AddScoped<InstructorCRUDRepo, InstructorCRUDRepo>();
             builder.Services.AddScoped<IAuthRepo, AuthRepo>();
+            builder.Services.AddScoped<IInstructorCourseRepo, InstructorCourseRepo>();
+            
             //applay filter to all
             builder.Services.AddControllersWithViews(options =>
             {
@@ -59,7 +62,7 @@ namespace Exam_System
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Account}/{action=Show}/{id?}");
+                pattern: "{controller=instructor}/{action=index}/{id?}");
 
             app.Run();
         }
