@@ -5,13 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Exam_System.Controllers
 {
-    public class InstructorController : Controller
+    public class InstructorAdminController : Controller
     {
-        InstructorCRUDRepo instructorRepo;
+        InstructorAdminRepo instructorRepo;
         TrackIRepo trackIRepo;
         ICourseRepo courseIRepo;
 
-        public InstructorController(InstructorCRUDRepo _instructorIRepo, TrackIRepo _trackIRepo, ICourseRepo _courseIRepo)
+        public InstructorAdminController(InstructorAdminRepo _instructorIRepo, TrackIRepo _trackIRepo, ICourseRepo _courseIRepo)
         {
             instructorRepo = _instructorIRepo;
             trackIRepo = _trackIRepo;

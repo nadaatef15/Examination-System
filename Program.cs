@@ -24,7 +24,7 @@ namespace Exam_System
             builder.Services.AddScoped<TrackIRepo, TrackRepo>();
             builder.Services.AddScoped<StudentCourseIRepo, StudentCourseRepo>();
             builder.Services.AddTransient<ICourseRepo, CourseRepo>();
-            builder.Services.AddScoped<InstructorCRUDRepo, InstructorCRUDRepo>();
+            builder.Services.AddScoped<InstructorAdminRepo, InstructorAdminRepo>();
             builder.Services.AddScoped<IAuthRepo, AuthRepo>();
             builder.Services.AddScoped<IInstructorCourseRepo, InstructorCourseRepo>();
             

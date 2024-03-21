@@ -3,7 +3,7 @@
 namespace Exam_System.IRepository
 {
 
-    public interface IInstructorRepo
+    public interface IInstructorAdminRepo
     {
         Task<List<GetInstructorDataResult>> GetAll();
         public Instructor GetById(int id);

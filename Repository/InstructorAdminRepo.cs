@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Exam_System.Repository
 {
-    public class InstructorCRUDRepo : IInstructorRepo
+    public class InstructorAdminRepo : IInstructorAdminRepo
     {
         readonly ExaminationContext db;
         readonly IExaminationContextProcedures dbProcedures;
 
-        public InstructorCRUDRepo(ExaminationContext _db, IExaminationContextProcedures _dbProcedures)
+        public InstructorAdminRepo(ExaminationContext _db, IExaminationContextProcedures _dbProcedures)
         {
             db = _db;
             dbProcedures = _dbProcedures;
