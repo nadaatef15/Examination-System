@@ -1,0 +1,77 @@
+﻿@model List<Track>
+@{
+    Layout = null;
+    ViewData["Title"] = "Admin | instructor Tracks";
+    var insId = ViewBag.InstructorId;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>showInstructorTracks</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/site.css">
+    <style>
+        .form-control {
+            margin-bottom: 10px;
+        }
+
+        .custom-input {
+            border: none;
+            border-bottom: 2px solid lightgreen;
+            border-radius: 0;
+        }
+
+        .custom-btn {
+            background-color: lightgreen;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="text-center">
+            <h3 class="justify-content-center mt-5">Instructor Tracks </h3>
+@*             @if (ViewBag.ErrorMsg != null)
+            {
+                <div class="alert alert-danger">@ViewBag.ErrorMsg</div>
+            } *@
+            <table class="table table-bordered table-hover border-danger align-items-center justify-content-center mt-5">
+
+                <thead>
+                    <tr>
+                        <th>Track Id</th>
+                        <th>Track Name</th>
+                        @* <th> Operation </th> *@
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count() == 0)
+                    {
+                        <tr>
+                            <td colspan="3">No Data Found</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.TrackId </td>
+                                <td>@item.TrackName</td>
+@*                                 <td>
+                                    <a class="btn btn-danger" asp-action="DeleteTracks" asp-controller="InstructorTracks" onclick="return confirm (' Are you sure?')" asp-route-trackId="@item.TrackId" asp-route-insId="@insId">Delete</a>
+                                </td> *@
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+@*             <a asp-action="ManageTracks" asp-route-id="@insId" asp-controller="InstructorTracks" class="btn btn-success">Add</a>
+ *@        </div>
+    </div>
+
+</body>
+</html>

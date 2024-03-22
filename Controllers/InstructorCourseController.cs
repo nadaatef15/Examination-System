@@ -60,9 +60,5 @@ namespace Exam_System.Controllers
             }
             return ShowInstructorCourses(insID);
         }
-
-
-
-
     }
 }

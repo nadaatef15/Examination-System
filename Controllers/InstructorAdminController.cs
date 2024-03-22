@@ -7,14 +7,14 @@ namespace Exam_System.Controllers
 {
     public class InstructorAdminController : Controller
     {
-        IInstructorAdminRepo instructorRepo;
+        IInstructorAdminRepo instructorAdminRepo;
         TrackIRepo trackIRepo;
         ICourseRepo courseIRepo;
         IInstructorCourseRepo instructorCourseRepo;
 
         public InstructorAdminController(IInstructorAdminRepo _instructorIRepo, TrackIRepo _trackIRepo, ICourseRepo _courseIRepo, IInstructorCourseRepo _instructorCourseRepo)
         {
-            instructorRepo = _instructorIRepo;
+            instructorAdminRepo = _instructorIRepo;
             trackIRepo = _trackIRepo;
             courseIRepo = _courseIRepo;
             instructorCourseRepo = _instructorCourseRepo;
@@ -23,7 +23,7 @@ namespace Exam_System.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var instructors = await instructorRepo.GetAll();
+            var instructors = await instructorAdminRepo.GetAll();
 
 
             return View(instructors);
@@ -52,14 +52,14 @@ namespace Exam_System.Controllers
                 return View(instructor);
             }
 
-            if (instructorRepo.IsEmailExist(instructor.InstructorEmail))
+            if (instructorAdminRepo.IsEmailExist(instructor.InstructorEmail))
             {
                 ViewBag.ErrorMsg = "this email is already exist";
                 return View(instructor);
 
             }
 
-            await instructorRepo.Add(instructor);
+            await instructorAdminRepo.Add(instructor);
 
             return RedirectToAction("Index");
         }
@@ -69,7 +69,7 @@ namespace Exam_System.Controllers
 
             if (id == 0) return BadRequest();
             // getbyid for instructor
-            await instructorRepo.Delete(id);
+            await instructorAdminRepo.Delete(id);
 
             return RedirectToAction("Index");
         }
@@ -83,7 +83,7 @@ namespace Exam_System.Controllers
             if (id == null)
                 return BadRequest();
 
-            var insDate = instructorRepo.GetById(id);
+            var insDate = instructorAdminRepo.GetById(id);
             if (insDate == null)
                 return NotFound();
 
@@ -102,26 +102,11 @@ namespace Exam_System.Controllers
             }
 
             else
-              await instructorRepo.Edit(id, instructor);
+              await instructorAdminRepo.Edit(id, instructor);
             return RedirectToAction("Index");
         }
 
-        public IActionResult ManageCourses(List<int> CourseToRemove, List<int> CourseToAdd, int insID)
-        {
-
-            var ins = instructorRepo.GetById(insID);
-            if (ins == null) return NotFound();
-
-            foreach (var item in CourseToAdd)
-            {
-                instructorCourseRepo.Add(item, insID);
-            }
-            foreach (var item in CourseToRemove)
-            {
-                instructorCourseRepo.Delete(item, insID);
-            }
-            return RedirectToAction("Index");
-        }
+       
 
     }
 }
