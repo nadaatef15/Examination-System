@@ -1,22 +1,26 @@
 ﻿using Exam_System.IRepository;
 using Exam_System.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Exam_System.Controllers
 {
+    [Authorize(Roles = "Instructor")]
     public class InstructorController : Controller
     {
         IRepoInstructor instructor;
         IRepoStudentCourse studentCourse;
         IRepoTrack track;
         IRepoExam exams;
-        public InstructorController(IRepoInstructor _instructor , IRepoStudentCourse _studentCourse,IRepoTrack _track, IRepoExam _exams)
+        IInstructorRepo instructorRepo;
+        public InstructorController(IRepoInstructor _instructor , IRepoStudentCourse _studentCourse,IRepoTrack _track, IRepoExam _exams, IInstructorRepo _instructorRepo)
         {
             instructor = _instructor;
             studentCourse = _studentCourse;
             track = _track;
             exams = _exams;
+            instructorRepo = _instructorRepo;
         }
        
         public IActionResult Index()

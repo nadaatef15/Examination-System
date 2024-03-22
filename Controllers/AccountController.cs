@@ -123,7 +123,7 @@ namespace Exam_System.Controllers
                         case "Admin":
                             return View("Views/Admin/AdminDashboard.cshtml");
                         case "Instructor":
-                            return View("Views/Instructor/View.cshtml");
+                            return RedirectToAction("Index", "Instructor");
                         case "Student":
                             return RedirectToAction("ShowCourses", "HomePage", new { id = userId });
                     }
