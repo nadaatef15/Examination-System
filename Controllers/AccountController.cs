@@ -9,7 +9,7 @@ namespace Exam_System.Controllers
 {
     public class AccountController : Controller
     {
-     
+
 
         IAuthRepo authRepo;
 
@@ -17,7 +17,7 @@ namespace Exam_System.Controllers
         {
             authRepo = _authRepo;
         }
-        public async Task< IActionResult> Show()
+        public async Task<IActionResult> Show()
         {
             await HttpContext.SignOutAsync();// remove cooke if open login
             return View();
@@ -84,7 +84,7 @@ namespace Exam_System.Controllers
                 {
                     Role = "Admin";
                     userId = admin.AdminId.ToString();
-  
+
                 }
 
                 var instructor = authRepo.FindInstructor(user.Email, user.Password);
@@ -106,12 +106,11 @@ namespace Exam_System.Controllers
                 if (!string.IsNullOrEmpty(Role))
                 {
                     var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, user.Email),
-                new Claim(ClaimTypes.Role, Role),
-                new Claim("UserId", userId),
-            
-            };
+                    {
+                        new Claim(ClaimTypes.Name, user.Email),
+                        new Claim(ClaimTypes.Role, Role),
+                        new Claim("UserId", userId),
+                    };
 
                     var userIdentity = new ClaimsIdentity(claims, "login");
 
@@ -121,12 +120,12 @@ namespace Exam_System.Controllers
 
                     switch (Role)
                     {
-                        case "Admin":                        
+                        case "Admin":
                             return View("Views/Admin/AdminDashboard.cshtml");
                         case "Instructor":
                             return View("Views/Instructor/View.cshtml");
                         case "Student":
-                            return View("Views/Student/View.cshtml");
+                            return RedirectToAction("ShowCourses", "HomePage", new { id = userId });
                     }
                 }
 

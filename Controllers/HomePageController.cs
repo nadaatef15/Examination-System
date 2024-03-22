@@ -1,31 +1,29 @@
-﻿//using Examination_System.Models;
-//using Microsoft.AspNetCore.Mvc;
-//using Microsoft.EntityFrameworkCore;
+﻿using Exam_System.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
-//namespace Examination_System.Controllers
-//{
-//    public class HomePageController : Controller
-//    {
-//        ITIContext db;
+namespace Examination_System.Controllers
+{
+    public class HomePageController : Controller
+    {
+        ExaminationContext db;
 
-//        public HomePageController(ITIContext _db)
-//        {
-//            db = _db;
-//        }
+        public HomePageController(ExaminationContext _db)
+        {
+            db = _db;
+        }
 
-//        public IActionResult ShowCourses(int id)
-//        {
-//            var model = db.Student.Include(s => s.CourseStudents).ThenInclude(cs => cs.course).ThenInclude(e => e.Exam).SingleOrDefault(s => s.Id == id);
-//            var track = db.Track.SingleOrDefault(t => t.TrackId == model.TrackId);
-//            ViewBag.track = track;
-//            return View(model);
-//        }
-//        public IActionResult Instructor(int id)
-//        {
-//            var model = db.Instructor.SingleOrDefault(s => s.Ins_Id == id);
-//            return View(model);
-//        }
+        public IActionResult ShowCourses(int id)
+        {
+            var model = db.Students
+                .Include(s => s.StudentCourses)
+                .ThenInclude(cs => cs.Course)
+                .ThenInclude(e => e.Exams)
+                .SingleOrDefault(s => s.StudentId == id);
 
-
-//    }
-//}
+            var track = db.Tracks.SingleOrDefault(t => t.TrackId == model.TrackId);
+            ViewBag.track = track;
+            return View(model);
+        }
+    }
+}
