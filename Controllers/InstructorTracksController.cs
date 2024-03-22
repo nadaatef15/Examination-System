@@ -10,11 +10,11 @@ namespace Exam_System.Controllers
     public class InstructorTracksController : Controller
     {
         IInstructorAdminRepo instructorAdminRepo;
-        TrackIRepo trackRepo;
+        IRepoTrack trackRepo;
 
         ExaminationContext db;
 
-        public InstructorTracksController(IInstructorAdminRepo _instructorAdminRepo, TrackIRepo _trackIRepo, ExaminationContext _db)
+        public InstructorTracksController(IInstructorAdminRepo _instructorAdminRepo, IRepoTrack _trackIRepo, ExaminationContext _db)
         {
             instructorAdminRepo = _instructorAdminRepo;
             trackRepo = _trackIRepo;

@@ -1,6 +1,4 @@
 ﻿using Exam_System.IRepository;
-using Exam_System.Models;
-using Exam_System.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Exam_System.Controllers
@@ -9,9 +7,9 @@ namespace Exam_System.Controllers
     {
         IInstructorCourseRepo instructorCourseRepo;
         IInstructorAdminRepo instructorRepo;
-        ICourseRepo courseRepo;
+        IRepoCourse courseRepo;
 
-        public InstructorCourseController(IInstructorCourseRepo _instructorCourseRepo, IInstructorAdminRepo _instructorRepo, ICourseRepo _courseRepo)
+        public InstructorCourseController(IInstructorCourseRepo _instructorCourseRepo, IInstructorAdminRepo _instructorRepo, IRepoCourse _courseRepo)
         {
             instructorCourseRepo = _instructorCourseRepo;
             instructorRepo = _instructorRepo;

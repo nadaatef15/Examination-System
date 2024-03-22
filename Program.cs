@@ -24,11 +24,15 @@ namespace Exam_System
             builder.Services.AddScoped<IRepoStudentCourse, RepoStudentCourse>();
             builder.Services.AddTransient<IRepoCourse, RepoCourse>();
             builder.Services.AddTransient<IRepoInstructor, RepoInstructor>();
-            builder.Services.AddTransient<IRepoExam, RepoExam>()
+            builder.Services.AddTransient<IRepoExam, RepoExam>();
             builder.Services.AddScoped<IExaminationContextProcedures, ExaminationContextProcedures>();
             builder.Services.AddScoped<IInstructorAdminRepo, InstructorAdminRepo>();
             builder.Services.AddScoped<IAuthRepo, AuthRepo>();
             builder.Services.AddScoped<IInstructorCourseRepo, InstructorCourseRepo>();
+            builder.Services.AddControllersWithViews();
+
+            builder.Services.AddTransient<IInstructorRepo, InstructorRepo>();
+            builder.Services.AddScoped<IInstructorAdminRepo, InstructorAdminRepo>();
 
             //applay filter to all
             builder.Services.AddControllersWithViews(options =>

@@ -8,11 +8,11 @@ namespace Exam_System.Controllers
     public class InstructorAdminController : Controller
     {
         IInstructorAdminRepo instructorAdminRepo;
-        TrackIRepo trackIRepo;
-        ICourseRepo courseIRepo;
+        IRepoTrack trackIRepo;
+        IRepoCourse courseIRepo;
         IInstructorCourseRepo instructorCourseRepo;
 
-        public InstructorAdminController(IInstructorAdminRepo _instructorIRepo, TrackIRepo _trackIRepo, ICourseRepo _courseIRepo, IInstructorCourseRepo _instructorCourseRepo)
+        public InstructorAdminController(IInstructorAdminRepo _instructorIRepo, IRepoTrack _trackIRepo, IRepoCourse _courseIRepo, IInstructorCourseRepo _instructorCourseRepo)
         {
             instructorAdminRepo = _instructorIRepo;
             trackIRepo = _trackIRepo;
