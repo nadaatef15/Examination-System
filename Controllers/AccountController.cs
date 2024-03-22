@@ -124,7 +124,7 @@ namespace Exam_System.Controllers
                             
                             return View("Views/Admin/AdminDashboard.cshtml");
                         case "Instructor":
-                            return View("Views/Instructor/View.cshtml");
+                            return RedirectToAction("Index", "Instructor");
                         case "Student":
                             return View("View", "Student");
                     }
