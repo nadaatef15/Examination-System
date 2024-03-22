@@ -23,49 +23,49 @@ namespace Exam_System.Controllers
             return View();
         }
 
-        [HttpPost]
+        //[HttpPost]
 
 
-        public IActionResult Login(string email, string password)
-        {
+        //public IActionResult Login(string email, string password)
+        //{
 
 
-            try
-            {
-                var admin = authRepo.FindAdmin(email, password);
-                if (admin != null)
-                {
+        //    try
+        //    {
+        //        var admin = authRepo.FindAdmin(email, password);
+        //        if (admin != null)
+        //        {
 
-                    return View("/Views/Admin/AdminDashboard.cshtml");
-                }
-
-
-                var instructor = authRepo.FindInstructor(email, password);
-                if (instructor != null)
-                {
-
-                    return View("/Views/Instructor/View.cshtml");
-                }
+        //            return View("/Views/Admin/AdminDashboard.cshtml");
+        //        }
 
 
-                var student = authRepo.FindStudent(email, password);
-                if (student != null)
-                {
+        //        var instructor = authRepo.FindInstructor(email, password);
+        //        if (instructor != null)
+        //        {
 
-                    return View("/Views/Student/View.cshtml");
-                }
+        //            return View("/Views/Instructor/View.cshtml");
+        //        }
 
-                ModelState.AddModelError("", "Invalid email or password.");
-                return View("Show");
-            }
-            catch (Exception ex)
-            {
 
-                ModelState.AddModelError("", "An error occurred while processing your request.");
+        //        var student = authRepo.FindStudent(email, password);
+        //        if (student != null)
+        //        {
 
-                return View("Show");
-            }
-        }
+        //            return View("/Views/Student/View.cshtml");
+        //        }
+
+        //        ModelState.AddModelError("", "Invalid email or password.");
+        //        return View("Show");
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        ModelState.AddModelError("", "An error occurred while processing your request.");
+
+        //        return View("Show");
+        //    }
+        //}
 
         [HttpPost]
         public IActionResult Login(UserLoginView user)
@@ -121,13 +121,12 @@ namespace Exam_System.Controllers
 
                     switch (Role)
                     {
-                        case "Admin":
-                            
+                        case "Admin":                        
                             return View("Views/Admin/AdminDashboard.cshtml");
                         case "Instructor":
                             return View("Views/Instructor/View.cshtml");
                         case "Student":
-                            return View("View", "Student");
+                            return View("Views/Student/View.cshtml");
                     }
                 }
 
