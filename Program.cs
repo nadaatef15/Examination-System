@@ -16,15 +16,16 @@ namespace Exam_System
 
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            builder.Services.AddControllersWithViews();
-            builder.Services.AddDbContext<ExaminationContext>();
+			// Add services to the container.
+			builder.Services.AddControllersWithViews();
+			builder.Services.AddDbContext<ExaminationContext>();
+			builder.Services.AddScoped<IRepoStudent, RepoStudent>();
+            builder.Services.AddScoped<IRepoTrack, RepoTrack>();
+            builder.Services.AddScoped<IRepoStudentCourse, RepoStudentCourse>();
+            builder.Services.AddTransient<IRepoCourse, RepoCourse>();
+            builder.Services.AddTransient<IRepoInstructor, RepoInstructor>();
+            builder.Services.AddTransient<IRepoExam, RepoExam>()
             builder.Services.AddScoped<IExaminationContextProcedures, ExaminationContextProcedures>();
-            builder.Services.AddScoped<StudentIRepo, StudentRepo>();
-            builder.Services.AddScoped<TrackIRepo, TrackRepo>();
-            builder.Services.AddScoped<StudentCourseIRepo, StudentCourseRepo>();
-            builder.Services.AddTransient<ICourseRepo, CourseRepo>();
-            builder.Services.AddTransient<IInstructorRepo, InstructorRepo>();
             builder.Services.AddScoped<IInstructorAdminRepo, InstructorAdminRepo>();
             builder.Services.AddScoped<IAuthRepo, AuthRepo>();
             builder.Services.AddScoped<IInstructorCourseRepo, InstructorCourseRepo>();

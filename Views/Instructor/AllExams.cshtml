@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Exam>
+@{
+    Layout = "_InstructorLayout";
+
+    ViewData["Title"] = "Instructor | All Exams";
+    ViewData["CoursesActive"] = "active";
+    ViewData["UsrProfileActive"] = "";
+    ViewData["LogOutActive"] = "";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/site.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <h1 class="text-center main-title">Exams</h1>
+<table class="table table-bordered table-responsive">
+    <thead class="thead-dark">
+        <tr>
+            <th>Course Name</th>
+            <th>Exam Date</th>
+            <th>Start Date</th>
+            <th>Track</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="8">No Exam found</td>
+            </tr>
+        }
+        else
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Course.CourseName</td>
+                    <td>@item.ExamDate</td>
+                    <td>@item.StartTime</td>
+                    <td>@item.Track?.TrackName</td>
+                    <td>
+                            <a class="btn btn-danger btn-action rounded-circle" asp-action="Delete" asp-controller="Instructor" asp-route-id="@item.ExamId" onclick="return confirm('Are you sure you want to delete this Exam?')"><i class="fas fa-trash"></i> </a>
+
+                     </td>
+                   
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+</body>
+    </html>
+    

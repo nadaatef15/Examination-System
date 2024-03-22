@@ -15,9 +15,9 @@ namespace Exam_System.Controllers
     public class AdminController : Controller
     {
       
-        ICourseRepo courseRepo;
+        IRepoCourse courseRepo;
 
-        public AdminController(ICourseRepo _courseRepo)
+        public AdminController(IRepoCourse _courseRepo)
         {
             courseRepo = _courseRepo;
         }

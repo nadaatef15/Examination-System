@@ -26,6 +26,7 @@ public partial class Exam
     public int? FullMark { get; set; }
 
     public virtual Course Course { get; set; }
+    public virtual Track Track { get; set; }
 
     public virtual Instructor Instructor { get; set; }
 

@@ -2,7 +2,7 @@
 
 namespace Exam_System.IRepository
 {
-    public interface ICourseRepo
+    public interface IRepoCourse
     {
         public List<Course> getAll();
 

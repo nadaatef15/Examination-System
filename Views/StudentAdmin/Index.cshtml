@@ -1,33 +1,26 @@
 ﻿@model IEnumerable<Student>
 @{
-    Layout = "_Layout";
+    ViewData["Title"] = "Admin | All Students";
+    ViewData["ReportsActive"] = "";
+    ViewData["StudentsActive"] = "";
+    ViewData["InstructorsActive"] = "";
+    ViewData["CoursesActive"] = "active";
+    ViewData["LogOutActive"] = "";
 }
-
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/css/site.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <style>
-        
-        .btn-action {
-            margin-right: 5px;
-            
-        }
-
-        .custom-btn {
-            background-color: lightgreen;
-        }
-    </style>
+    
 </head>
 <body>
-    <div class="container mt-5">
-        <a class="btn custom-btn mb-3" asp-action="Add" asp-controller="Student"><i class="fas fa-user-plus"></i> Add Student</a>
-        <table class="table table-striped ">
+   
+        <a class="btn btn-custom mb-3" asp-action="Add" asp-controller="StudentAdmin"><i class="fas fa-user-plus"></i> Add Student</a>
+        <table class="table table-bordered table-responsive">
             <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
@@ -60,17 +53,17 @@
                             <td>@item.StudentGender</td>
                             <td>@item.Track.TrackName</td>
                             <td>
-                                <a class="btn btn-primary btn-action rounded-circle" asp-action="Edit" asp-controller="Student" asp-route-id="@item.StudentId"><i class="fas fa-edit"></i> </a>
-                                <a class="btn btn-danger btn-action rounded-circle" asp-action="Delete" asp-controller="Student" asp-route-id="@item.StudentId" onclick="return confirm('Are you sure you want to delete this student?')"><i class="fas fa-trash"></i> </a>
-                                <a class="btn btn-info btn-action rounded-circle" asp-action="ManageCourses" asp-controller="Student" asp-route-id="@item.StudentId"><i class="fas fa-book"></i> </a>
-                                <a class="btn btn-info btn-action rounded-circle" asp-action="ShowGrades" asp-controller="Student" asp-route-id="@item.StudentId"><i class="fas fa-graduation-cap"></i>   </a>
+                                <a class="btn btn-primary btn-action rounded-circle" asp-action="Edit" asp-controller="StudentAdmin" asp-route-id="@item.StudentId"><i class="fas fa-edit"></i> </a>
+                                <a class="btn btn-danger btn-action rounded-circle" asp-action="Delete" asp-controller="StudentAdmin" asp-route-id="@item.StudentId" onclick="return confirm('Are you sure you want to delete this student?')"><i class="fas fa-trash"></i> </a>
+                                <a class="btn btn-info btn-action rounded-circle" asp-action="ManageCourses" asp-controller="StudentAdmin" asp-route-id="@item.StudentId"><i class="fas fa-book"></i> </a>
+                                <a class="btn btn-info btn-action rounded-circle" asp-action="ShowGrades" asp-controller="StudentAdmin" asp-route-id="@item.StudentId"><i class="fas fa-graduation-cap"></i>   </a>
                             </td>
                         </tr>
                     }
                 }
             </tbody>
         </table>
-    </div>
+
 
 
 
