@@ -34,11 +34,11 @@
     <div class="container mt-5">
 
         <form method="post" asp-action="Edit" asp-controller="instructorAdmin">
-            <div class="form-group">
+           @*  <div class="form-group">
                 <label asp-for="InstructorEmail">Email</label>
                 <input asp-for="InstructorEmail" class="form-control custom-input" value="@Model?.InstructorEmail" readonly />
                 <span asp-validation-for="InstructorEmail" class="text-danger"></span>
-            </div>
+            </div> *@
             @if (ViewBag.ErrorMsg != null)
             {
                 <div class="alert alert-danger">@ViewBag.ErrorMsg</div>
