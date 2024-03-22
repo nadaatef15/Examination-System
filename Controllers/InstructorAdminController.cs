@@ -2,6 +2,7 @@
 using Exam_System.Models;
 using Exam_System.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Exam_System.Controllers
 {
@@ -11,13 +12,15 @@ namespace Exam_System.Controllers
         IRepoTrack trackIRepo;
         IRepoCourse courseIRepo;
         IInstructorCourseRepo instructorCourseRepo;
+        ExaminationContext db;
 
-        public InstructorAdminController(IInstructorAdminRepo _instructorIRepo, IRepoTrack _trackIRepo, IRepoCourse _courseIRepo, IInstructorCourseRepo _instructorCourseRepo)
+        public InstructorAdminController(IInstructorAdminRepo _instructorIRepo, IRepoTrack _trackIRepo, IRepoCourse _courseIRepo, IInstructorCourseRepo _instructorCourseRepo, ExaminationContext _db)
         {
             instructorAdminRepo = _instructorIRepo;
             trackIRepo = _trackIRepo;
             courseIRepo = _courseIRepo;
             instructorCourseRepo = _instructorCourseRepo;
+            db = _db;
         }
 
 
@@ -26,7 +29,7 @@ namespace Exam_System.Controllers
             var instructors = await instructorAdminRepo.GetAll();
 
 
-            return View(instructors);
+            return View("Index", instructors);
         }
 
         public IActionResult Add()
@@ -68,12 +71,28 @@ namespace Exam_System.Controllers
         {
 
             if (id == 0) return BadRequest();
-            // getbyid for instructor
-            await instructorAdminRepo.Delete(id);
 
-            return RedirectToAction("Index");
+
+            var inst = db.Instructors.Include(a => a.Courses).Include(a => a.Tracks).FirstOrDefault(a => a.InstructorId == id);
+
+            if (inst.Courses.Count > 0)
+            {
+                ViewBag.ErrorMsg = "this instructor has cources";
+            }
+            else if (inst.Tracks.Count > 0)
+            {
+                ViewBag.ErrorMsg = "this instructor has tracks";
+
+            }
+            else
+            {
+                await instructorAdminRepo.Delete(id);
+
+            }
+
+
+            return await Index();
         }
-
 
         public IActionResult Edit(int id)
         {
@@ -92,7 +111,7 @@ namespace Exam_System.Controllers
         }
 
         [HttpPost]
-        public async Task< IActionResult>Edit(int id, Instructor instructor)
+        public async Task<IActionResult> Edit(int id, Instructor instructor)
         {
             if (string.IsNullOrEmpty(instructor.InstructorFname) || string.IsNullOrEmpty(instructor.InstructorLname) ||
                 string.IsNullOrEmpty(instructor.InstructorEmail) || string.IsNullOrEmpty(instructor.InstructorPassword) ||
@@ -102,11 +121,11 @@ namespace Exam_System.Controllers
             }
 
             else
-              await instructorAdminRepo.Edit(id, instructor);
+                await instructorAdminRepo.Edit(id, instructor);
             return RedirectToAction("Index");
         }
 
-       
+
 
     }
 }
