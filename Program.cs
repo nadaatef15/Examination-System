@@ -1,6 +1,9 @@
+using Exam_System.Controllers.Filters;
 using Exam_System.IRepository;
 using Exam_System.Models;
 using Exam_System.Repository;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.Options;
 
 namespace Exam_System
 {
@@ -8,6 +11,8 @@ namespace Exam_System
 	{
 		public static void Main(string[] args)
 		{
+
+
 			var builder = WebApplication.CreateBuilder(args);
 
 			// Add services to the container.
@@ -19,7 +24,25 @@ namespace Exam_System
             builder.Services.AddTransient<IRepoCourse, RepoCourse>();
             builder.Services.AddTransient<IRepoInstructor, RepoInstructor>();
             builder.Services.AddTransient<IRepoExam, RepoExam>();
+            builder.Services.AddScoped<IAuthRepo, AuthRepo>();
+            //applay filter to all
+            builder.Services.AddControllersWithViews(options =>
+            {
+                options.Filters.Add<AuthorizationFilter>();
+            });
 
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+      
+			}).AddCookie(a =>
+			{
+				a.LoginPath = "/Account/Login";
+                a.AccessDeniedPath = "/Account/AccessError";
+
+            });
             var app = builder.Build();
 
 			// Configure the HTTP request pipeline.
@@ -31,13 +54,14 @@ namespace Exam_System
 
 			app.UseRouting();
 
+			app.UseAuthentication();
 			app.UseAuthorization();
 
 			app.MapControllerRoute(
 				name: "default",
-				pattern: "{controller=Login}/{action=Show}/{id?}");
-
-			app.Run();
+				pattern: "{controller=Account}/{action=Show}/{id?}");
+    
+            app.Run();
 		}
 	}
 }

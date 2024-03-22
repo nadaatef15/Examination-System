@@ -85,6 +85,38 @@ namespace Exam_System.Controllers
             exams.Delete(id);
             return View("Index");
         }
+        [HttpGet]
+        public IActionResult AddQuestions() //get
+        {
+        
+            var userIdClaim = HttpContext.User.FindFirst("UserId");
+            int userId =int.Parse (userIdClaim.Value);
+            var instructorCourses = instructorRepo.getInstructorCourses(userId);
+            ViewBag.UserId = userId;
+            ViewBag.InstructorCourses=instructorCourses;
+            return View();
+        }
+     
+        public IActionResult AddMcqQuestions(int courseId,string questionType,string questionTitle,string ansA,string ansB,string ansC, string correctAns) //get
+        {
+      
+            instructorRepo.AddMcqQuestion(courseId,questionType,questionTitle, ansA, ansB, ansC, correctAns);
+
+
+            return RedirectToAction("SuccessAddQuestion");
+        }
+
+        public IActionResult AddTfQuestions(int courseId, string questionType, string questionTitle,string correctAnswer)
+        {
+           instructorRepo.AddTfQuestion(courseId ,questionType,questionTitle, correctAnswer);
+
+            return RedirectToAction("SuccessAddQuestion");
+        }
+
+        public IActionResult SuccessAddQuestion()
+        {
+            return View();
+        }
         
     }
 }

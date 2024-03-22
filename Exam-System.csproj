@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModel\" />
+    <Folder Include="Views\Shared\Error\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
