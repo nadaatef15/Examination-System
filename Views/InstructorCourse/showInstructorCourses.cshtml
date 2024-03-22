@@ -1,13 +1,8 @@
-﻿@model List<InstructorCourse>
+﻿@model List<Course>
 @{
     Layout = null;
-
-
     ViewData["Title"] = "Admin | instructor courses";
-    ViewData["ReportsActive"] = "";
-    ViewData["StudentsActive"] = "";
-    ViewData["InstructorsActive"] = "active";
-    ViewData["CoursesActive"] = "";
+    var insId = ViewBag.InstructorId;
 }
 
 <!DOCTYPE html>
@@ -43,8 +38,8 @@
 
                 <thead>
                     <tr>
-                        <th>Instructor</th>
-                        <th>Course</th>
+                        <th>Course Id</th>
+                        <th>Course Name</th>
                         <th>Operation</th>
                     </tr>
                 </thead>
@@ -60,17 +55,17 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td>@item.InstructorId </td>
-                                <td>@item.CourseId</td>
+                                <td>@item.CourseId </td>
+                                <td>@item.CourseName</td>
                                 <td>
-                                    <a class="btn btn-danger" asp-action="DeleteCourse" asp-controller="InstructorCourse" onclick="return confirm (' Are you sure?')" asp-route-idstring="@String.Join(",", item.InstructorId, item.CourseId)">Delete</a>
+                                    <a class="btn btn-danger" asp-action="DeleteCourse" asp-controller="InstructorCourse" onclick="return confirm (' Are you sure?')" asp-route-courseId="@item.CourseId" asp-route-instid="@insId">Delete</a>
                                 </td>
                             </tr>
                         }
                     }
                 </tbody>
             </table>
-            <a asp-action="AddInstructorCourse" asp-controller="InstructorCourseCRUD" class="btn btn-success">Add</a>
+            <a asp-action="ManageCourses" asp-route-id="@insId" asp-controller="InstructorCourse" class="btn btn-success">Add</a>
         </div>
     </div>
 

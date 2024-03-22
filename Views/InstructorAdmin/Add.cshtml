@@ -13,14 +13,14 @@
 <body>
     <div class="container mt-5">
 
-        <form method="post" asp-action="Add" asp-controller="Instructor">
+        <form method="post" asp-action="Add" asp-controller="InstructorAdmin">
 
             @if (ViewBag.ErrorMsg != null)
             {
                 <div class="alert alert-danger">@ViewBag.ErrorMsg</div>
             }
             @Html.Partial("Inputform", Model)
-            <a asp-action="Index" asp-controller="" class="btn btn-secondary">Cancel</a>
+            <a asp-action="Index" asp-controller="InstructorAdmin" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
     <div id="divData"></div>

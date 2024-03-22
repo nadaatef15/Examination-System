@@ -12,8 +12,7 @@ namespace Exam_System.IRepository
         Task Delete(int id);
         bool IsEmailExist(string email);
 
-       Task< List<GetTrackByInstructorIdResult>> GetTracks(Instructor id);
+        public List<Track> GetTracksByInstructorId(int instructotId);
 
-      Task GetTracksForInstructor(int id);
     }
 }

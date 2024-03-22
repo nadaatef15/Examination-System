@@ -7,17 +7,19 @@ namespace Exam_System.Controllers
 {
     public class InstructorAdminController : Controller
     {
-        InstructorAdminRepo instructorRepo;
+        IInstructorAdminRepo instructorRepo;
         TrackIRepo trackIRepo;
         ICourseRepo courseIRepo;
+        IInstructorCourseRepo instructorCourseRepo;
 
-        public InstructorAdminController(InstructorAdminRepo _instructorIRepo, TrackIRepo _trackIRepo, ICourseRepo _courseIRepo)
+        public InstructorAdminController(IInstructorAdminRepo _instructorIRepo, TrackIRepo _trackIRepo, ICourseRepo _courseIRepo, IInstructorCourseRepo _instructorCourseRepo)
         {
             instructorRepo = _instructorIRepo;
             trackIRepo = _trackIRepo;
             courseIRepo = _courseIRepo;
-
+            instructorCourseRepo = _instructorCourseRepo;
         }
+
 
         public async Task<IActionResult> Index()
         {
@@ -88,34 +90,35 @@ namespace Exam_System.Controllers
             return View(insDate);
 
         }
+
         [HttpPost]
-        public IActionResult Edit(int id, Instructor instructor)
+        public async Task< IActionResult>Edit(int id, Instructor instructor)
         {
             if (string.IsNullOrEmpty(instructor.InstructorFname) || string.IsNullOrEmpty(instructor.InstructorLname) ||
                 string.IsNullOrEmpty(instructor.InstructorEmail) || string.IsNullOrEmpty(instructor.InstructorPassword) ||
-                 instructor.InstructorSalary==null)
+                 instructor.InstructorSalary == null)
             {
                 return View(instructor);
             }
 
             else
-                instructorRepo.Edit(id, instructor);
-                 return RedirectToAction("Index");
+              await instructorRepo.Edit(id, instructor);
+            return RedirectToAction("Index");
         }
 
-        public IActionResult ManageCourses(List<int> CourseToRemove, List<int> CourseToAdd, int id)
+        public IActionResult ManageCourses(List<int> CourseToRemove, List<int> CourseToAdd, int insID)
         {
-            var ins = instructorRepo.GetById(id);
+
+            var ins = instructorRepo.GetById(insID);
             if (ins == null) return NotFound();
 
             foreach (var item in CourseToAdd)
             {
-                InstructorCourseRepo.Add(new InstructorCourse()
-                { CourseId = item, InstructorId = id });
+                instructorCourseRepo.Add(item, insID);
             }
             foreach (var item in CourseToRemove)
             {
-                InstructorCourseRepo.Delete(item, id);
+                instructorCourseRepo.Delete(item, insID);
             }
             return RedirectToAction("Index");
         }

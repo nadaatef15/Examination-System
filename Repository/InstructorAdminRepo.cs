@@ -52,28 +52,12 @@ namespace Exam_System.Repository
 
         public Instructor GetById(int id)
         {
-
-            //dbProcedures.GetInstrustureByIdAsync(id)
             return db.Instructors.FromSqlRaw("EXECUTE dbo.GetInstrustureById {0}", id).AsEnumerable().FirstOrDefault();
-
-
         }
 
-
-
-        // [GetTrackByInstructorId]
-        /*public async Task< List<GetTrackByInstructorIdAsync>> GetTracks(Instructor id)=>
-             await dbProcedures.GetTrackByInstructorIdAsync(id);
-*/
-
-        public  List <Track> GetTracks(int id)
+        public  List <Track> GetTracksByInstructorId(int instructotId)
         {
-            return db.Tracks.FromSqlRaw("EXECUTE dbo.GetTrackByInstructorIdAsync {0}" , SupervisorId).AsEnumerable().FirstOrDefault();
+            return db.Tracks.FromSqlRaw("EXECUTE dbo.GetTrackByInstructorId {0}" , instructotId).ToList();
         }
-
-
-
-
-
     }
 }

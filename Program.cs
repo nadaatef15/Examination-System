@@ -25,15 +25,15 @@ namespace Exam_System
             builder.Services.AddScoped<StudentCourseIRepo, StudentCourseRepo>();
             builder.Services.AddTransient<ICourseRepo, CourseRepo>();
             builder.Services.AddTransient<IInstructorRepo, InstructorRepo>();
-            builder.Services.AddScoped<InstructorAdminRepo, InstructorAdminRepo>();
+            builder.Services.AddScoped<IInstructorAdminRepo, InstructorAdminRepo>();
             builder.Services.AddScoped<IAuthRepo, AuthRepo>();
             builder.Services.AddScoped<IInstructorCourseRepo, InstructorCourseRepo>();
             
             //applay filter to all
-            builder.Services.AddControllersWithViews(options =>
+           /* builder.Services.AddControllersWithViews(options =>
             {
                 options.Filters.Add<AuthorizationFilter>();
-            });
+            });*/
 
             builder.Services.AddAuthentication(options =>
             {

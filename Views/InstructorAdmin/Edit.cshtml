@@ -33,7 +33,7 @@
 <body>
     <div class="container mt-5">
 
-        <form method="post" asp-action="Edit" asp-controller="instructor">
+        <form method="post" asp-action="Edit" asp-controller="instructorAdmin">
             <div class="form-group">
                 <label asp-for="InstructorEmail">Email</label>
                 <input asp-for="InstructorEmail" class="form-control custom-input" value="@Model?.InstructorEmail" readonly />
@@ -45,7 +45,7 @@
             }
             
             @Html.Partial("InputForm",Model)
-            <a asp-action="Index" asp-controller="instructor" class="btn btn-secondary">Cancel</a>
+            <a asp-action="Index" asp-controller="instructorAdmin" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
     <div id="divData"></div>

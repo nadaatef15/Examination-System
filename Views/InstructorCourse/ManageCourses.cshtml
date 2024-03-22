@@ -1,0 +1,37 @@
+﻿@model Instructor
+@{
+    Layout = "_Layout";
+    List<Course> ins = ViewBag.instCourses as List<Course>;
+    List<Course> noIns = ViewBag.CourseNotforInstructor as List<Course>;
+
+    SelectList insList = new SelectList(ins, "CourseId", "CourseName");
+    SelectList noInsList = new SelectList(noIns, "CourseId", "CourseName");
+    var id = ViewBag.insId;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Manage Courses</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/manageCources.css">
+</head>
+<body>
+    <h2>Add Course</h2>
+    <form method="post" asp-action="ManageCourses" asp-controller="InstructorCourse">
+        <input type="hidden" name="insID" value="@id" />
+
+        <div class="form-group">
+            <label class="form-label">Existing Courses</label>
+            <select name="coursesToRemove" multiple class="form-control" asp-items="insList"></select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Courses to Add</label>
+            <select name="coursesToAdd" multiple class="form-control" asp-items="noInsList"></select>
+        </div>
+
+        <input type="submit" value="Change" class="btn btn-primary" />
+    </form>
+</body>
+</html>

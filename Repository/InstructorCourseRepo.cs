@@ -1,6 +1,8 @@
 ﻿using Exam_System.IRepository;
 using Exam_System.Models;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using NuGet.DependencyResolver;
 
 namespace Exam_System.Repository
 {
@@ -14,42 +16,33 @@ namespace Exam_System.Repository
             db = _db;
             dbProcedures = _dbProcedures;
         }
-
-        public List<InstructorCourse> getByCourseId(int courseId)
+        public List<Course> getInstructorCoursesById(int instructorId)
         {
-            return db.InstructorCourses.Where(a => a.CourseId == courseId).ToList();
-        }
-        public List<InstructorCourse>getByinstructotId(int instructorId)
-        {
-            return db.InstructorCourses.Where(a => a.InstructorId == instructorId).ToList();
-
-        }
-        public async Task getByInstrucrorId(int instructorId)
-        {
-            await dbProcedures.GetInstrustureByIdAsync(instructorId);
+            return db.Courses.FromSqlRaw("EXECUTE dbo.GetAllInstructorCourses {0}", instructorId).ToList();
         }
 
-        public async Task<List<GetAllInstructorsCoursesResult>> getAll() => 
-               await dbProcedures.GetAllInstructorsCoursesAsync();
-
-
-        public List<InstructorCourse> getByCourseByInstructor(int instructorid)
+        public async Task Add(int courseId , int instructorId)
         {
-            return db.InstructorCourses.FromSqlRaw("EXECUTE dbo.GetAllInstructorCourses {0}", instructorid).ToList();
+            await db.Database.ExecuteSqlRawAsync("EXEC AddInstructorCourse @InstructorId,@CourseId",
+                     new SqlParameter("@InstructorId", instructorId),
+                     new SqlParameter("@CourseId", courseId));
+
+            /*
+                        dbProcedures.AddInstructorCourseAsync(
+                             InstructorId: instructorId,
+                             CourseId: instructorId
+                            );*/
         }
 
-        public void Add(InstructorCourse instructorCourse)
+        public async Task Delete(int courseId, int instructorId)
         {
-
-            dbProcedures.AddInstructorCourseAsync(
-                 InstructorId: instructorCourse.InstructorId,
-                 CourseId: instructorCourse.CourseId
-                );
+            await dbProcedures.DeleteInstructorCourseAsync(instructorId, courseId);
 
         }
-        public void Delete(int courseId, int instructorId)
+
+        public async Task<List<Course>> ListCource()
         {
-            dbProcedures.DeleteInstructorCourseAsync(instructorId, courseId);
+            return await db.Courses.ToListAsync();
 
         }
     }
