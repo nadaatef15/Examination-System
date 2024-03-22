@@ -2,7 +2,7 @@
 
 namespace Exam_System.IRepository
 {
-    public interface TrackIRepo
+    public interface IRepoTrack
     {
         public List<Track> getAll();
         public Track getById(int id);

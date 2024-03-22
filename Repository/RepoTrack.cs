@@ -5,11 +5,11 @@ using System.Diagnostics;
 
 namespace Exam_System.Repository
 {
-    public class TrackRepo : TrackIRepo
+    public class RepoTrack : IRepoTrack
     {
         ExaminationContext db;
 
-        public TrackRepo(ExaminationContext _db)
+        public RepoTrack(ExaminationContext _db)
         {
             db = _db;
         }

@@ -2,7 +2,7 @@
 
 namespace Exam_System.IRepository
 {
-    public interface StudentIRepo
+    public interface IRepoStudent
     {
         public List<Student> getAll();
         public Student getById (int id);

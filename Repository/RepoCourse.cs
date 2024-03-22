@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Exam_System.Repository
 {
-    public class CourseRepo : ICourseRepo
+    public class RepoCourse : IRepoCourse
     {
         ExaminationContext db;
-        public CourseRepo(ExaminationContext _db)
+        public RepoCourse(ExaminationContext _db)
         {
             db= _db;
         }

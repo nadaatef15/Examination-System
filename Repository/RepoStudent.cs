@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Exam_System.Repository
 {
-    public class StudentRepo : StudentIRepo
+    public class RepoStudent : IRepoStudent
     {
         ExaminationContext db;
 
-        public StudentRepo(ExaminationContext _db)
+        public RepoStudent(ExaminationContext _db)
         {
             db = _db;
         }
