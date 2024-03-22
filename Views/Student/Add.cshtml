@@ -4,10 +4,10 @@
     var Tracks = ViewBag.Tracks as List<Track>;
     SelectList TrackList = new SelectList(Tracks, "TrackId", "TrackName");
 
-    ViewData["Title"] = "Admin | Add instructor";
+    ViewData["Title"] = "Admin | Add Student";
     ViewData["ReportsActive"] = "";
-    ViewData["StudentsActive"] = "";
-    ViewData["InstructorsActive"] = "active";
+    ViewData["StudentsActive"] = "active";
+    ViewData["InstructorsActive"] = "";
     ViewData["CoursesActive"] = "";
     ViewData["LogOutActive"] = "";
 }
@@ -48,9 +48,6 @@
             {
                 <div class="alert alert-danger">@ViewBag.ErrorMsg</div>
             }
-            <select multiple>
-                <option></option>
-            </select>
             @Html.Partial("InputForm", Model)
             <a asp-action="Index" asp-controller="Student" class="btn btn-secondary">Cancel</a>
         </form>

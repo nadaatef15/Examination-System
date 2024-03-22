@@ -61,7 +61,7 @@
                             <tr>
                                 <td>@item.TrackId </td>
                                 <td>@item.TrackName</td>
-@*                                 <td>
+                                @*<td>
                                     <a class="btn btn-danger" asp-action="DeleteTracks" asp-controller="InstructorTracks" onclick="return confirm (' Are you sure?')" asp-route-trackId="@item.TrackId" asp-route-insId="@insId">Delete</a>
                                 </td> *@
                             </tr>
@@ -69,8 +69,9 @@
                     }
                 </tbody>
             </table>
-@*             <a asp-action="ManageTracks" asp-route-id="@insId" asp-controller="InstructorTracks" class="btn btn-success">Add</a>
- *@        </div>
+            @*<a asp-action="ManageTracks" asp-route-id="@insId" asp-controller="InstructorTracks" class="btn btn-success">Add</a>*@
+            <a asp-action="Index" asp-controller="InstructorAdmin" class="btn btn-secondary">Cancel</a>
+</div>
     </div>
 
 </body>
