@@ -1,0 +1,57 @@
+﻿@model Instructor
+@{
+    Layout = "_Layout";
+    var Tracks = ViewBag.Tracks as List<Track>;
+    SelectList TrackList = new SelectList(Tracks, "TrackId", "TrackName");
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/site.css">
+    <style>
+        .form-control {
+            margin-bottom: 10px;
+        }
+
+        .custom-input {
+            border: none;
+            border-bottom: 2px solid lightgreen;
+            border-radius: 0;
+        }
+
+        .custom-btn {
+            background-color: lightgreen;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+
+        <form method="post" asp-action="Edit" asp-controller="instructorAdmin">
+            <div class="form-group">
+                <label asp-for="InstructorEmail">Email</label>
+                <input asp-for="InstructorEmail" class="form-control custom-input" value="@Model?.InstructorEmail" readonly />
+                <span asp-validation-for="InstructorEmail" class="text-danger"></span>
+            </div>
+            @if (ViewBag.ErrorMsg != null)
+            {
+                <div class="alert alert-danger">@ViewBag.ErrorMsg</div>
+            }
+            
+            @Html.Partial("InputForm",Model)
+            <a asp-action="Index" asp-controller="instructorAdmin" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+    <div id="divData"></div>
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+</body>
+</html>

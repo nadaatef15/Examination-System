@@ -1,0 +1,75 @@
+﻿@model List<Course>
+@{
+    Layout = null;
+    ViewData["Title"] = "Admin | instructor courses";
+    var insId = ViewBag.InstructorId;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>showInstructorCourses</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/site.css">
+    <style>
+        .form-control {
+            margin-bottom: 10px;
+        }
+
+        .custom-input {
+            border: none;
+            border-bottom: 2px solid lightgreen;
+            border-radius: 0;
+        }
+
+        .custom-btn {
+            background-color: lightgreen;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="text-center">
+            <h3 class="justify-content-center mt-5">Instructor Courses Data</h3>
+            <table class="table table-bordered table-hover border-danger align-items-center justify-content-center mt-5">
+
+                <thead>
+                    <tr>
+                        <th>Course Id</th>
+                        <th>Course Name</th>
+                        <th>Operation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count() == 0)
+                    {
+                        <tr>
+                            <td colspan="3">No Data Found</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.CourseId </td>
+                                <td>@item.CourseName</td>
+                                <td>
+                                    <a class="btn btn-danger" asp-action="DeleteCourse" asp-controller="InstructorCourse" onclick="return confirm (' Are you sure?')" asp-route-courseId="@item.CourseId" asp-route-instid="@insId">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            <a asp-action="ManageCourses" asp-route-id="@insId" asp-controller="InstructorCourse" class="btn btn-success">Add</a>
+            <a asp-action="Index" asp-controller="InstructorAdmin" class="btn btn-secondary">Cancel</a>
+            
+        </div>
+    </div>
+
+</body>
+</html>

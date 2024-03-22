@@ -228,7 +228,27 @@
          "ObjectType": 1
       },
       {
+         "Name": "[dbo].[GetInstrustureById]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[GetStudentById]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[GetStudentCourseData]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[GetStudentCourseDataById]",
+         "ObjectType": 1
+      },
+      {
          "Name": "[dbo].[GetStudentData]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[GetTrackByInstructorId]",
          "ObjectType": 1
       },
       {
@@ -396,7 +416,7 @@
          "ObjectType": 1
       }
    ],
-   "UiHint": "desktop-qnj2spj.Examination.dbo",
+   "UiHint": "desktop-lhhb34h.exam.dbo",
    "UncountableWords": null,
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": false,
@@ -408,7 +428,7 @@
    "UseHierarchyId": false,
    "UseInflector": true,
    "UseLegacyPluralizer": false,
-   "UseManyToManyEntity": false,
+   "UseManyToManyEntity": true,
    "UseNoDefaultConstructor": false,
    "UseNoNavigations": false,
    "UseNoObjectFilter": false,

@@ -10,7 +10,7 @@ namespace Exam_System.Repository
         ExaminationContext db;
         public RepoCourse(ExaminationContext _db)
         {
-            db= _db;
+            db = _db;
         }
 
         public void AddCourse(string name, int passDegree, string topic, List<int> selectedTracks)
@@ -51,21 +51,21 @@ namespace Exam_System.Repository
 
         public Course GetCourseById(int courseId)
         {
-            return db.Courses.FirstOrDefault(c=> c.CourseId == courseId);
+            return db.Courses.FirstOrDefault(c => c.CourseId == courseId);
         }
 
         public void RemoveCourse(int courseId)
         {
-       
+
             bool isAssigned = db.StudentCourses.Any(sc => sc.CourseId == courseId);
             if (isAssigned)
             {
-          
+
                 throw new Exception("Ooops,Course cannot be deleted as it is assigned to one or more students.");
             }
             else
             {
-              
+
                 db.Database.ExecuteSqlRaw("EXEC DeleteCourse @CourseId", new SqlParameter("@CourseId", courseId));
             }
         }
@@ -88,14 +88,14 @@ namespace Exam_System.Repository
                     new SqlParameter("@TopicName", topic),
                     new SqlParameter("@CourseId", courseId));
             }
- 
+
             foreach (var trackId in selectedTracks)
             {
                 bool isAssignedToTrack = db.Courses.Any(ct => ct.CourseId == courseId && ct.Tracks.Any(t => t.TrackId == trackId));
 
                 if (!isAssignedToTrack)
                 {
-              
+
                     db.Database.ExecuteSqlRaw("EXEC AddCourseTrack @TrackId,@CourseId",
                         new SqlParameter("@TrackId", trackId),
                         new SqlParameter("@CourseId", courseId));
@@ -103,7 +103,7 @@ namespace Exam_System.Repository
 
 
 
-       
+
 
             }
         }
