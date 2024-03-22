@@ -4,13 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Exam_System.Controllers
 {
-    public class StudentController : Controller
+    public class StudentAdminController : Controller
     {
-        StudentIRepo studentIRepo;
-        TrackIRepo trackIRepo;
-        ICourseRepo courseIRepo;
-        StudentCourseIRepo studentCourseIRepo;
-        public StudentController(StudentIRepo _studentIRepo,TrackIRepo _trackIRepo,ICourseRepo _courseIRepo,StudentCourseIRepo _studentCourseIRepo)
+        IRepoStudent studentIRepo;
+        IRepoTrack trackIRepo;
+        IRepoCourse courseIRepo;
+        IRepoStudentCourse studentCourseIRepo;
+        public StudentAdminController(IRepoStudent _studentIRepo,IRepoTrack _trackIRepo,IRepoCourse _courseIRepo,IRepoStudentCourse _studentCourseIRepo)
         {
             studentIRepo = _studentIRepo;
             trackIRepo = _trackIRepo;

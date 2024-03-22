@@ -16,6 +16,8 @@ public partial class Track
     public int Capacity { get; set; }
 
     public virtual ICollection<Student> Students { get; set; } = new List<Student>();
+    public virtual ICollection<Exam> Exams { get; set; } = new List<Exam>();
+
 
     public virtual Instructor Supervisor { get; set; }
 

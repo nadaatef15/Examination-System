@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ViewModel\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 

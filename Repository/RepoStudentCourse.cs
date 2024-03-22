@@ -6,11 +6,11 @@ using System.Linq;
 
 namespace Exam_System.Repository
 {
-    public class StudentCourseRepo : StudentCourseIRepo
+    public class RepoStudentCourse : IRepoStudentCourse
     {
         private readonly ExaminationContext _db;
 
-        public StudentCourseRepo(ExaminationContext db)
+        public RepoStudentCourse(ExaminationContext db)
         {
             _db = db;
         }
@@ -21,6 +21,8 @@ namespace Exam_System.Repository
                                        studentCourse.StudentId,
                                        studentCourse.CourseId,
                                        studentCourse.Grade);
+
+            _db.SaveChanges();
         }
 
         public void Delete(int courseId, int studentId)
@@ -29,6 +31,8 @@ namespace Exam_System.Repository
 
             _db.Database.ExecuteSqlRaw("EXECUTE dbo.DeleteStudentCourse {0}, {1}",
                                        studentId, courseId);
+
+            _db.SaveChanges();
         }
 
         public List<StudentCourse> getAll()
@@ -38,12 +42,15 @@ namespace Exam_System.Repository
 
         public List<StudentCourse> getByCourseId(int courseId)
         {
-            return _db.StudentCourses.FromSqlRaw("EXECUTE dbo.GetStudentCourseDataByCourseId {0}", courseId).ToList();
+            //return _db.StudentCourses.FromSqlRaw("EXECUTE dbo.GetStudentCourseDataByCourseId {0}", courseId).ToList();
+            return _db.StudentCourses.Where(a => a.CourseId == courseId).ToList();
+
         }
 
         public StudentCourse getByIds(int courseId, int studentId)
         {
-            return _db.StudentCourses.FromSqlRaw("EXECUTE dbo.GetStudentCourseDataById {0}, {1}", courseId, studentId).AsEnumerable().FirstOrDefault();
+            return _db.StudentCourses.FirstOrDefault(a => a.CourseId == courseId && a.StudentId == studentId);
+            //return _db.StudentCourses.FromSqlRaw("EXECUTE dbo.GetStudentCourseDataById {0}, {1}", studentId, courseId).AsEnumerable().FirstOrDefault();
         }
 
         public List<StudentCourse> getByStudentId(int studentId)
@@ -58,6 +65,9 @@ namespace Exam_System.Repository
                                        obj.StudentId,
                                        obj.CourseId,
                                        grade);
+
+            _db.SaveChanges();
+
         }
     }
 }

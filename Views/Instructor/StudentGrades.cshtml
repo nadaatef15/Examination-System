@@ -1,0 +1,27 @@
+﻿@model IEnumerable<StudentCourse>
+@{
+    Layout = "_InstructorLayout";
+
+    ViewData["Title"] = "Instructor | Student Grades";
+
+    ViewData["CoursesActive"] = "active";
+    ViewData["UsrProfileActive"] = "";
+    ViewData["LogOutActive"] = "";
+    }
+
+<h1 class="text-center main-title">Student Grades</h1>
+<form asp-action="StudentGrades" asp-controller="Instructor" method="post">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            
+            <div class="col-md-6 mb-3">
+                <label for="gradeInput_@item.StudentId">@item.Student.StudentFname @item.Student.StudentLname</label>
+                <input type="text" class="form-control" id="gradeInput_@item.StudentId" value="@item.Grade" name="StudentGrade.@item.StudentId" />
+
+            </div>
+        }
+    </div>
+    <button type="submit" class="btn btn-custom">Save</button>
+    <a asp-action="Index" asp-controller="Instructor" class="btn btn-custom ml-2">Cancel</a>
+</form>

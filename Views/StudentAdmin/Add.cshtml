@@ -12,36 +12,13 @@
     ViewData["LogOutActive"] = "";
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Add Student</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/css/site.css">
-    <style>
-        .form-control {
-            margin-bottom: 10px;
-        }
 
-        .custom-input {
-            border: none; 
-            border-bottom: 2px solid lightgreen;
-            border-radius: 0; 
-        }
 
-        .custom-btn{
-            background-color:lightgreen;
-        }
-    </style>
-</head>
-<body>
-    <div class="container mt-5">
-
-        <form method="post" asp-action="Add" asp-controller="Student">
+        <form method="post" asp-action="Add" asp-controller="StudentAdmin">
+            <h1 class="text-center main-title">Add Student</h1>
             <div class="form-group">
                 <label asp-for="StudentEmail">Email</label>
-                <input asp-for="StudentEmail" class="form-control custom-input" value="@Model?.StudentEmail"  />
+                <input asp-for="StudentEmail" class="form-control" value="@Model?.StudentEmail"  />
                 <span asp-validation-for="StudentEmail" class="text-danger"></span>
             </div>
             @if (ViewBag.ErrorMsg != null)
@@ -49,14 +26,12 @@
                 <div class="alert alert-danger">@ViewBag.ErrorMsg</div>
             }
             @Html.Partial("InputForm", Model)
-            <a asp-action="Index" asp-controller="Student" class="btn btn-secondary">Cancel</a>
+            <a asp-action="Index" asp-controller="StudentAdmin" class="btn btn-custom">Cancel</a>
         </form>
-    </div>
     <div id="divData"></div>
 
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
-</body>
-</html>
+
 

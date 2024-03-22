@@ -1,24 +1,22 @@
 ﻿@model IEnumerable<StudentCourse>
 @{
-    Layout = "_Layout";
     var std = ViewBag.stdData as Student;
+
+    ViewData["Title"] = "Admin | Student Grades";
+    ViewData["ReportsActive"] = "";
+    ViewData["StudentsActive"] = "";
+    ViewData["InstructorsActive"] = "";
+    ViewData["CoursesActive"] = "active";
+    ViewData["LogOutActive"] = "";
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>ShowGrades</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="container mt-5">
+        <h1 class="text-center main-title">Grades</h1>
         <div class="alert alert-success">
             <strong>Student:</strong> @std.StudentId - @std.StudentFname - @std.Track.TrackName
         </div>
 
-        <table class="table table-bordered">
+        <table class="table table-bordered table-responsive">
             <thead class="thead-dark">
                 <tr>
                     <th>Course Name</th>
@@ -54,7 +52,5 @@
 
             </tbody>
         </table>
-    </div>
-    <a asp-action="Index" asp-controller="Student" class="btn btn-secondary">Cancel</a>
-</body>
-</html>
+    <a asp-action="Index" asp-controller="StudentAdmin" class="btn btn-custom">Cancel</a>
+
