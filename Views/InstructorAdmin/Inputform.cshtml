@@ -1,0 +1,62 @@
+﻿@model Instructor
+@{
+    ViewData["Title"] = "Admin | All Instructor";
+    ViewData["ReportsActive"] = "";
+    ViewData["StudentsActive"] = "";
+    ViewData["InstructorsActive"] = "active";
+    ViewData["CoursesActive"] = "";
+    ViewData["LogOutActive"] = "";
+}
+
+<div class="form-group">
+    <label asp-for="InstructorEmail">Email</label>
+    <input asp-for="InstructorEmail" class="form-control custom-input" value="@Model?.InstructorEmail" />
+    <span asp-validation-for="InstructorEmail" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="InstructorFname">First Name</label>
+    <input asp-for="InstructorFname" class="form-control custom-input" value="@Model?.InstructorFname" />
+    <span asp-validation-for="InstructorFname" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="InstructorLname">Last Name</label>
+    <input asp-for="InstructorLname" class="form-control custom-input" value="@Model?.InstructorLname" />
+    <span asp-validation-for="InstructorLname" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="InstructorPassword">Password</label>
+    <input asp-for="InstructorPassword" class="form-control custom-input" value="@Model?.InstructorPassword" />
+    <span asp-validation-for="InstructorPassword" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="InstructorGender">Gender</label>
+    <select asp-for="InstructorGender" class="form-control" value="@Model?.InstructorGender">
+        <option>Female</option>
+        <option>Male</option>
+    </select>
+    <span asp-validation-for="InstructorGender" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="InstructorSalary">Salary</label>
+    <input asp-for="InstructorSalary" class="form-control custom-input" value="@Model?.InstructorSalary" />
+    <span asp-validation-for="InstructorSalary" class="text-danger"></span>
+</div>
+<button type="submit" class="btn custom-btn">Submit</button>
+@* 
+<div class="form-group">
+    <label asp-for="TrackId">Department</label>
+    <select asp-for="TrackId" asp-items="TrackList" class="form-control">
+        <option value="">Select</option>
+    </select>
+    <span asp-validation-for="TrackId" class="text-danger"></span>
+</div> 
+ @if (ViewBag.CapacityError != null)
+{
+    <div class="alert alert-danger">@ViewBag.CapacityError</div>} *@
+
+

@@ -1,0 +1,36 @@
+﻿@model Student
+@{
+    List<Course> std = ViewBag.StudentCourses as List<Course>;
+    List<Course> noStd = ViewBag.StudentNotCourses as List<Course>;
+
+    SelectList stdList = new SelectList(std, "CourseId", "CourseName");
+    SelectList noStdList = new SelectList(noStd, "CourseId", "CourseName");
+
+    ViewData["Title"] = "Admin | Manage Student Courses";
+    ViewData["ReportsActive"] = "";
+    ViewData["StudentsActive"] = "";
+    ViewData["InstructorsActive"] = "";
+    ViewData["CoursesActive"] = "active";
+    ViewData["LogOutActive"] = "";
+}
+
+
+    <h1 class="text-center main-title">Manage Course</h1>
+    <div class="alert alert-success"><strong>Student:</strong>@Model.StudentFname - @Model.Track.TrackName</div>
+    <div class="container mt-5">
+        <form asp-action="ManageCourses" asp-controller="StudentAdmin" method="post">
+            
+            <div class="form-group">
+                <label for="CourseToRemove">Courses Assigned</label>
+                <select multiple class="form-control" id="CourseToRemove" asp-items="stdList" name="CourseToRemove"></select>
+            </div>
+            <div class="form-group">
+                <label for="CourseToAdd">Courses Available</label>
+                <select multiple class="form-control" id="CourseToAdd" asp-items="noStdList" name="CourseToAdd"></select>
+            </div>
+            <button type="submit" class="btn btn-custom">Change</button>
+            <a asp-action="Index" asp-controller="StudentAdmin" class="btn btn-custom">Cancel</a>
+        </form>
+        
+    </div>
+

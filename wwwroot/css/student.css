@@ -1,0 +1,13 @@
+﻿body {
+}
+:root {
+    --main-color: #48C572;
+    --main-text-color: #3B3B3B;
+}
+.item {
+    border-radius: 10px;
+    border: 2px solid var(--main-color);
+    padding: 25px 20px;
+    background-color: #f9fafb;
+    text-align:center;
+}

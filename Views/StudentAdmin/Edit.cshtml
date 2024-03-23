@@ -1,0 +1,36 @@
+﻿@model Student
+@{
+    var Tracks = ViewBag.Tracks as List<Track>;
+    SelectList TrackList = new SelectList(Tracks, "TrackId", "TrackName");
+
+    ViewData["Title"] = "Admin | Edit Student";
+    ViewData["ReportsActive"] = "";
+    ViewData["StudentsActive"] = "";
+    ViewData["InstructorsActive"] = "";
+    ViewData["CoursesActive"] = "active";
+    ViewData["LogOutActive"] = "";
+}
+
+
+
+        <form method="post" asp-action="Edit" asp-controller="StudentAdmin">
+            <h1 class="text-center main-title">Edit Student</h1>
+            <div class="form-group">
+                <label asp-for="StudentEmail">Email</label>
+                <input asp-for="StudentEmail" class="form-control custom-input" value="@Model?.StudentEmail" readonly />
+                <span asp-validation-for="StudentEmail" class="text-danger"></span>
+            </div>
+            @if (ViewBag.ErrorMsg != null)
+            {
+                <div class="alert alert-danger">@ViewBag.ErrorMsg</div>
+            }
+            @Html.Partial("InputForm",Model)
+            <a asp-action="Index" asp-controller="StudentAdmin" class="btn btn-custom">Cancel</a>
+        </form>
+    </div>
+    <div id="divData"></div>
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+

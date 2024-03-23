@@ -53,18 +53,15 @@ aside h1{
 
     aside ul li {
         margin: 20px 2px;
-      
 
     }
         aside ul li a {
-            text-align: center;
             text-decoration: none;
             color: var(--main-text-color);
             transition: .3s;
             border-bottom: 2px solid var(--main-color);
             padding-bottom: 7px;
             display: block;
-          
             width: 170px;
             text-align: left;
         }
@@ -96,41 +93,39 @@ th {
 
 /*mobile screen*/
 @media (max-width: 768px) {
-
-    aside {
-        background-color: white;
-        border-bottom: 2px solid var(--main-color);
-        border-right: 0;
-        padding: 15px 20px;
-        position: fixed;
-        top: 0px;
-        width: 100vh;
-        height: 140px;
+    aside ul li a {
+        width: 75px;
+        text-align: center;
     }
+
+        aside ul li a:hover {
+            transform: translateX(0px) translateY(10px);
+        }
 
     .page-container {
         width: 98%;
         flex-direction: column;
-        align-items:center
+        align-items: center;
     }
 
-    ul{
-        display:flex;
-        text-align:center;
-        justify-content:space-around;
-        gap:20px;
+    ul {
+        display: flex;
+        text-align: center;
+        justify-content: space-around;
+        gap: 15px;
     }
-    aside h1{
-        margin-bottom:15px;
+
+    aside h1 {
+        margin-bottom: 15px;
     }
+
     .dynamic-section {
-     margin-left:0px !important;
-     width:100%;
-     margin:150px auto;
-    
+        margin-left: 0px !important;
+        width: 100%;
+        margin: 150px auto;
     }
+
     .circle {
-   
         bottom: 60px;
     }
-    }
+}

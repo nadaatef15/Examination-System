@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddQuestions</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/css/admin.css" rel="stylesheet" />
+    <link href="~/css/instructor.css" rel="stylesheet" />
+
+</head>
+<body>
+
+    <div class="container mt-5">
+
+     
+           <div class="top-addQuestion d-flex justify-content-between gap-2 align-items-center my-3 flex-wrap">
+    @*       <div>
+            <label for="courseSelect">Select Course:</label>
+            <select id="selectedCourse" name="selectedCourse"  required>
+                <option value="">Choose Course</option>
+                @foreach (var crs in ViewBag.InstructorCourses)
+                {
+                    <option value="@crs.CourseId">@crs.CourseName</option>
+                }
+            </select>
+           </div> *@
+
+           <div>
+                <label>Add Question To <span class="color-green"> @ViewBag.course.CourseName </span> Course</label>
+               </div>
+
+            <div>
+            <label for="selectquestionType">Select Question Type:</label>
+            <select id="selectquestionType" name="questionType" required>
+                <option value="">Choose Question Type</option>
+                <option value="MCQ">Multiple Choice Question (MCQ)</option>
+                <option value="TF">True/False Question</option>
+            </select>
+            </div>
+            </div>
+
+            <div id="mcqForm" class="collapse">
+                <h3 class="main-title">Multiple Choice Question Form</h3>
+                <form method="POST" asp-action="AddMcqQuestions" asp-controller="Instructor">
+
+            
+                    <input type="hidden" name="courseId" id="courseId" class="courseId" value="">
+
+                
+                    <input type="hidden" name="questionType" id="questionType" class="questionType" value="">
+
+                    <div class="form-group my-3">
+                        <label for="question">Question:</label>
+                        <input name="questionTitle" class="form-control" placeholder="Enter the question" required />
+                        <span class="text-danger"></span>
+                    </div>
+                    <div class="mcq-answers">
+
+                    <div class="form-group my-3">
+                        <label  for="a">Distracted Answer 1:</label>
+                        <input id="a" name="ansA" type="text" placeholder="Answer 1" required />
+                    </div>
+
+                    <div class="form-group my-3">
+                        <label  for="b">Distracted Answer 2:</label>
+                        <input id="b" name="ansB" type="text" placeholder="Answer 2" required />
+                    </div>
+
+                    <div class="form-group my-3">
+                        <label for="c">Distracted Answer 3:</label>
+                        <input id="c" name="ansC" type="text" placeholder="Answer 3" required />
+                    </div>
+
+
+                    <div class="form-group my-3">
+                        <label  for="correct">Correct Answer</label>
+                        <input id="correct" name="correctAns" type="text" placeholder="Correct Answer" required />
+                    </div>
+                    </div>
+                    <button type="submit" class="btn-custom">Add</button>
+                </form>
+            </div>
+
+            <div id="trueFalseForm" class="collapse">
+                <h3 class="main-title">True/False Question Form</h3>
+                <form method="POST" asp-action="AddTfQuestions" asp-controller="Instructor">
+
+                
+                    <input type="hidden" name="courseId" id="courseId" class="courseId" value="">
+
+     
+                    <input type="hidden" name="questionType" id="questionType" class="questionType" value="">
+
+                    <div class="form-group my-3">
+                        <label for="question">Question:</label>
+                        <input name="questionTitle" class="form-control" placeholder="Enter the question" required />
+                        <span class="text-danger"></span>
+                    </div>
+                    <div class="form-group my-3">
+                        <label for="correctAnswer">Select the correct answer:</label>
+                        <select name="correctAnswer" class="form-control" multiple required>
+                        
+                            <option value="True">True</option>
+                            <option value="False">False</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-custom">Add</button>
+                </form>
+            </div>
+         
+
+            <script src="~/lib/jquery/dist/jquery.min.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="~/js/instructorQuestion.js">  </script>
+        
+    </div>
+</body>
+</html>

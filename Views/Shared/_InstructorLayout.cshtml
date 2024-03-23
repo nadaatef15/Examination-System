@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/css/admin.css" rel="stylesheet" />
+    <link href="~/css/instructor.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="page-container d-flex ">
+        <aside>
+            <h1>Instructor Control</h1>
+            <ul>
+                <li><a href="/Admin/Reports" class="@ViewData["ReportsActive"]">Reports</a></li>
+                <li><a href="/Instructor/index" class="@ViewData["CoursesActive"]">Courses</a></li>
+                <li><a href="/Instructor/index" class="@ViewData["UsrProfileActive"]">Usr Profile</a></li>
+                <li><a href="/Login/Show" class="@ViewData["LogOutActive"]">LogOut</a></li>
+            </ul>
+            <img class="circle" src="~/images/circles.png" />
+        </aside>
+        <div class="dynamic-section">
+            @RenderBody()
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

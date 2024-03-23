@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Course>
+@{
+    Layout = "_InstructorLayout";
+
+    ViewData["Title"] = "Instructor | Courses";
+
+    ViewData["CoursesActive"] = "active";
+    ViewData["UsrProfileActive"] = "";
+    ViewData["LogOutActive"] = "";
+    }
+
+<h1 class="text-center main-title"> Courses</h1>
+<table class="table table-bordered table-responsive">
+    <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model?.Count() == 0)
+        {
+            <tr>
+                <td colspan="8">No Courses found</td>
+            </tr>
+        }
+        else
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.CourseId</td>
+                    <td>@item.CourseName</td>
+                    <td class="all-courses">
+                        <a class="btn btn-custom m-3" asp-action="StudentGrades" asp-controller="Instructor" asp-route-id="@item.CourseId">Student Grades </a>
+                        <a class="btn btn-custom m-3" asp-action="GenerateExam" asp-controller="Instructor" asp-route-id="@item.CourseId">Generate Exam </a>
+                        <a class="btn btn-custom m-3" asp-action="AllExams" asp-controller="Instructor" asp-route-id="@item.CourseId">All Exams </a>
+                        <a class="btn btn-custom m-3" asp-action="AddQuestions" asp-controller="Instructor" asp-route-id="@item.CourseId">Add Question </a>
+
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

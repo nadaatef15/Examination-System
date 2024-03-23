@@ -1,23 +1,39 @@
 ﻿using Exam_System.IRepository;
+using Exam_System.Controllers.Filters;
 using Exam_System.Models;
 using Exam_System.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace Exam_System.Controllers
 {
+    
+    [Authorize(Roles ="Admin")]
+    
     public class AdminController : Controller
     {
       
-        ICourseRepo courseRepo;
+        IRepoCourse courseRepo;
+        IInstructorRepo InstructorRepo;
+        IRepoTrack trackRepo;
 
-        public AdminController(ICourseRepo _courseRepo)
+        public AdminController(IRepoCourse _courseRepo,IInstructorRepo _instructorRepo ,IRepoTrack _trackRepo)
         {
+
             courseRepo = _courseRepo;
+            InstructorRepo = _instructorRepo;
+            trackRepo = _trackRepo;
         }
 
-      
+        public IActionResult AdminDashboard()
+        {
+            ViewBag.AllCourses = courseRepo.getAll();
+            ViewBag.AllInstructor = InstructorRepo.getInstructors();
+            ViewBag.AllTracks = trackRepo.getAll();
+            return View();
+        }
         public IActionResult AllCourses()
         {
 
@@ -25,7 +41,7 @@ namespace Exam_System.Controllers
 
 
             
-            return View("Course/AllCourses",courses);
+            return View("course/AllCourses", courses);
           
         }
         // add course
@@ -35,7 +51,7 @@ namespace Exam_System.Controllers
         {
  
             var tracks=courseRepo.GetAllTracks();
-            return View("Course/AddCourse",tracks);
+            return View("course/AddCourse",tracks);
         }
         [HttpPost]
         public IActionResult AddCourse(string name, int passDegree, string topic, List<int> selectedTracks)
