@@ -14,10 +14,10 @@
         <aside>
             <h1>Instructor Control</h1>
             <ul>
-                <li><a href="/Admin/Reports" class="@ViewData["ReportsActive"]">Reports</a></li>
+                <li><a href="/Instructor/Reports" class="@ViewData["ReportsActive"]">Reports</a></li>
                 <li><a href="/Instructor/index" class="@ViewData["CoursesActive"]">Courses</a></li>
                 <li><a href="/Instructor/index" class="@ViewData["UsrProfileActive"]">Usr Profile</a></li>
-                <li><a href="/Login/Show" class="@ViewData["LogOutActive"]">LogOut</a></li>
+                <li><a  asp-action="logout" asp-controller="Account" class="@ViewData["LogOutActive"]">LogOut</a></li>
             </ul>
             <img class="circle" src="~/images/circles.png" />
         </aside>
