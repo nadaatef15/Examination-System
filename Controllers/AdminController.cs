@@ -22,7 +22,10 @@ namespace Exam_System.Controllers
             courseRepo = _courseRepo;
         }
 
-      
+        public IActionResult AdminDashboard()
+        {
+            return View();
+        }
         public IActionResult AllCourses()
         {
 

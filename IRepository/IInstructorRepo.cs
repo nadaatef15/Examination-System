@@ -8,5 +8,7 @@ namespace Exam_System.IRepository
          void AddMcqQuestion(int courseId, string questionType, string questionTitle, string ansA, string ansB, string ansC, string correctAns);
 
          void AddTfQuestion(int courseId, string questionType, string questionTitle, string correctAnswer);
+
+        public Course getCourseToAddQuestion(int id);
     }
 }

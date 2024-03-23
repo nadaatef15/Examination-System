@@ -90,14 +90,17 @@ namespace Exam_System.Controllers
             return View("Index");
         }
         [HttpGet]
-        public IActionResult AddQuestions() //get
+        public IActionResult AddQuestions(int id) //get
         {
         
             var userIdClaim = HttpContext.User.FindFirst("UserId");
             int userId =int.Parse (userIdClaim.Value);
-            var instructorCourses = instructorRepo.getInstructorCourses(userId);
+            //var instructorCourses = instructorRepo.getInstructorCourses(userId);
             ViewBag.UserId = userId;
-            ViewBag.InstructorCourses=instructorCourses;
+            //ViewBag.InstructorCourses=instructorCourses;
+
+            var course = instructorRepo.getCourseToAddQuestion(id);
+            ViewBag.course=course;
             return View();
         }
      

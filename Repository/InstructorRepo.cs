@@ -99,5 +99,10 @@ namespace Exam_System.Repository
         {
             return db.Instructors.FirstOrDefault(i => i.InstructorId == userId).Courses.ToList();
         }
+
+        public Course getCourseToAddQuestion(int id)
+        {
+            return db.Courses.FirstOrDefault(i => i.CourseId == id);    
+        }
     }
 }
