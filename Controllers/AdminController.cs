@@ -16,14 +16,22 @@ namespace Exam_System.Controllers
     {
       
         IRepoCourse courseRepo;
+        IInstructorRepo InstructorRepo;
+        IRepoTrack trackRepo;
 
-        public AdminController(IRepoCourse _courseRepo)
+        public AdminController(IRepoCourse _courseRepo,IInstructorRepo _instructorRepo ,IRepoTrack _trackRepo)
         {
+
             courseRepo = _courseRepo;
+            InstructorRepo = _instructorRepo;
+            trackRepo = _trackRepo;
         }
 
         public IActionResult AdminDashboard()
         {
+            ViewBag.AllCourses = courseRepo.getAll();
+            ViewBag.AllInstructor = InstructorRepo.getInstructors();
+            ViewBag.AllTracks = trackRepo.getAll();
             return View();
         }
         public IActionResult AllCourses()

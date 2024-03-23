@@ -11,6 +11,8 @@
     <meta name="viewport" content="width=device-width" />
     <title>ShowCourses</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/student.css" />
     <script src="https://kit.fontawesome.com/d3bc0f0f7a.js" crossorigin="anonymous"></script> 
     <style>
         .header{
@@ -67,7 +69,7 @@
         <h1>@Model.StudentFname @Model.StudentLname</h1>
         @if (tr.TrackName != null)
         {
-            <p><span class="text-warning">@tr.TrackName</span> Track</p>
+            <p><span class="text-success">@tr.TrackName</span> Track</p>
             <p> Supervisor: @tr.Supervisor.InstructorFname</p>
         }
     </section>
@@ -77,12 +79,12 @@
         {
             foreach (var exam in @item.Course.Exams)
             {
-                <div class="mb-3 shadow-lg bg-light rounded p-4 ">
+                <div class="mb-3  item">
                     <div>
-                    <h3>Course Name: @item.Course.CourseName</h3>
-                    <h5>Exam ID: @exam.ExamId</h5>
-                    <p>The Exam duration of this course is: @exam.Duration</p>
-                        <a asp-action="GenerateQuestions" asp-controller="Student" asp-route-stdID="@item.StudentId" asp-route-CrsId="@item.Course.CourseId" asp-route-ExamId="@exam.ExamId"  class="btn btn-primary text-light">Go to Exam</a>
+                    <h3 class="my-2">Course Name: @item.Course.CourseName</h3>
+                    <h5 class="my-2">Exam ID: @exam.ExamId</h5>
+                    <p class="mb-4 text-secondary">The Exam duration of this course is: @exam.Duration</p>
+                        <a asp-action="GenerateQuestions" asp-controller="Student" asp-route-stdID="@item.StudentId" asp-route-CrsId="@item.Course.CourseId" asp-route-ExamId="@exam.ExamId"  class="btn-custom text-center text-decoration-none">Go to Exam</a>
                 </div>
             </div>
             }
