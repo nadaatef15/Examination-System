@@ -1,6 +1,13 @@
 ﻿@model Instructor
 @{
-    Layout = "_Layout";
+  
+    ViewData["Title"] = "Admin | Edit Instructor";
+    ViewData["ReportsActive"] = "";
+    ViewData["StudentsActive"] = "";
+    ViewData["InstructorsActive"] = "active";
+    ViewData["CoursesActive"] = "";
+    ViewData["LogOutActive"] = "";
+}
     var Tracks = ViewBag.Tracks as List<Track>;
     SelectList TrackList = new SelectList(Tracks, "TrackId", "TrackName");
 
