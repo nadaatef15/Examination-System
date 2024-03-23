@@ -104,5 +104,9 @@ namespace Exam_System.Repository
         {
             return db.Courses.FirstOrDefault(i => i.CourseId == id);    
         }
+        public List<Instructor> getInstructors()
+        {
+            return db.Instructors.ToList();
+        }
     }
 }

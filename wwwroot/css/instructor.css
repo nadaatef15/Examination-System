@@ -1,9 +1,23 @@
 ﻿
-
+:root {
+    --main-color: #48C572;
+    --main-text-color: #3B3B3B;
+}
 .main-title {
     margin: 50px auto;
 }
 
+input ,select{
+    border:none;
+    outline:none;
+    border-bottom:2px solid var(--main-color);
+    height:45px;
+
+}
+.color-green{
+    color:var(--main-color);
+   
+}
 .top-addQuestion {
     border-bottom: 2px #e4e4e4 double;
     padding-bottom: 50px;
@@ -49,10 +63,66 @@ select.selector {
         padding: 0px 5px;
     }
 
+.all-courses a.btn-custom {
+    width: 150px;
+    padding: 10px 12px;
+}
+.about-date {
+    display: flex;
+    justify-content: space-between;
+}
+    .about-date div {
+        width: calc(90% / 3);
+    }
+
+        .about-date div input, .section-flex div input, .section-flex div select{
+            width: 100%;
+        }
+
+.section-flex{
+    display:flex;
+    justify-content:space-between;
+    margin:25px 0px;
+}
+.section-flex div{
+    width:calc(90% / 2);
+}
+
+.btns{
+    text-align:center;
+    display:flex;
+    justify-content:center;
+    gap:15px;
+}
 /*mobile screen*/
 @media (max-width: 768px) {
-    .mcq-answers {
+
+    aside {
+    
+      height:20vh;
+      border-right:none;
+      width:100%;
+      padding:15px 0px;
+    }
+        .mcq-answers {
         grid-template-columns: 1fr;
         gap: 15px;
+    }
+        .about-date {
+           flex-direction:column;
+
+        }
+
+            .about-date div, .section-flex div {
+                width: 100%;
+            }
+
+    .section-flex {
+   flex-direction:column;
+    }
+    .all-courses a.btn-custom {
+        width: 110px;
+        font-size: 12px;
+        padding: 10px 4px;
     }
 }

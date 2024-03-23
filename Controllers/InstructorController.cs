@@ -110,14 +110,14 @@ namespace Exam_System.Controllers
             instructorRepo.AddMcqQuestion(courseId,questionType,questionTitle, ansA, ansB, ansC, correctAns);
 
 
-            return RedirectToAction("SuccessAddQuestion");
+            return RedirectToAction("Index");
         }
 
         public IActionResult AddTfQuestions(int courseId, string questionType, string questionTitle,string correctAnswer)
         {
            instructorRepo.AddTfQuestion(courseId ,questionType,questionTitle, correctAnswer);
 
-            return RedirectToAction("SuccessAddQuestion");
+            return RedirectToAction("Index");
         }
 
         public IActionResult SuccessAddQuestion()

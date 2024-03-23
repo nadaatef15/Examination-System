@@ -17,33 +17,51 @@
 <h1 class="text-center main-title">Generate Exam</h1>
 
 <form asp-action="GenerateExam" asp-controller="Instructor" method="post">
-
+    <div class="about-date">
+        <div>
     <label asp-for="ExamDate">Exam Date</label>
-    <input asp-for="ExamDate" value="@Model?.ExamDate" type="date" required><br>
-
+    <input asp-for="ExamDate" value="@Model?.ExamDate" type="date" required>
+        </div>
+        <div>
     <label asp-for="StartTime">Start Time</label>
-    <input asp-for="StartTime" value="@Model?.StartTime" type="time" required><br>
-
+    <input asp-for="StartTime" value="@Model?.StartTime" type="time" required>
+        </div>
+        <div>
     <label asp-for="EndTime">End Time</label>
-    <input asp-for="EndTime" value="@Model?.EndTime" type="time" required><br>
+    <input asp-for="EndTime" value="@Model?.EndTime" type="time" required>
+        </div>
+    </div>
 
+
+    <div class="section-flex">
+   
+        <div>
     <label asp-for="TrackId">Track</label>
     <select asp-for="TrackId" asp-items="trackList" required>
         <option>Track</option>
-    </select><br>
-
+    </select>
+        </div>
+        <div>
     <label asp-for="FullMark">Full Mark</label>
-    <input asp-for="FullMark" value="@Model?.FullMark" required><br>
+    <input asp-for="FullMark" value="@Model?.FullMark" required>
+        </div>
+    </div>
 
+    <div class="section-flex">
+
+        <div>
     <label for="numTrueFalseQuestions">Number of True/False Questions:</label>
     <input type="number" id="numTrueFalseQuestions" name="numTrueFalseQuestions" required><br>
-
+        </div>
+        <div>
     <label for="numMCQuestions">Number of Multiple Choice Questions:</label>
     <input type="number" id="numMCQuestions" name="numMCQuestions" required><br>
-
+        </div>
+    </div>
+    <div class="btns">
     <button type="submit" class="btn btn-custom" >Submit</button>
     <a asp-action="Index" asp-controller="Instructor" class="btn btn-custom ml-2">Cancel</a>
-
+    </div>
     @if (ViewBag.ExamConflict != null)
     {
         <div class="alert alert-danger mt-5">

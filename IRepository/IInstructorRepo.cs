@@ -10,5 +10,7 @@ namespace Exam_System.IRepository
          void AddTfQuestion(int courseId, string questionType, string questionTitle, string correctAnswer);
 
         public Course getCourseToAddQuestion(int id);
+
+        List<Instructor> getInstructors();
     }
 }
