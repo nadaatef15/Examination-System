@@ -1,16 +1,31 @@
-﻿using Exam_System.Models;
+﻿using Exam_System.IRepository;
+using Exam_System.Models;
+using Exam_System.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System;
+
 
 namespace Exam_System.Controllers
 {
     public class ExamController : Controller
     {
-        ExaminationContext db=new ExaminationContext();
-        
+       
+        Exam exam;
+        IQuestionRepo questionRepo;
+        IRepoExam repoExam;
+        IRepoStudentAnswer repoStudentAnswer;
+        IRepoStudent repoStudent;
+
+        public ExamController(IQuestionRepo _questionRepo, IRepoExam _repoExam, IRepoStudentAnswer _repoStudentAnswer, IRepoStudent _repoStudent)
+        {
+            questionRepo=_questionRepo;
+            repoExam=_repoExam;
+            repoStudentAnswer=_repoStudentAnswer;
+            repoStudent=_repoStudent;
+        }
         public List<Question> GenerateQuestions(int crsId)
         {
-            var AllQuestions= db.Questions.ToList();
+            var AllQuestions= questionRepo.GetQuestions();
 			Random random = new Random();
             List<Question> questions = AllQuestions.Where(q => q.CourseId == crsId)
 												   .OrderBy(_ => random.Next())
@@ -18,20 +33,13 @@ namespace Exam_System.Controllers
 												   .ToList();
             return questions;
         }
-		/*public List<Answer> GenerateAnswers(int quesId)
+		
+		public Exam GenerateExam(List<Question> questions,int examId, int courseId, int instructorId)
 		{
-			var AllAnswers= db.Answers.ToList();
-			List<Answer> answers = AllAnswers.Where(a => a.QuestionId == quesId)
-												   .ToList();
-			return answers;
-
-		}*/
-		public Exam GenerateExam(List<Question> questions, int courseId, int instructorId)
-		{
-			Exam exam = db.Exams.FirstOrDefault(a => a.InstructorId==instructorId && a.CourseId==courseId);
+            exam = repoExam.GetExambyIds(examId, courseId, instructorId);
 			exam.Questions= questions;
-			//db.SaveChanges();
-			return exam;
+            //repoExam.Save();
+            return exam;
 
 		}
 		public IActionResult Index()
@@ -39,43 +47,43 @@ namespace Exam_System.Controllers
 			return View();
 		}
 		[HttpGet]
-		public IActionResult Create()
+		public IActionResult StartExam(int CrsId,int ExamId,int InstId)
 		{
-			int crsId = 4;
-			int instructorId = 2;
-			List<Question> questions = GenerateQuestions(crsId);
-			Exam exam = GenerateExam(questions, crsId, instructorId);
-
+            var stdid = HttpContext.User.FindFirst("UserId");
+            ViewBag.StdID = int.Parse(stdid.Value);
+           Student std= repoStudent.getById(ViewBag.StdID);
+           ViewBag.StudentName=$"{std.StudentFname} {std.StudentLname}";
+            List<Question> questions = GenerateQuestions(CrsId);
+			Exam exam = GenerateExam(questions, ExamId, CrsId, InstId);
+           // repoExam.Save();
 			return View(exam);
 		}
 
-		[HttpPost]
-		public IActionResult Create(int StudentId,int ExamId, int QuestionId, List<StudentAnswer> studentAnswers)
-		{
-			/*db.StudentAnswers.AddRange(studentAnswers);
-			db.SaveChanges();*/
+        [HttpPost]
+        public IActionResult StartExam(int examId, Dictionary<int, StudentAnswer> studentAnswers)
+        {
+            var stdid = HttpContext.User.FindFirst("UserId");
+            ViewBag.StdID = int.Parse(stdid.Value);
             if (ModelState.IsValid)
             {
-				foreach (var studentAnswer in studentAnswers)
-				{
-					db.StudentAnswers.Add(studentAnswer);
-				}
-				db.SaveChanges();
-				return RedirectToAction("Index", "Student");
-            }
-            else
-            {
-                // Handle invalid model state, if necessary
-                return View(); // You may want to return the view with errors displayed
+                foreach (var questionId in studentAnswers.Keys)
+                {
+                    if (studentAnswers[questionId].AnswerChooseId==null)
+                    {
+                        ModelState.AddModelError("Answer","there is question didn't answer");
+                        return View(exam);
+                    }
+                    var answer = studentAnswers[questionId];
+                    answer.ExamId = examId;
+                    answer.StudentId = ViewBag.StdID;
+                    repoStudentAnswer.Add(answer);
+                }
+                //repoExam.Save();
+                return RedirectToAction("ShowCourses", "HomePage");
             }
 
-            //return RedirectToAction("Index","Student");
-		}
-		public IActionResult SaveAnswer(StudentAnswer studentAnswer)
-		{
-			db.StudentAnswers.Add(studentAnswer);
-			db.SaveChanges();
-			return RedirectToAction("Create");
-		}
+            return View();
+        }
+
     }
 }

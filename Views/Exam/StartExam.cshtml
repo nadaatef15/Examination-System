@@ -1,0 +1,142 @@
+﻿@using System.Timers;
+@using System.Globalization
+@model Exam
+@{
+    Layout = null;
+    int counter = 1;
+    var duration = Model.Duration;
+    //var time = Model.StartTime?.ToString("yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture); 
+    /*?? TimeOnly.MinValue;
+    System.Timers.Timer myTimer = new System.Timers.Timer(1000);
+    void MyTimerElapsed(object sender, ElapsedEventArgs e)
+    {
+        // Your code here: Perform the desired task
+        time = time.AddMinutes(1);
+        Console.WriteLine(time);
+    }
+    myTimer.Elapsed += MyTimerElapsed;
+    myTimer.Enabled = true;
+    string formattedTime = ""; // Initialize the formatted time string
+    if (Model.StartTime.HasValue)
+    {
+        formattedTime = Model.StartTime.Value.ToString("yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture);
+    }*/
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/student.css"/>
+    <script src="https://kit.fontawesome.com/d3bc0f0f7a.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <section class="text-center mt-5 mb-5 w-50 m-auto">
+
+        <h1><span class="text-success"> @Model.Course.CourseName Exam</span></h1>
+
+        <p><span class="text-success" id="">@Model.Duration</span></p>
+        <p><span> Student Name: @ViewBag.StudentName</span></p>
+       
+    </section>
+    <section class="container m-auto">
+
+    <form method="post" class="text-center">
+        <input type="hidden" name="ExamId" value="@Model.ExamId" />
+        <div  class="mt-5 mb-5 w-50 m-auto ">
+            @foreach (var question in Model.Questions)
+            {
+                    <div class="mb-3  item" style="text-align:left;">
+                        <h5>@counter: @question.QuestionTitle</h5>
+                        <input type="hidden" name="StudentAnswers[@question.QuestionId].QuestionId" value="@question.QuestionId" />
+                        @if(question.StudentAnswers.Any()){
+                            @foreach (var ans in question.StudentAnswers)
+                            {
+                                <p>
+                                    <input type="radio" name="StudentAnswers[@question.QuestionId].AnswerChooseId" value="@ans.AnswerChooseId" />
+                                    @ans.AnswerChoose
+                                </p>
+                            }
+                        }
+                        else
+                        {
+                            
+                        @foreach (var ans in question.Answers)
+                        {
+                            <p>
+                                <input type="radio" name="StudentAnswers[@question.QuestionId].AnswerChooseId" value="@ans.AnswerId" />
+                                @ans.AnswerBody
+                            </p>
+                        }
+                        }
+                    </div>
+                    { counter++;}
+
+                }
+        </div>
+            <input onclick="return confirm('Are you sure you want to end the exam and submit your answers?');" data-bs-toggle="modal" data-bs-target="#exampleModal" id="modalSubmit" type="submit" value="Submit" class="btn btn-success text-center mb-3" asp-route-id="@ViewBag.StdID" />
+    </form>
+        <!-- Button trigger modal
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Launch demo modal
+		</button> -->
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div asp-validation-summary="All" class="alert alert-danger list-unstyled"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+           /* //if (Model.ExamDate.Validation != null) {
+            $("#modalSubmit").attr("data-bs-toggle","modal")
+            $("#modalSubmit").attr("data-bs-target","#exampleModal")
+            }*/
+           
+            //var duration = {Model.Duration;};
+            var currentTime = new Date('@Model.Duration * 1000'); // Convert seconds to milliseconds
+            // Get duration in seconds from Model
+
+            function updateTime() {
+                if (currentTime > 0) {
+                    $('#currentTime').text(formatDuration(currentTime)); // Update the displayed time
+                    currentTime--; // Decrement duration by 1 second
+                } else {
+                    console.log("End exam"); // Log message when duration reaches zero
+                    clearInterval(timerInterval); // Stop the timer when duration reaches zero
+                }
+            }
+
+            // Function to format duration in HH:mm:ss format
+            function formatDuration(durationInSeconds) {
+                var hours = Math.floor(durationInSeconds / 3600);
+                var minutes = Math.floor((durationInSeconds % 3600) / 60);
+                var seconds = durationInSeconds % 60;
+                return ('0' + hours).slice(-2) + ':' + ('0' + minutes).slice(-2) + ':' + ('0' + seconds).slice(-2);
+            }
+
+            // Call updateTime function every second
+            var timerInterval = setInterval(updateTime, 1000);
+        });
+    </script>
+
+</body>
+</html>

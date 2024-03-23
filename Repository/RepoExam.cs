@@ -62,6 +62,15 @@ namespace Exam_System.Repository
             }
            
         }
-       
+       public Exam GetExambyIds(int examId, int courseId, int instructorId)
+        {
+            // Exam exam = db.Exams.FirstOrDefault(a => a.ExamId==examId && a.CourseId==courseId  && a.InstructorId==instructorId);
+            Exam exam = db.Exams.FirstOrDefault(a => a.ExamId==examId && a.CourseId==courseId);
+            return exam;
+        }
+        public void Save()
+        {
+            db.SaveChanges();
+        }
     }
 }

@@ -84,12 +84,12 @@
                     <h3 class="my-2">Course Name: @item.Course.CourseName</h3>
                     <h5 class="my-2">Exam ID: @exam.ExamId</h5>
                     <p class="mb-4 text-secondary">The Exam duration of this course is: @exam.Duration</p>
-                        <a asp-action="GenerateQuestions" asp-controller="Student" asp-route-stdID="@item.StudentId" asp-route-CrsId="@item.Course.CourseId" asp-route-ExamId="@exam.ExamId"  class="btn-custom text-center text-decoration-none">Go to Exam</a>
+                        <a asp-action="StartExam" asp-controller="Exam" asp-route-stdID="@item.StudentId" asp-route-CrsId="@item.Course.CourseId" asp-route-ExamId="@exam.ExamId" asp-route-InstId="@tr.Supervisor.InstructorId" class="btn-custom text-center text-decoration-none">Go to Exam</a>
                 </div>
             </div>
             }
         }
     </section>
-    
+  
 </body>
 </html>

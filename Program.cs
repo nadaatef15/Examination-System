@@ -30,6 +30,8 @@ namespace Exam_System
             builder.Services.AddTransient<IInstructorRepo, InstructorRepo>();
             builder.Services.AddScoped<IInstructorCourseRepo, InstructorCourseRepo>();
             builder.Services.AddScoped<IAuthRepo, AuthRepo>();
+            builder.Services.AddScoped<IQuestionRepo, QuestionRepo>();
+            builder.Services.AddScoped<IRepoStudentAnswer,RepoStudentAnswer>();
 
             //applay filter to all
             builder.Services.AddControllersWithViews(options =>
