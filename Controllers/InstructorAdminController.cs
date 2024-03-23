@@ -3,9 +3,11 @@ using Exam_System.Models;
 using Exam_System.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.AspNetCore.Authorization;
 namespace Exam_System.Controllers
 {
+
+    [Authorize(Roles = "Admin")]
     public class InstructorAdminController : Controller
     {
         IInstructorAdminRepo instructorAdminRepo;
