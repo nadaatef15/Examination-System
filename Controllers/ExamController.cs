@@ -10,52 +10,55 @@ namespace Exam_System.Controllers
 {
     public class ExamController : Controller
     {
-       
+
         Exam exam;
         IQuestionRepo questionRepo;
         IRepoExam repoExam;
         IRepoStudentAnswer repoStudentAnswer;
         IRepoStudent repoStudent;
+        IAnswerRepo answerRepo;
 
-        public ExamController(IQuestionRepo _questionRepo, IRepoExam _repoExam, IRepoStudentAnswer _repoStudentAnswer, IRepoStudent _repoStudent)
+        public ExamController(IQuestionRepo _questionRepo, IRepoExam _repoExam, IRepoStudentAnswer _repoStudentAnswer, IRepoStudent _repoStudent, IAnswerRepo _answerRepo)
         {
-            questionRepo=_questionRepo;
-            repoExam=_repoExam;
-            repoStudentAnswer=_repoStudentAnswer;
-            repoStudent=_repoStudent;
+            questionRepo = _questionRepo;
+            repoExam = _repoExam;
+            repoStudentAnswer = _repoStudentAnswer;
+            repoStudent = _repoStudent;
+            answerRepo = _answerRepo;
         }
         public List<Question> GenerateQuestions(int crsId)
         {
-            var AllQuestions= questionRepo.GetQuestions();
-			Random random = new Random();
+            var AllQuestions = questionRepo.GetQuestions();
+            Random random = new Random();
             List<Question> questions = AllQuestions.Where(q => q.CourseId == crsId)
-												   .OrderBy(_ => random.Next())
-												   .Take(10)
-												   .ToList();
+                                                   .OrderBy(_ => random.Next())
+                                                   .Take(10)
+                                                   .ToList();
             return questions;
         }
-		
-		public Exam GenerateExam(List<Question> questions,int examId, int courseId, int instructorId)
-		{
+
+        public Exam GenerateExam(List<Question> questions, int examId, int courseId, int instructorId)
+        {
             exam = repoExam.GetExambyIds(examId, courseId, instructorId);
-			exam.Questions= questions;
+            //Delete Old Exam Questions
+            exam.Questions = questions;
             repoExam.Save(); //comment this line to make data don't save in table in DB
             return exam;
 
-		}
-		public IActionResult Index()
-		{
-			return View();
-		}
-		[HttpGet]
-		public IActionResult StartExam(int CrsId,int ExamId,int InstId)
-		{
+        }
+        public IActionResult Index()
+        {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult StartExam(int CrsId, int ExamId, int InstId)
+        {
             var stdid = HttpContext.User.FindFirst("UserId");
             ViewBag.StdID = int.Parse(stdid.Value);
-           Student std= repoStudent.getById(ViewBag.StdID);
-           ViewBag.StudentName=$"{std.StudentFname} {std.StudentLname}";
+            Student std = repoStudent.getById(ViewBag.StdID);
+            ViewBag.StudentName = $"{std.StudentFname} {std.StudentLname}";
             List<Question> questions = GenerateQuestions(CrsId);
-			Exam exam = GenerateExam(questions, ExamId, CrsId, InstId);
+            Exam exam = GenerateExam(questions, ExamId, CrsId, InstId);
             // Assuming exam.Duration is a TimeSpan?
             string formattedDuration = exam.Duration?.ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture);
             ViewBag.duration = formattedDuration;
@@ -64,7 +67,7 @@ namespace Exam_System.Controllers
 
             // repoExam.Save();
             return View(exam);
-		}
+        }
 
         [HttpPost]
         public IActionResult StartExam(int examId, Dictionary<int, StudentAnswer> studentAnswers)
@@ -75,7 +78,7 @@ namespace Exam_System.Controllers
             {
                 foreach (var questionId in studentAnswers.Keys)
                 {
-                    if (studentAnswers[questionId].AnswerChooseId==null)
+                    if (studentAnswers[questionId].AnswerChooseId == null)
                     {
                         ModelState.AddModelError("AnswerChooseId", "there is question didn't answer");
                         //return View(exam);
@@ -86,15 +89,24 @@ namespace Exam_System.Controllers
                     repoStudentAnswer.Add(answer);
                 }
                 repoExam.Save(); //comment this line to make data don't save in table in DB
-                return RedirectToAction("EndExam", "Exam");
+                return RedirectToAction("EndExam", "Exam", new { examId = examId });
             }
 
             return View();
         }
-        public IActionResult EndExam()
+        public async Task<ActionResult> EndExam(int examId)
         {
             var stdid = HttpContext.User.FindFirst("UserId");
+            var studentAnswer = repoStudentAnswer.GetStudentAnswers(int.Parse(stdid.Value), examId);
+            var mark = 10;
+            foreach (var answer in studentAnswer)
+            {
+                var isCorrect = await answerRepo.ValidateAnswer(answer.QuestionId, answer.AnswerChooseId);
+                if (isCorrect == null || !isCorrect.Value) mark--;
+            }
             ViewBag.StdID = int.Parse(stdid.Value);
+            ViewBag.Mark = mark;
+
             return View();
         }
 
