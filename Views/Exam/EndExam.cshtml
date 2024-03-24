@@ -12,9 +12,10 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 </head>
 <body>
-    <div class="text-center">
+    <div class="text-center container d-flex flex-column justify-content-center align-items-center gap-3">
 
-    <h1>Exam Finished Successfully <img src="~/images/check-mark.png" /> </h1>
+    <h1>Exam Finished Successfully <img src="~/images/Done.gif" /> </h1>
+
     <h2>Your Mark is: @ViewBag.Mark</h2>
     <a asp-action="ShowCourses" asp-controller="HomePage" asp-route-id="@ViewBag.StdID" class="btn btn-success">Back to home</a>
     </div>

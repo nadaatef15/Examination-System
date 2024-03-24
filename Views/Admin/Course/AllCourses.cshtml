@@ -44,6 +44,7 @@
                     <form onsubmit="return confirm('Are you sure you want to delete this course?');" id="removeForm-@course.CourseId" asp-action="RemoveCourse" asp-controller="admin" method="get">
                         <input type="hidden" name="courseId" value="@course.CourseId" />
                         <button type="submit"><img alt="delete" width="35" src="~/images/trash (1).png" /></button>
+                        <div asp-validation-summary="All" class="text-danger alert-danger"></div>
                     </form>
                 </td>
             </tr>
