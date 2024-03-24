@@ -101,7 +101,7 @@ namespace Exam_System.Controllers
             catch (Exception ex)
             {
                 ViewBag.ErrorMessage = ex.Message;
-
+                ModelState.AddModelError("",ex.Message);
                 return RedirectToAction("AllCourses");
             }
 

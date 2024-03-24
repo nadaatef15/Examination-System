@@ -22,7 +22,7 @@ namespace Exam_System.Repository
                 db.Database.ExecuteSqlRaw("EXEC AddQuestion @QuestionType,@QuestionTitle,@QuestionDegree,@CourseID",
                  new SqlParameter("@QuestionType", questionType),
                  new SqlParameter("@QuestionTitle", questionTitle),
-                 new SqlParameter("@QuestionDegree", 3),
+                 new SqlParameter("@QuestionDegree", 5),
                  new SqlParameter("@CourseID", courseId));
 
                 var Question = db.Questions.FirstOrDefault(q => q.QuestionType == questionType && q.QuestionTitle == questionTitle && q.CourseId == courseId);
@@ -68,7 +68,7 @@ namespace Exam_System.Repository
                 db.Database.ExecuteSqlRaw("EXEC AddQuestion @QuestionType,@QuestionTitle,@QuestionDegree,@CourseID",
                new SqlParameter("@QuestionType", questionType),
                new SqlParameter("@QuestionTitle", questionTitle),
-                new SqlParameter("@QuestionDegree", 2),
+                new SqlParameter("@QuestionDegree", 5),
                new SqlParameter("@CourseID", courseId));
                 var Question = db.Questions.FirstOrDefault(q => q.QuestionType == questionType && q.QuestionTitle == questionTitle && q.CourseId == courseId);
                 if (Question != null)
