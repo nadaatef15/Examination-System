@@ -1,0 +1,30 @@
+﻿@model Instructor
+@{
+    Layout = "_InstructorLayout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/css/changepass.css" />
+
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Edit Account</h2>
+        <form asp-action="changpassinstructor" asp-controller="AccountEdit" method="post">
+            <div class="mb-3">
+                <label asp-for="InstructorPassword" class="form-label"></label>
+                <input asp-for="InstructorPassword" class="form-control">
+                <span asp-validation-for="InstructorPassword"></span>
+            </div>
+
+
+            <button type="submit" class="btn btn-success">Edit</button>
+        </form>
+
+    </div>
+</body>
+</html>
