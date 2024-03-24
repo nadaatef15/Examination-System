@@ -8,15 +8,18 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="/css/changepass.css" />
+    <link rel="stylesheet" href="~/css/changepass.css" />
+ 
 
 </head>
 <body>
+    <img src="~/images/Reset password.gif" alt="password" />
     <div class="container mt-5">
+      
         <h2>Edit Account</h2>
         <form asp-action="ChangepassStd" asp-controller="AccountEdit" method="post">
             <div class="mb-3">
-                <label asp-for="StudentPassword" class="form-label"></label>
+                <label asp-for="StudentPassword" class="form-label text-start"></label>
                 <input asp-for="StudentPassword" class="form-control">
                 <span asp-validation-for="StudentPassword"></span>
             </div>
