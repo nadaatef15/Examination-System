@@ -1,0 +1,66 @@
+﻿bo
+
+:root {
+    --main-color: #48C572;
+    --main-text-color: #3B3B3B;
+}
+.nameCourse{
+text-align:left;
+margin-bottom:10px;
+}
+hr{
+    height:4px;
+    color:gray;
+    width:60%;
+    margin:auto
+}
+
+.question {
+    border-top: 2px solid var(--main-color);
+    border-radius: 12px;
+    color: var(--main-text-color);
+    padding: 15px 5px;
+}
+
+h5{
+    padding-bottom:15px;
+    text-align:justify
+}
+
+    h5 span {
+        color: #6a9356
+    }
+
+.submitExam{
+    padding:15px 20px;
+    border-radius:10px;
+    border:none;
+    outline:none;
+}
+
+#timer {
+    font-size: 28px;
+    font-weight: bold;
+    width: fit-content;
+    margin: auto;
+    color: #dc3545;
+    padding: 5px 2px;
+}
+
+@media (max-width: 768px) {
+    body{
+        padding:10px 40px;
+    }
+    .nameCourse, .dateTimer {
+        flex-direction: column
+    }
+    .dateTimer div{
+        justify-content:center;
+        align-items:center
+    }
+    #timer {
+
+        margin: 0;
+    
+    }
+}

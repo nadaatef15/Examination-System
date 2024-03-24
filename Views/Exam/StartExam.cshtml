@@ -30,28 +30,48 @@
     <meta name="viewport" content="width=device-width" />
     <title>Create</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/student.css"/>
+    <link rel="stylesheet" href="~/css/site.css"/>
+    <link rel="stylesheet" href="~/css/exam.css" />
+
     <script src="https://kit.fontawesome.com/d3bc0f0f7a.js" crossorigin="anonymous"></script>
 
 </head>
 <body>
-    <section class="text-center mt-5 mb-5 w-50 m-auto">
+    <section class="text-center container mt-5 mb-5  m-auto ">
 
-        <h1><span class="text-success"> @Model.Course.CourseName Exam</span></h1>
-
-        <p><span class="text-success" id="">@Model.Duration</span></p>
-        <p><span> Student Name: @ViewBag.StudentName</span></p>
        
+
+        @* <p><span class="text-success" id="">@ViewBag.duration</span></p> *@
+        
+        <div class="nameCourse align-items-center d-flex justify-content-between ">
+            <h2> Student Name: <span class="text-success"> @ViewBag.StudentName</span></h2>
+            <h2>Exam Name: <span class="text-success"> @Model.Course.CourseName </span></h2>
+        </div>
+        <div class="dateTimer d-flex justify-content-between">
+            <h3>Exam Date: <span class="text-success"> @Model.ExamDate </span></h3>
+
+            <div class="d-flex align-items-center">
+                <h3>Timer:</h3>
+                <div id="timer"></div>
+            </div>
+
+            
+      
+        </div>
+        
+
+     
     </section>
+    <hr/>
     <section class="container m-auto">
 
     <form method="post" class="text-center">
         <input type="hidden" name="ExamId" value="@Model.ExamId" />
-        <div  class="mt-5 mb-5 w-50 m-auto ">
+        <div  class="mt-5 mb-5  m-auto ">
             @foreach (var question in Model.Questions)
             {
-                    <div class="mb-3  item" style="text-align:left;">
-                        <h5>@counter: @question.QuestionTitle</h5>
+                    <div class="mb-3  question" style="text-align:left;">
+                        <h5><span>Q @counter: </span> @question.QuestionTitle</h5>
                         <input type="hidden" name="StudentAnswers[@question.QuestionId].QuestionId" value="@question.QuestionId" />
                         @if(question.StudentAnswers.Any()){
                             @foreach (var ans in question.StudentAnswers)
@@ -78,7 +98,7 @@
 
                 }
         </div>
-            <input onclick="return confirm('Are you sure you want to end the exam and submit your answers?');" data-bs-toggle="modal" data-bs-target="#exampleModal" id="modalSubmit" type="submit" value="Submit" class="btn btn-success text-center mb-3" asp-route-id="@ViewBag.StdID" />
+            <input onclick="return confirm('Are you sure you want to end the exam and submit your answers?');" data-bs-toggle="modal" data-bs-target="#exampleModal" id="modalSubmit" type="submit" value="Submit" class="btn-custom text-center mb-3" asp-route-id="@ViewBag.StdID" />
     </form>
         <!-- Button trigger modal
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -104,7 +124,8 @@
         </div>
     </section>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script>
+  
+@*     <script>
         $(document).ready(function () {
            /* //if (Model.ExamDate.Validation != null) {
             $("#modalSubmit").attr("data-bs-toggle","modal")
@@ -135,8 +156,44 @@
 
             // Call updateTime function every second
             var timerInterval = setInterval(updateTime, 1000);
+        }); *@
+
+        
+    <script>
+        var interval; // Variable to store the interval ID
+
+        // Function to start the timer
+        function startTimer(duration) {
+            var timer = duration;
+            interval = setInterval(function () {
+                var hours = Math.floor(timer / 3600);
+                var minutes = Math.floor((timer % 3600) / 60);
+                var seconds = timer % 60;
+
+                document.getElementById('timer').innerText = hours + ':' + minutes + ':' + seconds ;
+
+                if (--timer < 0) {
+                    clearInterval(interval);
+                    // Optionally, you can redirect the user or perform any action when the timer reaches zero
+                    // window.location.href = '/Exam/Finish'; // Example redirect
+                }
+            }, 1000); // Update the timer every second (1000 milliseconds)
+        }
+
+        // Function to convert the formatted duration to seconds
+        function durationToSeconds(duration) {
+            var parts = duration.split(':');
+            return parseInt(parts[0]) * 3600 + parseInt(parts[1]) * 60 + parseInt(parts[2]);
+        }
+
+        // Start the timer when the page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            var duration = '@ViewBag.duration'; // Fetch the duration from ViewBag
+            var totalSeconds = durationToSeconds(duration);
+            startTimer(totalSeconds);
         });
     </script>
+
 
 </body>
 </html>

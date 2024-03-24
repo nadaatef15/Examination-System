@@ -3,6 +3,7 @@ using Exam_System.Models;
 using Exam_System.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Globalization;
 
 
 namespace Exam_System.Controllers
@@ -55,8 +56,14 @@ namespace Exam_System.Controllers
            ViewBag.StudentName=$"{std.StudentFname} {std.StudentLname}";
             List<Question> questions = GenerateQuestions(CrsId);
 			Exam exam = GenerateExam(questions, ExamId, CrsId, InstId);
-           // repoExam.Save();
-			return View(exam);
+            // Assuming exam.Duration is a TimeSpan?
+            string formattedDuration = exam.Duration?.ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture);
+            ViewBag.duration = formattedDuration;
+
+
+
+            // repoExam.Save();
+            return View(exam);
 		}
 
         [HttpPost]
