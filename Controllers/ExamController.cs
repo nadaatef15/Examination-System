@@ -98,7 +98,7 @@ namespace Exam_System.Controllers
         {
             var stdid = HttpContext.User.FindFirst("UserId");
             var studentAnswer = repoStudentAnswer.GetStudentAnswers(int.Parse(stdid.Value), examId);
-            var mark = 10;
+            var mark = studentAnswer.Count;
             foreach (var answer in studentAnswer)
             {
                 var isCorrect = await answerRepo.ValidateAnswer(answer.QuestionId, answer.AnswerChooseId);

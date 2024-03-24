@@ -17,7 +17,7 @@ namespace Exam_System.Repository
             if(answerId == null) 
                 return false;
 
-            return await db.Answers.Where(x => x.QuestionId == questionId && x.AnswerId == answerId).Select(x => x.IsCorrect).FirstAsync();
+            return await db.Answers.Where(x => x.QuestionId == questionId && x.AnswerId == answerId).Select(x => x.IsCorrect).FirstOrDefaultAsync();
         }
     }
 }
