@@ -31,6 +31,7 @@ namespace Exam_System
             builder.Services.AddScoped<IInstructorCourseRepo, InstructorCourseRepo>();
             builder.Services.AddScoped<IAuthRepo, AuthRepo>();
             builder.Services.AddScoped<IQuestionRepo, QuestionRepo>();
+            builder.Services.AddScoped<IAnswerRepo, AnswerRepo>();
             builder.Services.AddScoped<IRepoStudentAnswer,RepoStudentAnswer>();
 
             //applay filter to all
