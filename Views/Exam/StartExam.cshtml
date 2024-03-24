@@ -7,7 +7,7 @@
     var duration = Model.Duration;
     //var time = Model.StartTime?.ToString("yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture); 
     /*?? TimeOnly.MinValue;
-    System.Timers.Timer myTimer = new System.Timers.Timer(1000);
+    System.Timers.Timer myTimer = new System.Timers.Timer(10 00);
     void MyTimerElapsed(object sender, ElapsedEventArgs e)
     {
         // Your code here: Perform the desired task
@@ -34,7 +34,7 @@
     <script src="https://kit.fontawesome.com/d3bc0f0f7a.js" crossorigin="anonymous"></script>
 
 </head>
-<body>
+<body style="background-color:#f8f8f8;">
     <section class="text-center mt-5 mb-5 w-50 m-auto">
 
         <h1><span class="text-success"> @Model.Course.CourseName Exam</span></h1>
@@ -53,18 +53,6 @@
                     <div class="mb-3  item" style="text-align:left;">
                         <h5>@counter: @question.QuestionTitle</h5>
                         <input type="hidden" name="StudentAnswers[@question.QuestionId].QuestionId" value="@question.QuestionId" />
-                        @if(question.StudentAnswers.Any()){
-                            @foreach (var ans in question.StudentAnswers)
-                            {
-                                <p>
-                                    <input type="radio" name="StudentAnswers[@question.QuestionId].AnswerChooseId" value="@ans.AnswerChooseId" />
-                                    @ans.AnswerChoose
-                                </p>
-                            }
-                        }
-                        else
-                        {
-                            
                         @foreach (var ans in question.Answers)
                         {
                             <p>
@@ -72,19 +60,16 @@
                                 @ans.AnswerBody
                             </p>
                         }
-                        }
                     </div>
                     { counter++;}
 
                 }
         </div>
-            <input onclick="return confirm('Are you sure you want to end the exam and submit your answers?');" data-bs-toggle="modal" data-bs-target="#exampleModal" id="modalSubmit" type="submit" value="Submit" class="btn btn-success text-center mb-3" asp-route-id="@ViewBag.StdID" />
-    </form>
-        <!-- Button trigger modal
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Launch demo modal
-		</button> -->
+			 <input onclick="return confirm('Are you sure you want to end the exam and submit your answers?');"  id="modalSubmit" type="submit" value="Submit" class="btn btn-success text-center mb-3" asp-route-id="@ViewBag.StdID" />
 
+			<!--<input onclick="return confirm('Are you sure you want to end the exam and submit your answers?');" data-bs-toggle="modal" data-bs-target="#exampleModal" id="modalSubmit" type="submit" value="Submit" class="btn btn-success text-center mb-3" asp-route-id="@ViewBag.StdID" />-->
+    </form>
+       
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -104,6 +89,9 @@
         </div>
     </section>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"> </script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"> </script>
+
     <script>
         $(document).ready(function () {
            /* //if (Model.ExamDate.Validation != null) {

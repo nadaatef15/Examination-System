@@ -1,0 +1,21 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>EndExam</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="text-center">
+
+    <h1>Exam Finished Successfully <img src="~/images/check-mark.png" /> </h1>
+    <a asp-action="ShowCourses" asp-controller="HomePage" asp-route-id="@ViewBag.StdID" class="btn btn-success">Back to home</a>
+    </div>
+</body>
+</html>
