@@ -16,7 +16,7 @@
             <ul>
                 <li><a href="/Instructor/Reports" class="@ViewData["ReportsActive"]">Reports</a></li>
                 <li><a href="/Instructor/index" class="@ViewData["CoursesActive"]">Courses</a></li>
-                <li><a href="/Instructor/index" class="@ViewData["UsrProfileActive"]">Usr Profile</a></li>
+                <li><a asp-action="changpassinstructor"asp-controller="accountedit">Usr Profile</a></li>
                 <li><a  asp-action="logout" asp-controller="Account" class="@ViewData["LogOutActive"]">LogOut</a></li>
             </ul>
             <img class="circle" src="~/images/circles.png" />

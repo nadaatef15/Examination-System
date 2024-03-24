@@ -68,6 +68,8 @@
     <section class="text-center mt-5 mb-5 w-50 m-auto">
 
         <h1>@Model.StudentFname @Model.StudentLname</h1>
+        <a asp-action="ChangepassStd" asp-controller="AccountEdit" asp-route-stdID="@Model.StudentId" class="btn btn-success">Edit</a>
+
         @if (tr.TrackName != null)
         {
             <p><span class="text-success">@tr.TrackName</span> Track</p>
