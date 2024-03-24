@@ -2,7 +2,7 @@
 using Exam_System.IRepository;
 namespace Exam_System.Repository
 {
-    public class RepoStudentAnswer:IRepoStudentAnswer
+    public class RepoStudentAnswer : IRepoStudentAnswer
     {
 
         ExaminationContext db;
@@ -14,5 +14,11 @@ namespace Exam_System.Repository
         {
             db.StudentAnswers.Add(answer);
         }
+
+        public List<StudentAnswer> GetStudentAnswers(int studentId, int examId)
+        {
+            return db.StudentAnswers.Where(x => x.StudentId == studentId && x.ExamId == examId).ToList();
+        }
+
     }
 }

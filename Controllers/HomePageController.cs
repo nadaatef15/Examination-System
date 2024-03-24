@@ -23,8 +23,11 @@ namespace Examination_System.Controllers
                 .ThenInclude(e => e.Exams)
                 .SingleOrDefault(s => s.StudentId == id);
 
+            var answerdEaxams= db.StudentAnswers.Where(x=>x.StudentId==id).Select(x=>x.ExamId).Distinct().ToList();
+
             var track = db.Tracks.SingleOrDefault(t => t.TrackId == model.TrackId);
             ViewBag.track = track;
+            ViewBag.AnswerdEaxams = answerdEaxams;
             return View(model);
         }
     }
