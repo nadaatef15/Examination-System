@@ -7,7 +7,7 @@
     var duration = Model.Duration;
     //var time = Model.StartTime?.ToString("yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture); 
     /*?? TimeOnly.MinValue;
-    System.Timers.Timer myTimer = new System.Timers.Timer(1000);
+    System.Timers.Timer myTimer = new System.Timers.Timer(10 00);
     void MyTimerElapsed(object sender, ElapsedEventArgs e)
     {
         // Your code here: Perform the desired task
@@ -73,25 +73,12 @@
                     <div class="mb-3  question" style="text-align:left;">
                         <h5><span>Q @counter: </span> @question.QuestionTitle</h5>
                         <input type="hidden" name="StudentAnswers[@question.QuestionId].QuestionId" value="@question.QuestionId" />
-                        @if(question.StudentAnswers.Any()){
-                            @foreach (var ans in question.StudentAnswers)
-                            {
-                                <p>
-                                    <input type="radio" name="StudentAnswers[@question.QuestionId].AnswerChooseId" value="@ans.AnswerChooseId" />
-                                    @ans.AnswerChoose
-                                </p>
-                            }
-                        }
-                        else
-                        {
-                            
                         @foreach (var ans in question.Answers)
                         {
                             <p>
                                 <input type="radio" name="StudentAnswers[@question.QuestionId].AnswerChooseId" value="@ans.AnswerId" />
                                 @ans.AnswerBody
                             </p>
-                        }
                         }
                     </div>
                     { counter++;}
@@ -105,6 +92,9 @@
             Launch demo modal
 		</button> -->
 
+			<!--<input onclick="return confirm('Are you sure you want to end the exam and submit your answers?');" data-bs-toggle="modal" data-bs-target="#exampleModal" id="modalSubmit" type="submit" value="Submit" class="btn btn-success text-center mb-3" asp-route-id="@ViewBag.StdID" />-->
+    </form>
+       
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">

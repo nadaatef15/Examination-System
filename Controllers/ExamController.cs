@@ -39,7 +39,7 @@ namespace Exam_System.Controllers
 		{
             exam = repoExam.GetExambyIds(examId, courseId, instructorId);
 			exam.Questions= questions;
-            //repoExam.Save();
+            repoExam.Save(); //comment this line to make data don't save in table in DB
             return exam;
 
 		}
@@ -77,18 +77,24 @@ namespace Exam_System.Controllers
                 {
                     if (studentAnswers[questionId].AnswerChooseId==null)
                     {
-                        ModelState.AddModelError("Answer","there is question didn't answer");
-                        return View(exam);
+                        ModelState.AddModelError("AnswerChooseId", "there is question didn't answer");
+                        //return View(exam);
                     }
                     var answer = studentAnswers[questionId];
                     answer.ExamId = examId;
                     answer.StudentId = ViewBag.StdID;
                     repoStudentAnswer.Add(answer);
                 }
-                //repoExam.Save();
-                return RedirectToAction("ShowCourses", "HomePage");
+                repoExam.Save(); //comment this line to make data don't save in table in DB
+                return RedirectToAction("EndExam", "Exam");
             }
 
+            return View();
+        }
+        public IActionResult EndExam()
+        {
+            var stdid = HttpContext.User.FindFirst("UserId");
+            ViewBag.StdID = int.Parse(stdid.Value);
             return View();
         }
 
