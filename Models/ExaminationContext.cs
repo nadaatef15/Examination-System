@@ -42,7 +42,9 @@ public partial class ExaminationContext : DbContext
     public virtual DbSet<Track> Tracks { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-     => optionsBuilder.UseLazyLoadingProxies().UseSqlServer("Server=tcp:examinationsystemdb.database.windows.net,1433;Initial Catalog=WorkedExamDB;Persist Security Info=False;User ID=adminLogin;Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+
+     => optionsBuilder.UseLazyLoadingProxies().UseSqlServer("Server=.;Database=workedExamDB;Integrated Security=true;TrustServerCertificate=true");
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
