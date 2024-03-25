@@ -14,71 +14,37 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link href="~/css/site.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/student.css" />
+    <link href="~/css/admin.css" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/d3bc0f0f7a.js" crossorigin="anonymous"></script>
-    <style>
-        .header {
-            padding: 8px 8%;
-            background-color: darkred;
-        }
-
-        .logo {
-            width: 7%;
-        }
-
-        .studentImg {
-            width: 300px;
-            height: 300px;
-            object-fit: cover;
-        }
-
-        .course {
-            position: relative;
-            height: 450px;
-            font-family: sans-serif;
-            letter-spacing: 4px;
-            font-weight: bolder;
-        }
-
-            .course::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-image: url('/Images/iti.jpg');
-                background-size: cover;
-                background-position: center bottom;
-                background-repeat: no-repeat;
-                filter: blur(2px);
-                z-index: -1;
-            }
-
-        .logoAndP {
-            font-family: sans-serif;
-        }
-
-        .grayColor {
-            color: lightgray;
-        }
-    </style>
+  
 </head>
 <body>
 
     <!--Student Info -->
-    <section class="text-center mt-5 mb-5 w-50 m-auto">
+    <div class="page-container">
+        <aside class="std">
+            <img src="~/images//Exams-bro.svg" class="stdimg" alt="exam"/>
+               <h1>@Model.StudentFname @Model.StudentLname</h1>
+        
+            @if (tr.TrackName != null)
+            {
+                <p class="text-center"><span class="text-success">@tr.TrackName</span> Track</p>
+                <p class="text-center "> Supervisor: @tr.Supervisor.InstructorFname</p>
+            }
 
-        <h1>@Model.StudentFname @Model.StudentLname</h1>
-        <a asp-action="ChangepassStd" asp-controller="AccountEdit" asp-route-stdID="@Model.StudentId" class="btn btn-success">Edit</a>
+            <ul>
+                <li>    <a asp-action="ChangepassStd" asp-controller="AccountEdit" asp-route-stdID="@Model.StudentId" class="@ViewData["LogOutActive"]">Edit</a></li>
+                <li>    <a asp-controller="Account" asp-action="Logout" class="@ViewData["LogOutActive"]">LogOut</a></li>
+            </ul>
+        
 
-        @if (tr.TrackName != null)
-        {
-            <p><span class="text-success">@tr.TrackName</span> Track</p>
-            <p> Supervisor: @tr.Supervisor.InstructorFname</p>
-        }
-    </section>
+            <img class="circle" src="~/images/circles.png" />
+        </aside>
 
-    <section class="my-5 w-50 m-auto">
+
+        <div class="right-sec py-5 container dynamic-section">
+        <h1 class="main-title">Student Courses </h1>
+    <section class="my-5  m-auto">
         @foreach (var item in Model.StudentCourses)
         {
             foreach (var exam in @item.Course.Exams)
@@ -104,6 +70,7 @@
             }
         }
     </section>
-
+    </div>
+    </div>
 </body>
 </html>

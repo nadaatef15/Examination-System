@@ -10,9 +10,9 @@
     border-radius: 5px;
     background-color: #f9f9f9;
 }
-img{
-    width:300px;
-    margin:40px auto;
+.imgPass {
+    width: 300px;
+    margin: 40px auto;
 }
 h2 {
     text-align: center;

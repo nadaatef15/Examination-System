@@ -69,17 +69,18 @@ aside h1{
             transform:translateX(10px);
             color:var(--main-color);
         }
-        .dynamic-section {
-            margin-left: 310px !important;
-            margin: 40px 0;
-            padding:40px 20px;
-            background-color: white;
-            border-radius: 10px;
-            width: 75%;
-        }
-tr {
-    vertical-align: baseline;
+.dynamic-section, .right-sec {
+    margin-left: 310px !important;
+    margin: 40px 0;
+    padding: 40px 20px;
+    background-color: white;
+    border-radius: 10px;
+    width: 75%;
 }
+
+            tr {
+                vertical-align: baseline;
+            }
 th {
     color: var(--main-color);
     text-align: center;
@@ -119,7 +120,7 @@ th {
         margin-bottom: 15px;
     }
 
-    .dynamic-section {
+    .dynamic-section, .right-sec {
         margin-left: 0px !important;
         width: 100%;
         margin: 150px auto;
@@ -127,5 +128,17 @@ th {
 
     .circle {
         bottom: 60px;
+    }
+       .page-container aside.std{
+        height:28vh;
+        width:100%;
+        border-right:none;
+        border-bottom:1px solid var(--main-color)
+    }
+        aside.std .stdimg{
+            display:none
+        }
+    .right-sec {
+        margin-top:250px;
     }
 }
