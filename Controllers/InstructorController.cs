@@ -109,7 +109,7 @@ namespace Exam_System.Controllers
         public IActionResult Delete(int id)
         {
             exams.Delete(id);
-            return View("Index");
+            return RedirectToAction("Index");
         }
         [HttpGet]
         public IActionResult AddQuestions(int id) //get
