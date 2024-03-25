@@ -1,6 +1,11 @@
 ﻿@model Instructor
 @{
-    Layout = "_Layout";
+    ViewData["Title"] = "Admin | Manage course";
+    ViewData["ReportsActive"] = "";
+    ViewData["StudentsActive"] = "";
+    ViewData["InstructorsActive"] = "active";
+    ViewData["CoursesActive"] = "";
+    ViewData["LogOutActive"] = "";
     List<Course> ins = ViewBag.instCourses as List<Course>;
     List<Course> noIns = ViewBag.CourseNotforInstructor as List<Course>;
 

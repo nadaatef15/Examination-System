@@ -1,6 +1,11 @@
 ﻿@model List<Course>
 @{
-    Layout = null;
+    ViewData["Title"] = "Admin | Show Instructor course";
+    ViewData["ReportsActive"] = "";
+    ViewData["StudentsActive"] = "";
+    ViewData["InstructorsActive"] = "active";
+    ViewData["CoursesActive"] = "";
+    ViewData["LogOutActive"] = "";
     ViewData["Title"] = "Admin | instructor courses";
     var insId = ViewBag.InstructorId;
 }
