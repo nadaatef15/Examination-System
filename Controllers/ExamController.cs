@@ -122,7 +122,7 @@ namespace Exam_System.Controllers
             ViewBag.Mark = mark;
 
             return View();
-            //return RedirectToAction("StudentAnswersDisplay");
+          //  return RedirectToAction("StudentAnswersDisplay");
         }
 
         public IActionResult StudentAnswersDisplay(int examId,int studentId)
