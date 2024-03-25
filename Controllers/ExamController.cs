@@ -43,12 +43,41 @@ namespace Exam_System.Controllers
         public IActionResult StartExam(int CrsId, int ExamId, int InstId)
         {
             var stdid = HttpContext.User.FindFirst("UserId");
+            // Check if the exam has already been started for the current session
+            if (HttpContext.Session.GetString("ExamStarted") != null)
+            {
+                // Exam has already been started, redirect to a different page
+                return RedirectToAction("ShowCourses", "HomePage", new { id = int.Parse(stdid.Value) } );
+            }
+
+
+
+         
             ViewBag.StdID = int.Parse(stdid.Value);
             Student std = repoStudent.getById(ViewBag.StdID);
             ViewBag.StudentName = $"{std.StudentFname} {std.StudentLname}";
             Exam exam = GenerateExam( ExamId, CrsId, InstId);
             // Assuming exam.Duration is a TimeSpan?
-            string formattedDuration = exam.Duration?.ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture);
+            //string formattedDuration = exam.Duration?.ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture);
+            //ViewBag.duration = formattedDuration;
+
+
+            HttpContext.Session.SetString("ExamStarted", "true");
+
+            string formattedDuration = "00:00"; // Default value
+
+            if (exam.Duration != null)
+            {
+                if (exam.Duration.Value.Hour >= 1)
+                {
+                    formattedDuration = exam.Duration.Value.ToString(@"hh\:mm\:ss");
+                }
+                else
+                {
+                    formattedDuration = exam.Duration.Value.ToString(@"mm\:ss");
+                }
+            }
+
             ViewBag.duration = formattedDuration;
             // repoExam.Save();
             return View(exam);
@@ -93,6 +122,16 @@ namespace Exam_System.Controllers
             ViewBag.Mark = mark;
 
             return View();
+            //return RedirectToAction("StudentAnswersDisplay");
+        }
+
+        public IActionResult StudentAnswersDisplay(int examId,int studentId)
+        {
+            var studentAnswers = repoStudentAnswer.GetStudentAnswers(studentId, examId);
+
+        
+            return View(studentAnswers);
+
         }
 
     }

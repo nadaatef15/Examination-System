@@ -56,17 +56,37 @@
                         <h3 class="my-2">Course Name: @item.Course.CourseName</h3>
                         <h5 class="my-2">Exam ID: @exam.ExamId</h5>
                      
-                        <p class="mb-2 text-secondary">The Exam duration of this course is: @exam.Duration?.ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)</p>
+                   <p class="mb-2 text-secondary">The Exam duration of this course is: <span id="examDuration">@exam.Duration?.ToString(@"mm\:ss", CultureInfo.InvariantCulture)</span></p>
+
                           <p class="mb-4 text-secondary">The Exam Date is: @exam.ExamDate </p>
-                        @if (!disable)
-                        {
-                            <a asp-action="StartExam" asp-controller="Exam" asp-route-stdID="@item.StudentId" asp-route-CrsId="@item.Course.CourseId" asp-route-ExamId="@exam.ExamId" asp-route-InstId="@tr.Supervisor.InstructorId" class="btn-custom text-center text-decoration-none" >Go to Exam</a>
-                        }
-                        else
-                        {
-                            <a class=" btn btn-secondary px-4 text-center text-decoration-none" >Done</a>
-                        }           
-                        </div>
+                                @if (!disable)
+                                {
+                       
+                                    var today = DateTime.Today;
+                                    var examDate = DateTime.ParseExact(exam.ExamDate.ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                                    var isToday = (today == examDate);
+
+                                  
+                                    if (!isToday)
+                                    {
+                                        <button class="btn btn-secondary px-4 text-center text-decoration-none" disabled>
+                                            Exam Not Available Today
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <a asp-action="StartExam" asp-controller="Exam" asp-route-stdID="@item.StudentId" asp-route-CrsId="@item.Course.CourseId" asp-route-ExamId="@exam.ExamId" asp-route-InstId="@tr.Supervisor.InstructorId" class="btn-custom text-center text-decoration-none">
+                                            Go to Exam
+                                        </a>
+                                    }
+                                }
+                                else
+                                {
+                                    <a class="btn btn-secondary px-4 text-center text-decoration-none" disabled>
+                                        Done
+                                    </a>
+                                }
+                            </div>
                 </div>
                 }
             }

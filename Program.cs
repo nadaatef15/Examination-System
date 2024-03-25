@@ -33,7 +33,7 @@ namespace Exam_System
             builder.Services.AddScoped<IQuestionRepo, QuestionRepo>();
             builder.Services.AddScoped<IAnswerRepo, AnswerRepo>();
             builder.Services.AddScoped<IRepoStudentAnswer,RepoStudentAnswer>();
-
+            builder.Services.AddSession(options=> options.IdleTimeout = TimeSpan.FromMinutes(20));
             //applay filter to all
             builder.Services.AddControllersWithViews(options =>
             {
@@ -65,7 +65,7 @@ namespace Exam_System
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseSession();
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Account}/{action=Show}/{id?}");
