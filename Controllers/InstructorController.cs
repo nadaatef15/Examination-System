@@ -57,8 +57,25 @@ namespace Exam_System.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult GenerateExam(int id,Exam exam,int numTrueFalseQuestions,int numMCQuestions)
+        public IActionResult GenerateExam(int id, Exam exam, int numTrueFalseQuestions, int numMCQuestions)
         {
+            DateOnly today = DateOnly.FromDateTime(DateTime.Today);
+
+            if (exam.ExamDate < today)
+            {
+                ViewBag.Tracks = track.getAll();
+                ViewBag.ExamConflict = "Exam date must be in the future.";
+                return View(exam);
+            }
+
+           
+            if (exam.StartTime >= exam.EndTime)
+            {
+                ViewBag.Tracks = track.getAll();
+                ViewBag.ExamConflict = "End time must be greater than start time.";
+                return View(exam);
+            }
+
             exam.CourseId = id;
 
             var userIdClaim = HttpContext.User.FindFirst("UserId");
@@ -72,22 +89,27 @@ namespace Exam_System.Controllers
                 ViewBag.Tracks = track.getAll();
                 ViewBag.ExamConflict = "There is a conflicting exam scheduled for the same time in this track, course, and instructor.";
                 return View(exam);
-
             }
 
             exams.InsertExam(exam, numTrueFalseQuestions, numMCQuestions);
-            return View("Index");
+            return RedirectToAction("Index");
         }
+
         public IActionResult AllExams(int id)
         {
-            var modal = exams.getAll(4,id);
+           
+
+            var userIdClaim = HttpContext.User.FindFirst("UserId");
+            int InstructorId = int.Parse(userIdClaim.Value);
+
+            var modal = exams.getAll(InstructorId,id);
             return View(modal);
         }
 
         public IActionResult Delete(int id)
         {
             exams.Delete(id);
-            return View("Index");
+            return RedirectToAction("Index");
         }
         [HttpGet]
         public IActionResult AddQuestions(int id) //get

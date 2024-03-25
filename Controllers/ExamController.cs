@@ -26,22 +26,11 @@ namespace Exam_System.Controllers
             repoStudent = _repoStudent;
             answerRepo = _answerRepo;
         }
-        public List<Question> GenerateQuestions(int crsId)
-        {
-            var AllQuestions = questionRepo.GetQuestions();
-            Random random = new Random();
-            List<Question> questions = AllQuestions.Where(q => q.CourseId == crsId)
-                                                   .OrderBy(_ => random.Next())
-                                                   .Take(10)
-                                                   .ToList();
-            return questions;
-        }
-
-        public Exam GenerateExam(List<Question> questions, int examId, int courseId, int instructorId)
+      
+        public Exam GenerateExam( int examId, int courseId, int instructorId)
         {
             exam = repoExam.GetExambyIds(examId, courseId, instructorId);
-            //Delete Old Exam Questions
-            exam.Questions = questions;
+            
             repoExam.Save(); //comment this line to make data don't save in table in DB
             return exam;
 
@@ -67,8 +56,7 @@ namespace Exam_System.Controllers
             ViewBag.StdID = int.Parse(stdid.Value);
             Student std = repoStudent.getById(ViewBag.StdID);
             ViewBag.StudentName = $"{std.StudentFname} {std.StudentLname}";
-            List<Question> questions = GenerateQuestions(CrsId);
-            Exam exam = GenerateExam(questions, ExamId, CrsId, InstId);
+            Exam exam = GenerateExam( ExamId, CrsId, InstId);
             // Assuming exam.Duration is a TimeSpan?
             //string formattedDuration = exam.Duration?.ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture);
             //ViewBag.duration = formattedDuration;
@@ -91,7 +79,6 @@ namespace Exam_System.Controllers
             }
 
             ViewBag.duration = formattedDuration;
-
             // repoExam.Save();
             return View(exam);
         }

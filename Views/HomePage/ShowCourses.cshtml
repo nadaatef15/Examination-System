@@ -49,6 +49,7 @@
         {
             foreach (var exam in @item.Course.Exams)
             {
+                @if(exam.TrackId== Model.TrackId){
                 var disable = ViewBag.AnswerdEaxams.Contains(exam.ExamId);
                 <div class="mb-3  item">
                     <div>
@@ -87,6 +88,7 @@
                                 }
                             </div>
                 </div>
+                }
             }
         }
     </section>

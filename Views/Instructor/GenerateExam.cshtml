@@ -58,16 +58,17 @@
     <input type="number" id="numMCQuestions" name="numMCQuestions" required><br>
         </div>
     </div>
-    <div class="btns">
-    <button type="submit" class="btn btn-custom" >Submit</button>
-    <a asp-action="Index" asp-controller="Instructor" class="btn btn-custom ml-2">Cancel</a>
-    </div>
+    
     @if (ViewBag.ExamConflict != null)
     {
         <div class="alert alert-danger mt-5">
             @ViewBag.ExamConflict
         </div>
     }
+    <div class="btns">
+    <button type="submit" class="btn btn-custom" >Submit</button>
+    <a asp-action="Index" asp-controller="Instructor" class="btn btn-custom ml-2">Cancel</a>
+    </div>
 </form>
 
 
