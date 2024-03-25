@@ -99,38 +99,7 @@
     </section>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
   
-@*     <script>
-        $(document).ready(function () {
-           /* //if (Model.ExamDate.Validation != null) {
-            $("#modalSubmit").attr("data-bs-toggle","modal")
-            $("#modalSubmit").attr("data-bs-target","#exampleModal")
-            }*/
-           
-            //var duration = {Model.Duration;};
-            var currentTime = new Date('@Model.Duration * 1000'); // Convert seconds to milliseconds
-            // Get duration in seconds from Model
 
-            function updateTime() {
-                if (currentTime > 0) {
-                    $('#currentTime').text(formatDuration(currentTime)); // Update the displayed time
-                    currentTime--; // Decrement duration by 1 second
-                } else {
-                    console.log("End exam"); // Log message when duration reaches zero
-                    clearInterval(timerInterval); // Stop the timer when duration reaches zero
-                }
-            }
-
-            // Function to format duration in HH:mm:ss format
-            function formatDuration(durationInSeconds) {
-                var hours = Math.floor(durationInSeconds / 3600);
-                var minutes = Math.floor((durationInSeconds % 3600) / 60);
-                var seconds = durationInSeconds % 60;
-                return ('0' + hours).slice(-2) + ':' + ('0' + minutes).slice(-2) + ':' + ('0' + seconds).slice(-2);
-            }
-
-            // Call updateTime function every second
-            var timerInterval = setInterval(updateTime, 1000);
-        }); *@
 
 
     <script>
@@ -158,26 +127,25 @@
 
                 if (--timer < 0) {
                     clearInterval(interval);
-                    // Optionally, you can redirect the user or perform any action when the timer reaches zero
-                    // window.location.href = '/Exam/Finish'; // Example redirect
+               
+                    window.location.href = '/Exam/EndExam'; 
                 }
-            }, 1000); // Update the timer every second (1000 milliseconds)
+            }, 1000); 
         }
 
-        // Function to convert the formatted duration to seconds
+  
         function durationToSeconds(duration) {
             var parts = duration.split(':');
             if (parts.length == 3) {
-                return parseInt(parts[0]) * 3600 + parseInt(parts[1]) * 60 + parseInt(parts[2]) - 1; // Convert hours, minutes, and seconds to seconds and subtract one minute
+                return parseInt(parts[0]) * 3600 + parseInt(parts[1]) * 60 + parseInt(parts[2]) - 1; 
             } else if (parts.length == 2) {
-                return parseInt(parts[0]) * 60 + parseInt(parts[1]) - 1; // Convert minutes and seconds to seconds and subtract one minute
+                return parseInt(parts[0]) * 60 + parseInt(parts[1]) - 1; 
             }
-            return parseInt(duration) - 1; // If duration doesn't contain hours or minutes, assume it's just seconds and subtract one minute
+            return parseInt(duration) - 1;
         }
 
-        // Start the timer when the page loads
         document.addEventListener('DOMContentLoaded', function () {
-            var duration = '@ViewBag.duration'; // Fetch the duration from ViewBag
+            var duration = '@ViewBag.duration'; 
             var totalSeconds = durationToSeconds(duration);
             startTimer(totalSeconds);
         });
