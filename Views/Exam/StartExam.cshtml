@@ -132,7 +132,7 @@
             var timerInterval = setInterval(updateTime, 1000);
         }); *@
 
-        
+
     <script>
         var interval; // Variable to store the interval ID
 
@@ -144,7 +144,17 @@
                 var minutes = Math.floor((timer % 3600) / 60);
                 var seconds = timer % 60;
 
-                document.getElementById('timer').innerText = hours + ':' + minutes + ':' + seconds ;
+                // Format the timer display
+                var timerDisplay = '';
+                if (hours > 0) {
+                    timerDisplay += hours + ':';
+                }
+                if (minutes < 10 && hours > 0) {
+                    timerDisplay += '0';
+                }
+                timerDisplay += minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+
+                document.getElementById('timer').innerText = timerDisplay;
 
                 if (--timer < 0) {
                     clearInterval(interval);
@@ -157,7 +167,12 @@
         // Function to convert the formatted duration to seconds
         function durationToSeconds(duration) {
             var parts = duration.split(':');
-            return parseInt(parts[0]) * 3600 + parseInt(parts[1]) * 60 + parseInt(parts[2]);
+            if (parts.length == 3) {
+                return parseInt(parts[0]) * 3600 + parseInt(parts[1]) * 60 + parseInt(parts[2]) - 1; // Convert hours, minutes, and seconds to seconds and subtract one minute
+            } else if (parts.length == 2) {
+                return parseInt(parts[0]) * 60 + parseInt(parts[1]) - 1; // Convert minutes and seconds to seconds and subtract one minute
+            }
+            return parseInt(duration) - 1; // If duration doesn't contain hours or minutes, assume it's just seconds and subtract one minute
         }
 
         // Start the timer when the page loads
@@ -166,11 +181,11 @@
             var totalSeconds = durationToSeconds(duration);
             startTimer(totalSeconds);
         });
-        
-            function preventBack() { window.history.forward(); }
+
+        function preventBack() { window.history.forward(); }
         setTimeout("preventBack()", 0);
         window.onunload = function () { null };
-    
+
     </script>
 
 

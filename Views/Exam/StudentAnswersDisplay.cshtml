@@ -1,0 +1,21 @@
+﻿@model List<StudentAnswer>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>StudentAnswersDisplay</title>
+</head>
+<body>
+    <h1>Student Answers</h1>
+
+    @foreach (var answer in Model)
+    {
+        <div>
+            <p>Question ID: @answer.QuestionId</p>
+            <p>Student's Answer: @answer.AnswerChooseId</p>
+            @* <p>@if (answer) { <text style="color: green;">Correct</text> } else { <text style="color: red;">Incorrect</text> }</p> *@
+        </div>
+    }
+</body>
+</html>
