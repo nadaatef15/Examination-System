@@ -14,7 +14,7 @@
         <aside>
             <h1>Instructor Control</h1>
             <ul>
-                <li><a href="/Instructor/Reports" class="@ViewData["ReportsActive"]">Reports</a></li>
+                <li><a asp-action="showreport" asp-controller="report">Reports</a></li>
                 <li><a href="/Instructor/index" class="@ViewData["CoursesActive"]">Courses</a></li>
                 <li><a asp-action="changpassinstructor"asp-controller="accountedit">Usr Profile</a></li>
                 <li><a  asp-action="logout" asp-controller="Account" class="@ViewData["LogOutActive"]">LogOut</a></li>

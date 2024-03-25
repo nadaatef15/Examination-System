@@ -1,0 +1,52 @@
+﻿
+@{
+    Layout = "_InstructorLayout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <title>showReport</title>
+    <style>
+       
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(3, auto); /* Three buttons in a row */
+            grid-gap: 20px; /* Spacing between buttons */
+            padding: 20px;
+            background: white; /* White background for the button area */
+            border-radius: 10px; /* Rounded corners for the button area */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s; /* Smooth transition for hover effects */
+        }
+
+            .btn:hover {
+                background-color: #48C572; /* Change color on hover */
+                color: white;
+                transform: translateY(-2px); /* Slight lift on hover */
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a class="btn" href="https://www.google.com/">Button 1</a>
+        <a class="btn" href="https://www.google.com/">Button 2</a>
+        <a class="btn" href="https://www.google.com/">Button 3</a>
+        <a class="btn" href="https://www.google.com/">Button 4</a>
+        <a class="btn" href="https://www.google.com/">Button 5</a>
+        <a class="btn" href="https://www.google.com/">Button 6</a>
+    </div>
+</body>
+</html>
