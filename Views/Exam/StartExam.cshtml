@@ -5,22 +5,6 @@
     Layout = null;
     int counter = 1;
     var duration = Model.Duration;
-    //var time = Model.StartTime?.ToString("yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture); 
-    /*?? TimeOnly.MinValue;
-    System.Timers.Timer myTimer = new System.Timers.Timer(10 00);
-    void MyTimerElapsed(object sender, ElapsedEventArgs e)
-    {
-        // Your code here: Perform the desired task
-        time = time.AddMinutes(1);
-        Console.WriteLine(time);
-    }
-    myTimer.Elapsed += MyTimerElapsed;
-    myTimer.Enabled = true;
-    string formattedTime = ""; // Initialize the formatted time string
-    if (Model.StartTime.HasValue)
-    {
-        formattedTime = Model.StartTime.Value.ToString("yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture);
-    }*/
 }
 
 <!DOCTYPE html>
@@ -36,7 +20,7 @@
     <script src="https://kit.fontawesome.com/d3bc0f0f7a.js" crossorigin="anonymous"></script>
 
 </head>
-<body>
+<body onload="preventBack()">
     <section class="text-center container mt-5 mb-5  m-auto ">
 
        
@@ -182,6 +166,11 @@
             var totalSeconds = durationToSeconds(duration);
             startTimer(totalSeconds);
         });
+        
+            function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+    
     </script>
 
 
