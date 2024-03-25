@@ -1,11 +1,16 @@
-# Examination System
+<h1 >Examination System</h1>
 
-<div align="center" style="margin-bottom: 70px;">
-    <img src="Exams.gif" alt="exam" width="600" />
+<div style="display: flex; justify-content: space-between; align-items: flex-start;">
+    <div style="width: 50%;">
+        The Examination System is a web application designed to streamline the management of courses, instructors, and students within an educational institution. It offers different levels of access and functionality for administrators, instructors, and students. This project is built using ASP.NET Core MVC framework with a SQL database backend, and it is hosted on Microsoft Azure for scalability and reliability.
+    </div>
+    <br/>
+    <div style="margin-bottom: 70px; width:50%;" align="center">
+        <img src="Exams.gif" alt="exam" width="450" />
+    </div>
 </div>
 <br/>
 <br/>
-The Examination System is a web application designed to streamline the management of courses, instructors, and students within an educational institution. It offers different levels of access and functionality for administrators, instructors, and students. This project is built using ASP.NET Core MVC framework with a SQL database backend, and it is hosted on Microsoft Azure for scalability and reliability.
 
 ## Features
 
