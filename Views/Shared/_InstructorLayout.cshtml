@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -13,6 +14,7 @@
     <div class="page-container d-flex ">
         <aside>
             <h1>Instructor Control</h1>
+            <h3>@User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)</h3>
             <ul>
                 
                 <li><a asp-action="showreport" asp-controller="report">Reports</a></li>
