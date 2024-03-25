@@ -1,7 +1,10 @@
 # Examination System
 
-<img src="Exams.gif" alt="exam"/>
-
+<div align="center" style="margin-bottom: 70px;">
+    <img src="Exams.gif" alt="exam" width="600" />
+</div>
+<br/>
+<br/>
 The Examination System is a web application designed to streamline the management of courses, instructors, and students within an educational institution. It offers different levels of access and functionality for administrators, instructors, and students. This project is built using ASP.NET Core MVC framework with a SQL database backend, and it is hosted on Microsoft Azure for scalability and reliability.
 
 ## Features
@@ -19,11 +22,11 @@ The Examination System is a web application designed to streamline the managemen
 
 ## Team Members
 
-- Asmaa Mohamed (@johndoe) 
-- Asmaa Elfatayry (@janesmith) 
-- Aya Shehata (@michaeljohnson) 
-- Nada Atef (@emilybrown) 
-- Nada Mohsen (@alexlee) 
+- Asmaa Albhbity (@AsmaaAlbhbity) 
+- Asmaa Elfatayry (@asmaa-elfatayry) 
+- Aya Shehata (@AyaSHEHAT) 
+- Nada Atef (@nadaatef15) 
+- Nada Mohsen (@nadamohsen15) 
 
 
 ## Technology Stack
