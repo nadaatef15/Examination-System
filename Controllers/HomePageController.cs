@@ -15,8 +15,12 @@ namespace Examination_System.Controllers
             db = _db;
         }
 
-        public IActionResult ShowCourses(int id)
+        public IActionResult ShowCourses()
         {
+
+            var userIdClaim = HttpContext.User.FindFirst("UserId");
+            int id = int.Parse(userIdClaim.Value);
+
             var model = db.Students
                 .Include(s => s.StudentCourses)
                 .ThenInclude(cs => cs.Course)

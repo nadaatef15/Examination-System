@@ -125,7 +125,7 @@ namespace Exam_System.Controllers
                         case "Instructor":
                             return RedirectToAction("Index", "Instructor");
                         case "Student":
-                            return RedirectToAction("ShowCourses", "HomePage", new { id = userId });
+                            return RedirectToAction("ShowCourses", "HomePage");
                     }
                 }
 

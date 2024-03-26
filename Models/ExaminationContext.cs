@@ -42,7 +42,9 @@ public partial class ExaminationContext : DbContext
     public virtual DbSet<Track> Tracks { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-     => optionsBuilder.UseLazyLoadingProxies().UseSqlServer("Server=MYPC\\MSSQLSERVER2022;Database=workedExamDB;Integrated Security=true;TrustServerCertificate=true");
+
+     => optionsBuilder.UseLazyLoadingProxies().UseSqlServer("Server=.;Database=workedExamDB;Integrated Security=true;TrustServerCertificate=true");
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
