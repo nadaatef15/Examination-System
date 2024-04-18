@@ -63,7 +63,8 @@
                                 {
                        
                                     var today = DateTime.Today;
-                                    var examDate = DateTime.ParseExact(exam.ExamDate.ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                                    @* var examDate = DateTime.ParseExact(exam.ExamDate.ToString(), "MM/dd/yyyy", CultureInfo.InvariantCulture); *@
+                                    var examDate = DateTime.ParseExact(exam.ExamDate.ToString(), "M/d/yyyy", CultureInfo.InvariantCulture);
                                     var isToday = (today == examDate);
 
                                   

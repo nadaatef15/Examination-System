@@ -16,8 +16,6 @@
             <h1>Instructor Control</h1>
             <h3>@User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)</h3>
             <ul>
-                
-                <li><a asp-action="showreport" asp-controller="report">Reports</a></li>
                 <li><a href="/Instructor/index" class="@ViewData["CoursesActive"]">Courses</a></li>
                 <li><a asp-action="changpassinstructor"asp-controller="accountedit">Usr Profile</a></li>
                 <li><a  asp-action="logout" asp-controller="Account" class="@ViewData["LogOutActive"]">LogOut</a></li>

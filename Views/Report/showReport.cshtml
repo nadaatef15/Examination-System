@@ -1,6 +1,6 @@
 ﻿
 @{
-    Layout = "_InstructorLayout";
+    Layout = "_AdminLayout";
 }
 
 <!DOCTYPE html>
@@ -14,13 +14,17 @@
 
 
         .container {
-            display: grid;
-            grid-template-columns: repeat(3, auto); /* Three buttons in a row */
-            grid-gap: 20px; /* Spacing between buttons */
+           
             padding: 20px;
             background: white; /* White background for the button area */
             border-radius: 10px; /* Rounded corners for the button area */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+        }
+
+        .buttons{
+            display: grid;
+            grid-template-columns: repeat(3, auto); /* Three buttons in a row */
+            grid-gap: 20px; /* Spacing between buttons */
         }
 
         .btn {
@@ -41,12 +45,18 @@
 </head>
 <body>
     <div class="container">
-        <a class="btn btn-custom m-3" href="http://localhost/ReportServer/Pages/ReportViewer.aspx?%2fReport+Project1%2fTrack_Info&rs:Command=Render">Trach Info</a>
+        <div class="text-center">
+            <img src="~/images/social-dashboard-animate (3).svg" width="350px" />
+        </div>
+        <div class="buttons">
+
+        <a class="btn btn-custom m-3" href="http://localhost/ReportServer/Pages/ReportViewer.aspx?%2fReport+Project1%2fTrack_Info&rs:Command=Render">Track Information</a>
         <a class="btn btn-custom m-3" href="http://localhost/ReportServer/Pages/ReportViewer.aspx?%2fReport+Project1%2fNumber+Of+Students+in+each+course&rs:Command=Render">Number of Students</a> <br/>
         <a class="btn btn-custom m-3" href="http://localhost/ReportServer/Pages/ReportViewer.aspx?%2fReport+Project1%2fStudent+Answers&rs:Command=Render">Student Answers</a>
         <a class="btn btn-custom m-3" href="http://localhost/ReportServer/Pages/ReportViewer.aspx?%2fReport+Project1%2fCourse+Topic&rs:Command=Render">Course Topics</a> <br />
-        <a class="btn btn-custom m-3" href="http://localhost/ReportServer/Pages/ReportViewer.aspx?%2fReport+Project1%2fExam+Questions&rs:Command=Render">Exam Question</a>
+        <a class="btn btn-custom m-3" href="http://localhost/ReportServer/Pages/ReportViewer.aspx?%2fReport+Project1%2fExam+Questions&rs:Command=Render">Exam Questions</a>
         <a class="btn btn-custom m-3" href="http://localhost/ReportServer/Pages/ReportViewer.aspx?%2fReport+Project1%2fStudent+Grade&rs:Command=Render">Student Grade</a>
+        </div>
     </div>
 </body>
 </html>
