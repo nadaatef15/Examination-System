@@ -11,6 +11,7 @@ public partial class Course
     public int CourseId { get; set; }
 
 
+
     [Required(ErrorMessage = "Course name is required")]
     [StringLength(100, ErrorMessage = "Course name cannot exceed 100 characters")]
 
