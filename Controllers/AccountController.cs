@@ -121,7 +121,7 @@ namespace Exam_System.Controllers
                     switch (Role)
                     {
                         case "Admin":
-                            return RedirectToAction("AdminDashboard", "Admin");
+                            return RedirectToAction("Showreport", "Report"); //Admin/AdminDashboard
                         case "Instructor":
                             return RedirectToAction("Index", "Instructor");
                         case "Student":
